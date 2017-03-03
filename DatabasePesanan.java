@@ -1,21 +1,24 @@
 
 /**
- * Write a description of class DatabasePesanan here.
+ * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
  * 
- * Muhammad Rajab(1206244415) 
- * 0.1, 23 Februari 2017
+ * @author Muhammad Rajab(1206244415) 
+ * @version 0.2, 02 Maret 2017 
+ * @since 0.1, 23 Februari 2017
  */
 
 /**
  * Modul 1 : Jika terdapat method lain yang memerlukan nilai return selain numerik, string dan boolean, diganti
  * menjadi tipe method String dengan nilai return value-nya String kosong.
+ * Modul 2 : Class DatabasePesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
+ 
  */
 
 public class DatabasePesanan
 {
     // instance variables - replace the example below with your own
-    private int x;
-    private String[] listPesanan;
+    
+    private Pesanan list_pesanan;
 
     /**
      * Constructor for objects of class DatabasePesanan
@@ -23,37 +26,62 @@ public class DatabasePesanan
     public DatabasePesanan()
     {
         // initialise instance variables
-        x = 0;
-    }
-    
-    public boolean addPesanan(Pesanan pesan)
-    {
-        return false;
-    }
-
-    public boolean hapusPesanan(Pesanan pesan)
-    {
-        return false;
-    }
-    
-    /*Belum ada Class Pelanggan, cannot find Symbol class Pelanggan
-    public Pesanan getPesanan(Pelanggan pengguna)
-    {
         
     }
-    */
-
-    public String getPesanan(String pengguna)
+    
+    /**
+     * Method untuk memasukkan pesanan dari ojek kedalam database pesanan
+     * 
+     * @param pesan Parameter dari method addPesanan yang merujuk ke class Pesanan
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public boolean addPesanan(Pesanan pesan)
     {
-        return "";
+        Pesanan list_pesanan = pesan;
+        System.out.println("Pesanan Berhasil Dilakukan");
+        return true;
+    }
+
+    /**
+     * Method untuk menghapus pesanan ojek dari database pesanan
+     * 
+     * @param pesan Parameter dari method hapusPesanan yang merujuk ke class Pesanan
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public boolean hapusPesanan(Pesanan pesan)
+    {
+        Pesanan list_pesanan = null;
+        return true;
     }
     
-    /* Belum ada array di String
+    /**
+     * Method untuk menampilkan pesanan ojek
+     * 
+     * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
+     */
+    public Pesanan getPesanan()
+    {
+        return list_pesanan;
+    }
+    
+    /**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
+}
+
+/*Bekas Modul 1
+    / Belum ada array di String
+    
+    //private Pesanan listPesanan;
+    
     public String[] getDatabase()
     {
         
     }
-    */
+    
    
     public String getDatabase()
     {
@@ -70,22 +98,26 @@ public class DatabasePesanan
     {
         
     }
-    */
+    
     
     public String pesananDibatalkan(String pengguna)
     {
         return "";
     }
+    /*
     
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
+    Belum ada Class Pelanggan, cannot find Symbol class Pelanggan
+    public Pesanan getPesanan(Pelanggan pengguna)
     {
-        // put your code here
-        return x + y;
+        
     }
-}
+    
+
+    public Pesanan getPesanan(Pesanan pengguna)
+    {
+        return list_pesanan;
+    }
+    
+   
+     */
+    

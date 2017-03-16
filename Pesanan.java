@@ -22,7 +22,8 @@ public class Pesanan
     private String pelanggan_awal;
     private String pelanggan_akhir;
     private double biaya;
-    private String layanan;
+    //private String layanan;
+    private TipeLayanan layanan;
     private Lokasi lokasi_awal;
     private Lokasi lokasi_akhir;
     private boolean diproses = false; //isi dari diproses adalah false
@@ -40,7 +41,55 @@ public class Pesanan
      * @param pelanggan_akhir Parameter dari constructor kelas ini dalam bentuk String
      * @param biaya Parameter dari constructor kelas ini dalam bentuk double (numerik)
      */
-    public Pesanan(Pelanggan pengguna, String layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir, double biaya)
+    public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal)
+    {
+        // initialise instance variables
+        this.pengguna = pengguna;
+        this.layanan = layanan;
+        this.lokasi_awal = lokasi_awal;
+        this.lokasi_akhir = lokasi_akhir;
+        this.pelanggan_awal = pelanggan_awal;
+        //this.pelanggan_akhir = pelanggan_akhir;
+        //this.biaya = biaya;
+    }
+    
+    /**
+     * Constructor for objects of class Pesanan
+     * (Ditambah saat modul 3)
+     * 
+     * @param pengguna Parameter dari constructor kelas ini yang merujuk ke class Pelanggan
+     * @param layanan Parameter dari constructor kelas ini dalam bentuk String
+     * @param lokasi_awal Parameter dari constructor kelas ini yang merujuk ke class Lokasi
+     * @param lokasi_akhir Parameter dari constructor kelas ini yang merujuk ke class Lokasi
+     * @param pelanggan_awal Parameter dari constructor kelas ini dalam bentuk String
+     * @param pelanggan_akhir Parameter dari constructor kelas ini dalam bentuk String
+     * @param biaya Parameter dari constructor kelas ini dalam bentuk double (numerik)
+     */
+    public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir)
+    {
+        // initialise instance variables
+        this.pengguna = pengguna;
+        this.layanan = layanan;
+        this.lokasi_awal = lokasi_awal;
+        this.lokasi_akhir = lokasi_akhir;
+        this.pelanggan_awal = pelanggan_awal;
+        this.pelanggan_akhir = pelanggan_akhir;
+        //this.biaya = biaya;
+    }
+    
+    /**
+     * Constructor for objects of class Pesanan
+     * (Ditambah saat modul 3)
+     * 
+     * @param pengguna Parameter dari constructor kelas ini yang merujuk ke class Pelanggan
+     * @param layanan Parameter dari constructor kelas ini dalam bentuk String
+     * @param lokasi_awal Parameter dari constructor kelas ini yang merujuk ke class Lokasi
+     * @param lokasi_akhir Parameter dari constructor kelas ini yang merujuk ke class Lokasi
+     * @param pelanggan_awal Parameter dari constructor kelas ini dalam bentuk String
+     * @param pelanggan_akhir Parameter dari constructor kelas ini dalam bentuk String
+     * @param biaya Parameter dari constructor kelas ini dalam bentuk double (numerik)
+     */
+    public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir, double biaya)
     {
         // initialise instance variables
         this.pengguna = pengguna;
@@ -53,11 +102,41 @@ public class Pesanan
     }
     
     /**
+     * Method untuk menampilkan pelayan dari ojek
+     * (Ditambah saat modul 3)
+     * @return pengguna Mengembalikan isi data dari instance variable pengguna
+     */
+    public Ojek getPelayan()
+    {
+        return pelayan;
+    }
+    /*
+    /**
+     * Method untuk menampilkan status pesanan dari ojek
+     * 
+     * @return false Mengembalikan isi data dari method ini dengan nilai false
+    
+    public boolean getStatusPesanan()
+    {
+        return false;
+    }
+    */
+    /**
+     * Method untuk menampilkan status pesanan dari ojek
+     * (Ditambah saat modul 3)
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public boolean getStatusDiproses()
+    {
+        return true;
+    }
+    
+    /**
      * Method untuk menampilkan status pesanan dari ojek
      * 
      * @return false Mengembalikan isi data dari method ini dengan nilai false
      */
-    public boolean getStatusPesanan()
+    public boolean getStatusSelesai()
     {
         return false;
     }
@@ -104,10 +183,10 @@ public class Pesanan
     
     /**
      * Method untuk menampilkan tipe layanan dari ojek
-     * 
+     * (String diubah menjadi TipeLayanan pada modul 3)
      * @return layanan Mengembalikan isi data dari instance variable layanan
      */
-    public String getTipeLayanan()
+    public TipeLayanan getTipeLayanan()
     {
         return layanan;
     }
@@ -140,6 +219,106 @@ public class Pesanan
     public double getBiaya()
     {
         return biaya;
+    }
+   
+    /**
+     * Method untuk memasukkan nama pelayan
+     * 
+     * @param pelayan Parameter dari method setPelayan yang merujuk ke class Ojek
+     */
+    public void setPelayan(Ojek pelayan)
+    {
+        this.pelayan = pelayan;
+    }
+    
+    /**
+     * Method untuk memasukkan nama pelanggan
+     * 
+     * @param pengguna Parameter dari method setPelanggan yang merujuk ke class Pelanggan
+     */
+    public void setPelanggan(Pelanggan pengguna)
+    {
+        this.pengguna = pengguna;
+    }
+    
+    /**
+     * Method untuk memasukkan nama pelanggan awal
+     * 
+     * @param pelanggan_awal Parameter dari method setPenggunaAwal dalam bentuk String
+     */
+    public void setPenggunaAwal(String pelanggan_awal)
+    {
+        this.pelanggan_awal = pelanggan_awal;
+    }
+    
+    /**
+     * Method untuk memasukkan nama pelanggan akhir
+     * 
+     * @param pelanggan_akhir Parameter dari method setPenggunaAkhir dalam bentuk String
+     */
+    public void setPenggunaAkhir(String pelanggan_akhir)
+    {
+        this.pelanggan_akhir = pelanggan_akhir;
+    }
+    
+    /**
+     * Method untuk memasukkan biaya
+     * 
+     * @param biaya Parameter dari method setBiaya dalam bentuk double
+     */
+    public void setBiaya(Double biaya)
+    {
+        this.biaya = biaya;
+    }
+    
+    /**
+     * Method untuk memasukkan tipe layanan
+     * 
+     * @param layanan Parameter dari method setTipeLayanan yang merujuk ke class TipeLayanan
+     */
+    public void setTipeLayanan(TipeLayanan layanan)
+    {
+        this.layanan = layanan;
+    }
+    
+    /**
+     * Method untuk memasukkan lokasi awal
+     * 
+     * @param lokasi_awal Parameter dari method setLokasiAwal yang merujuk ke class Lokasi
+     */
+    public void setLokasiAwal(Lokasi lokasi_awal)
+    {
+        this.lokasi_awal = lokasi_awal;
+    }
+    
+    /**
+     * Method untuk memasukkan lokasi akhir
+     * 
+     * @param lokasi_akhir Parameter dari method setLokasiAkhir yang merujuk ke class Lokasi
+     */
+    public void setLokasiAkhir(Lokasi lokasi_akhir)
+    {
+        this.lokasi_akhir = lokasi_akhir;
+    }
+    
+    /**
+     * Method untuk memasukkan status diproses
+     * 
+     * @param diproses Parameter dari method setStatusDiproses dalam bentuk boolean
+     */
+    public void setStatusDiproses(boolean diproses)
+    {
+        this.diproses = diproses;
+    }
+    
+    /**
+     * Method untuk memasukkan status selesai
+     * 
+     * @param diproses Parameter dari method setStatusSelesai dalam bentuk boolean
+     */
+    public void setStatusSelesai(boolean diproses)
+    {
+        this.diproses = diproses;
     }
     
     /**

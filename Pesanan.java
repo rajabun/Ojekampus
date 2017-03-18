@@ -2,7 +2,8 @@
 /**
  * class Pesanan berisi kumpulan method yang mengatur pesanan.
  * 
- * @author Muhammad Rajab(1206244415) 
+ * @author Muhammad Rajab(1206244415)
+ * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
  */
@@ -11,6 +12,7 @@
  * Modul 1 : Jika terdapat method lain yang memerlukan nilai return selain numerik, string dan boolean, diganti
  * menjadi tipe method String dengan nilai return value-nya String kosong.
  * Modul 2 : Class Pesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
+ * Modul 3 : Menambah 2 constructor, beberapa method (getPelayan(), getStatusDiproses() dan getTipeLayanan()) dan mengubah isi method printData()
  */
 
 public class Pesanan
@@ -22,12 +24,11 @@ public class Pesanan
     private String pelanggan_awal;
     private String pelanggan_akhir;
     private double biaya;
-    //private String layanan;
     private TipeLayanan layanan;
     private Lokasi lokasi_awal;
     private Lokasi lokasi_akhir;
     private boolean diproses = false; //isi dari diproses adalah false
-    private boolean dibatalkan = false;
+    private boolean selesai = false;
     
 
     /**
@@ -38,8 +39,6 @@ public class Pesanan
      * @param lokasi_awal Parameter dari constructor kelas ini yang merujuk ke class Lokasi
      * @param lokasi_akhir Parameter dari constructor kelas ini yang merujuk ke class Lokasi
      * @param pelanggan_awal Parameter dari constructor kelas ini dalam bentuk String
-     * @param pelanggan_akhir Parameter dari constructor kelas ini dalam bentuk String
-     * @param biaya Parameter dari constructor kelas ini dalam bentuk double (numerik)
      */
     public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal)
     {
@@ -48,9 +47,7 @@ public class Pesanan
         this.layanan = layanan;
         this.lokasi_awal = lokasi_awal;
         this.lokasi_akhir = lokasi_akhir;
-        this.pelanggan_awal = pelanggan_awal;
-        //this.pelanggan_akhir = pelanggan_akhir;
-        //this.biaya = biaya;
+        this.pelanggan_awal = pelanggan_awal;   
     }
     
     /**
@@ -63,7 +60,6 @@ public class Pesanan
      * @param lokasi_akhir Parameter dari constructor kelas ini yang merujuk ke class Lokasi
      * @param pelanggan_awal Parameter dari constructor kelas ini dalam bentuk String
      * @param pelanggan_akhir Parameter dari constructor kelas ini dalam bentuk String
-     * @param biaya Parameter dari constructor kelas ini dalam bentuk double (numerik)
      */
     public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir)
     {
@@ -74,7 +70,6 @@ public class Pesanan
         this.lokasi_akhir = lokasi_akhir;
         this.pelanggan_awal = pelanggan_awal;
         this.pelanggan_akhir = pelanggan_akhir;
-        //this.biaya = biaya;
     }
     
     /**
@@ -104,41 +99,31 @@ public class Pesanan
     /**
      * Method untuk menampilkan pelayan dari ojek
      * (Ditambah saat modul 3)
-     * @return pengguna Mengembalikan isi data dari instance variable pengguna
+     * @return pelayan Mengembalikan isi data dari instance variable pelayan
      */
     public Ojek getPelayan()
     {
         return pelayan;
     }
-    /*
-    /**
-     * Method untuk menampilkan status pesanan dari ojek
-     * 
-     * @return false Mengembalikan isi data dari method ini dengan nilai false
     
-    public boolean getStatusPesanan()
-    {
-        return false;
-    }
-    */
     /**
-     * Method untuk menampilkan status pesanan dari ojek
+     * Method untuk menampilkan status pesanan diproses dari ojek
      * (Ditambah saat modul 3)
-     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     * @return diproses Mengembalikan isi data dari method ini dengan isi nilai diproses
      */
     public boolean getStatusDiproses()
     {
-        return true;
+        return diproses;
     }
     
     /**
-     * Method untuk menampilkan status pesanan dari ojek
+     * Method untuk menampilkan status pesanan selesai dari ojek
      * 
-     * @return false Mengembalikan isi data dari method ini dengan nilai false
+     * @return selesai Mengembalikan isi data dari method ini dengan nilai selesai
      */
     public boolean getStatusSelesai()
     {
-        return false;
+        return selesai;
     }
     
     /**
@@ -149,16 +134,6 @@ public class Pesanan
     public Pelanggan getPelanggan()
     {
         return pengguna;
-    }
-    
-    /**
-     * Method untuk menampilkan ojek
-     * 
-     * @return pelayan Mengembalikan isi data dari instance variable pelayan
-     */
-    public Ojek getOjek()
-    {
-        return pelayan;
     }
     
     /**
@@ -222,7 +197,7 @@ public class Pesanan
     }
    
     /**
-     * Method untuk memasukkan nama pelayan
+     * Method untuk memasukkan nama pelayan (ojek)
      * 
      * @param pelayan Parameter dari method setPelayan yang merujuk ke class Ojek
      */
@@ -316,19 +291,26 @@ public class Pesanan
      * 
      * @param diproses Parameter dari method setStatusSelesai dalam bentuk boolean
      */
-    public void setStatusSelesai(boolean diproses)
+    public void setStatusSelesai(boolean selesai)
     {
-        this.diproses = diproses;
+        this.selesai = selesai;
     }
     
     /**
-     * Method untuk Menampilkan hasil (isi data) dari instance lokasi_awal, lokasi_akhir dan layanan dalam bentuk string
+     * Method untuk Menampilkan hasil (isi data) dari method getStatusSelesai(), getStatusDiproses(),
+     * instance lokasi_awal, lokasi_akhir, pelanggan_awal, pelanggan_akhir dan layanan dalam bentuk string
+     * 
+     * Diubah di Modul 3
      */
     public void printData()
     {
-        System.out.println("Lokasi Pelanggan Awal :" + " " + lokasi_awal);
-        System.out.println("Lokasi Pelanggan Akhir :" + " " + lokasi_akhir);
+        System.out.println("Nama Pelanggan Awal :" + " " + pelanggan_awal);
+        System.out.println("Lokasi Awal :" + " " + lokasi_awal);
+        System.out.println("Nama Pelanggan Akhir :" + " " + pelanggan_akhir);
+        System.out.println("Lokasi Akhir :" + " " + lokasi_akhir);
         System.out.println("Layanan yang Dipilih :" + " " + layanan);
+        System.out.println("Status selesai :" + " " + getStatusSelesai());
+        System.out.println("Status diproses :" + " " + getStatusDiproses() + "\n\n");
     }
     
     /**
@@ -415,4 +397,80 @@ public class Pesanan
     {
         return "";
     }
+    */
+   
+   /* Bekas Modul 2
+   
+    instance variables
+   
+    
+    Method
+    
+    /**
+     * Method untuk menampilkan status pesanan dari ojek
+     * Bekas Modul 2
+     * @return false Mengembalikan isi data dari method ini dengan nilai false
+    
+    public boolean getStatusPesanan()
+    {
+        return false;
+    }
+    */
+    
+   /*
+    /**
+     * Method untuk menampilkan ojek
+     * Bekas Modul 2
+     * @return pelayan Mengembalikan isi data dari instance variable pelayan
+     
+    public Ojek getOjek()
+    {
+        return pelayan;
+    }
+    */
+    
+   /*
+    /**
+     * Method untuk Menampilkan hasil (isi data) dari instance lokasi_awal, lokasi_akhir dan layanan dalam bentuk string
+     * Bekas Modul 2
+    public void printData()
+    {
+        System.out.println("Lokasi Pelanggan Awal :" + " " + lokasi_awal);
+        System.out.println("Lokasi Pelanggan Akhir :" + " " + lokasi_akhir);
+        System.out.println("Layanan yang Dipilih :" + " " + layanan);
+    }
+    */
+    
+   /* Bekas Modul 3
+       
+      instance variables
+      //private String layanan;
+      //private boolean dibatalkan = false;
+    
+   
+      Isi dalam Method
+      
+      public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal)
+    {
+        // initialise instance variables
+        
+        //this.pelanggan_akhir = pelanggan_akhir;
+        //this.biaya = biaya;
+    }
+    
+      public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir)
+    {
+        // initialise instance variables
+        
+        //this.biaya = biaya;
+    }
+    
+    public void printData()
+    {
+        //System.out.println("Layanan yang Dipilih :" + " " + TipeLayanan.BeliBarang.toString());
+        //System.out.println("Status selesai :" + " " + selesai + "\n\n");
+        //System.out.println("Status diproses :" + " " + diproses);
+    }
+    
+    
     */

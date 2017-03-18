@@ -2,7 +2,8 @@
 /**
  * class Lokasi berisi kumpulan method untuk mengatur lokasi tujuan pelanggan.
  * 
- * @author Muhammad Rajab(1206244415) 
+ * @author Muhammad Rajab(1206244415)
+ * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
  */

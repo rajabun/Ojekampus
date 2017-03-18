@@ -2,24 +2,34 @@
 /**
  * class Ojek berisi kumpulan method untuk mengatur ojek yang dipesan.
  * 
- * @author Muhammad Rajab(1206244415) 
+ * @author Muhammad Rajab(1206244415)
+ * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
  */
 
 /**
  * Modul 2 : Class Ojek ditambahkan pada versi 0.2
+ * Modul 3 : Menambah beberapa method (setTelefon(), setEmail(), setDOB(), setNoPlat()) 
+ *           Menambah beberapa method (getTelefon(), getEmail(), getDOB(), getNoPlat(), getStatus())
+ *           Mengubah isi method printData()
+ *           Menambah instance variables private StatusOjek status = StatusOjek.Idle
+ *           Menambah instance variables private String telefon, email, no_plat, dob 
+ *           
  */
 
 public class Ojek
 {
     // instance variables - replace the example below with your own
 
-    private String status = "Idle"; //isi dari status adalah idle dalam bentuk string
+    private StatusOjek status = StatusOjek.Idle; //Ditambahkan saat modul 3
     private Lokasi posisi_sekarang;
     private Pesanan pesanan_sekarang = null; //isi dari pesanan_sekarang adalah null
     private int id;
     private String nama;
+    private String telefon, email, no_plat; //Ditambahkan saat modul 3
+    private String dob; //Ditambahkan saat modul 3
+        
 
 
     /**
@@ -27,12 +37,9 @@ public class Ojek
      * 
      * @param nama Parameter dari constructor kelas ini dalam bentuk String
      */
-    //public Ojek(int id, String nama, Lokasi posisi_sekarang) saat ini dicomment karena tidak perlu menginput id dan posisi_sekarang, cukup menginput nama
-    public Ojek(String nama)
+    public Ojek(int id, String nama, Lokasi posisi_sekarang) 
     {
         // initialise instance variables
-        DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
-        id = id_ojek.getIDOjekTerakhir(); //mengambil isi data id dari method getIDOjekTerakhir() dari kelas DatabaseUser.   
         this.nama = nama; //this digunakan karena nama instance variable sama dengan dengan parameter method ini
         Lokasi lokasi1 = new Lokasi("Cafe Earhouse", 12, 06, "Pamulang");
         posisi_sekarang = lokasi1;
@@ -57,6 +64,48 @@ public class Ojek
     {
         this.nama = nama;
     }
+    
+    /**
+     * Method untuk memasukkan telepon ojek
+     * Ditambahkan saat modul 3
+     * @param telefon Parameter dari method setTelefon dalam bentuk String
+     */
+    public boolean setTelefon(String telefon)
+    {
+        this.telefon = telefon;
+        return false;
+    }
+    
+    /**
+     * Method untuk memasukkan email ojek
+     * Ditambahkan saat modul 3
+     * @param email Parameter dari method setEmail dalam bentuk String
+     */
+    public boolean setEmail(String email)
+    {
+        this.email = email;
+        return false;
+    }
+    
+    /**
+     * Method untuk memasukkan dob ojek
+     * Ditambahkan saat modul 3
+     * @param dob Parameter dari method setDOB dalam bentuk String
+     */
+    public void setDOB(String dob)
+    {
+        this.dob = dob;        
+    }
+    
+    /**
+     * Method untuk memasukkan nomer plat ojek
+     * Ditambahkan saat modul 3
+     * @param no_plat Parameter dari method setNoPlat dalam bentuk String
+     */
+    public void setNoPlat(String no_plat)
+    {
+        this.no_plat = no_plat;        
+    }
 
     /**
      * Method untuk memesan ojek
@@ -65,7 +114,7 @@ public class Ojek
      */
     public void setPesanan(Pesanan pesan)
     {
-        pesanan_sekarang = null;
+        pesanan_sekarang = pesan;
     }
     
     /**
@@ -75,17 +124,17 @@ public class Ojek
      */
     public void setPosisi(Lokasi sekarang)
     {
-       this.posisi_sekarang = posisi_sekarang; 
+       posisi_sekarang = sekarang; 
     }
     
     /**
      * Method untuk memasukkan status ojek
-     * 
-     * @param status Parameter dari method setStatus dalam bentuk String
-     */
-    public void setStatus(String status)
+     * Ditambahkan saat modul 3
+     * @param status Parameter dari method setStatus yang merujuk ke class StatusOjek
+     */ 
+    public void setStatus(StatusOjek status)
     {
-        this.status = status;
+        this.status = status;        
     }
     
     /**
@@ -95,6 +144,8 @@ public class Ojek
      */
     public int getID()
     {
+        DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
+        id = id_ojek.getIDOjekTerakhir();
         return id;
     }
     
@@ -106,6 +157,46 @@ public class Ojek
     public String getNama()
     {
         return nama;
+    }
+    
+    /**
+     * Method untuk menampilkan telefon ojek
+     * Ditambahkan saat modul 3
+     * @return telefon Mengembalikan isi data dari instance variable telefon
+     */
+    public String getTelefon()
+    {
+        return telefon;
+    }
+    
+    /**
+     * Method untuk menampilkan email ojek
+     * Ditambahkan saat modul 3
+     * @return email Mengembalikan isi data dari instance variable email
+     */
+    public String getEmail()
+    {
+        return email;
+    }
+    
+    /**
+     * Method untuk menampilkan dob ojek
+     * Ditambahkan saat modul 3
+     * @return dob Mengembalikan isi data dari instance variable dob
+     */
+    public String getDOB()
+    {
+        return dob;
+    }
+    
+    /**
+     * Method untuk menampilkan nomer plat ojek
+     * Ditambahkan saat modul 3
+     * @return no_plat Mengembalikan isi data dari instance variable no_plat
+     */
+    public String getNoPlat()
+    {
+        return no_plat;
     }
     
     /**
@@ -130,12 +221,12 @@ public class Ojek
     
     /**
      * Method untuk menampilkan status ojek
-     * 
+     * Ditambahkan saat modul 3
      * @return status Mengembalikan isi data dari instance variable status
-     */
-    public String getStatus()
+     */ 
+    public StatusOjek getStatus()
     {
-        return status;
+        return status;        
     }
     
     /**
@@ -143,9 +234,9 @@ public class Ojek
      */
     public void printData()
     {
-        System.out.println("Nama :" + " " + nama);
-        System.out.println("ID Pelanggan :" + " " + id);
-        System.out.println("Status Ojek :" + " " + status);
+        System.out.println("Nama Ojek:" + " " + nama);
+        System.out.println("ID Ojek :" + " " + getID());
+        System.out.println("Status Ojek :" + " " + status + "\n");
     }
     
     /**
@@ -171,4 +262,62 @@ public class Ojek
  * Lokasi posisiSekarang = new Lokasi("Cafe Earhouse", 12, 06, "Pamulang");
  * posisi_sekarang = posisiSekarang;
  * this.posisiSekarang = posisiSekarang;
+ */
+
+/*
+ * Bekas Modul 3
+ * 
+ * instance variables :
+ * 
+ * //private String status = "Idle"; //isi dari status adalah idle dalam bentuk string
+ * //Lokasi lokasi1 = new Lokasi("Cafe Earhouse", 12, 06, "Pamulang");
+ * //private Lokasi posisi_sekarang = lokasi1;
+ * //DatabaseUser id_ojek = new DatabaseUser();
+ * //private int id = id_ojek.getIDOjekTerakhir();
+ * 
+ * method :
+ * 
+ * //public Ojek(String nama) //saat ini dicomment karena tidak perlu menginput id dan posisi_sekarang, cukup menginput nama
+ * {
+ *     //DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
+ *     //id = id_ojek.getIDOjekTerakhir(); //mengambil isi data id dari method getIDOjekTerakhir() dari kelas DatabaseUser.    
+ * }
+ * 
+ *  public void setPesanan(Pesanan pesan)
+ *  {
+ *      //pesanan_sekarang = null;
+ *  }
+ *  
+ *  /*
+    /**
+     * Method untuk menampilkan status ojek
+     * 
+     * @return status Mengembalikan isi data dari instance variable status
+     
+    public String getStatus()
+    {
+        return status;
+    }
+ *  
+ *  public void setPesanan(Pesanan pesan)
+    {
+        //pesanan_sekarang = null;
+    }
+ *  /*
+    /**
+     * Method untuk memasukkan status ojek
+     * 
+     * @param status Parameter dari method setStatus dalam bentuk String
+     *
+    public void setStatus(String status)
+    {
+        this.status = status;
+    }
+    
+ *
+ *  public void printData()
+ *  {
+ *    //System.out.println("ID Ojek :" + " " + id);
+ *  }
+ *  
  */

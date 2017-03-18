@@ -2,7 +2,8 @@
 /**
  * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
  * 
- * @author Muhammad Rajab(1206244415) 
+ * @author Muhammad Rajab(1206244415)
+ * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
  */
@@ -11,7 +12,7 @@
  * Modul 1 : Jika terdapat method lain yang memerlukan nilai return selain numerik, string dan boolean, diganti
  * menjadi tipe method String dengan nilai return value-nya String kosong.
  * Modul 2 : Class DatabasePesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
- 
+ * Modul 3 : Tidak ada perubahan 
  */
 
 public class DatabasePesanan
@@ -37,8 +38,9 @@ public class DatabasePesanan
      */
     public boolean addPesanan(Pesanan pesan)
     {
-        Pesanan list_pesanan = pesan;
-        System.out.println("Pesanan Berhasil Dilakukan");
+        //Pesanan list_pesanan = pesan;
+        list_pesanan = pesan;
+        System.out.println("Pesanan Berhasil Dilakukan\n");
         return true;
     }
 
@@ -50,7 +52,8 @@ public class DatabasePesanan
      */
     public boolean hapusPesanan(Pesanan pesan)
     {
-        Pesanan list_pesanan = null;
+        //Pesanan list_pesanan = null;
+        list_pesanan = null;
         return true;
     }
     

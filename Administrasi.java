@@ -42,6 +42,7 @@ public class Administrasi
         pes_Rajab.setStatusSelesai(false);
         pes_Rajab.setStatusDiproses(true);
         pes_Rajab.setPelayan(ojek_Muhammad);
+        /*
         ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
         p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
         pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
@@ -50,7 +51,7 @@ public class Administrasi
         ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
         p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
         pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-         
+        */
     }
     
     /**
@@ -90,10 +91,11 @@ public class Administrasi
         pes_Rajab.setStatusDiproses(false);
         ojek_Muhammad.setPesanan(null);
         ojekLepasPesanan(ojek_Muhammad);
-        
+        /*
         ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
         p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
         pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        */
     }
     
     /**
@@ -108,10 +110,11 @@ public class Administrasi
         pes_Rajab.setStatusDiproses(false);
         ojek_Muhammad.setPesanan(null);
         ojekLepasPesanan(ojek_Muhammad);
-        
+        /*
         ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
         p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
         pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        */
     }
     
     /**
@@ -126,10 +129,11 @@ public class Administrasi
         pes_Rajab.setStatusSelesai(false);
         pes_Rajab.setStatusDiproses(false);
         pes_Rajab.setPelayan(null);
-        
+        /*
         ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
         p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
         pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        */
     }
     
     /**
@@ -144,10 +148,11 @@ public class Administrasi
         pes_Rajab.setStatusSelesai(true);
         pes_Rajab.setStatusDiproses(false);
         pes_Rajab.setPelayan(null);
-        
+        /*
         ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
         p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
         pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        */
     }
     
 }

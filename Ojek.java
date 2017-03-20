@@ -1,8 +1,17 @@
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+
 
 /**
  * class Ojek berisi kumpulan method untuk mengatur ojek yang dipesan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
@@ -14,7 +23,10 @@
  *           Menambah beberapa method (getTelefon(), getEmail(), getDOB(), getNoPlat(), getStatus())
  *           Mengubah isi method printData()
  *           Menambah instance variables private StatusOjek status = StatusOjek.Idle
- *           Menambah instance variables private String telefon, email, no_plat, dob 
+ *           Menambah instance variables private String telefon, email, no_plat, dob
+ * Modul 4 : Mengimpor class Pattern, Matcher dan Date
+ *           Mengubah instance variables private String dob; menjadi private Date dob;
+ *           Mengubah method setEmail(String email)
  *           
  */
 
@@ -28,10 +40,8 @@ public class Ojek
     private int id;
     private String nama;
     private String telefon, email, no_plat; //Ditambahkan saat modul 3
-    private String dob; //Ditambahkan saat modul 3
-        
-
-
+    private Date dob; //Ditambahkan saat modul 3
+    
     /**
      * Constructor for objects of class Ojek
      * 
@@ -72,29 +82,152 @@ public class Ojek
      */
     public boolean setTelefon(String telefon)
     {
-        this.telefon = telefon;
-        return false;
+        //untuk validasi nomer telepon dengan maksimal 12 digit dengan format "081234567890"
+        // \ : Nothing, but quotes the following character
+        // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        // re{n,m} : Matches at least n but not more than m times
+        // \\d{7,12} berarti 012345678901
+        if (telefon.matches("\\d{7,12}")) 
+        {
+            this.telefon = telefon;
+            System.out.println(telefon + " : " + telefon.matches("\\d{7,12}") + "\n");
+            return true;
+        }
+        
+        //untuk validasi nomer telepon dengan -, . atau spasi
+        // \ : Nothing, but quotes the following character
+        // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        // re{n} : Matches exactly n number of occurrences of the preceding expression.
+        // \s : A whitespace character: [ \t\n\x0B\f\r] -> untuk validasi spasi (Bukan \s karena \s merupakan special escape sequences for String untuk spasi)
+        // [re] : Grouping
+        // - : untuk pemisah nomor telepon -
+        // \\. : Backslash character (untuk .), gabisa langsung . karena kalo . itu,
+        // . : Matches any single character except newline. Using m option allows it to match the newline as well
+        // \\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4} berarti 000-111-2222 atau 000.111.2222 atau 000 111 2222
+        
+        else if(telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
+        {
+            this.telefon = telefon;
+            System.out.println(telefon + " : " + telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
+            return true;
+        }
+        
+        //untuk validating nomer telepon dimana kode area menggunakan ()
+        // \\( : Backslash character untuk (, gabisa langsung ( karena fungsinya akan bertabrakan dengan ()
+        // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        // re{n} : Matches exactly n number of occurrences of the preceding expression.
+        // \\) : Backslash character untuk ), gabisa langsung ) karena fungsinya akan bertabrakan dengan ()
+        // - : untuk pemisah nomor telepon -
+        // \\(\\d{3}\\)-\\d{3}-\\d{4} berarti (000)-111-2222
+        
+        else if(telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
+        {
+            this.telefon = telefon;
+            System.out.println(telefon + " : " + telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
+            return true;
+        }
+        //return false jika tidak ada input yang sesuai (matches)
+        else
+        {
+            System.out.println("Maaf format nomer telefon yang ada masukan salah\n");
+            return false;
+        }
+          
     }
     
     /**
      * Method untuk memasukkan email ojek
      * Ditambahkan saat modul 3
+     * Diubah di modul 4
      * @param email Parameter dari method setEmail dalam bentuk String
      */
     public boolean setEmail(String email)
     {
-        this.email = email;
-        return false;
+        // ^ : Matches the beginning of the line
+        // (re) : Grouping
+        // . : Any character (may or may not match line terminators)
+        // re+ : Matches 1 or more of the previous thing
+        // @ : untuk @ dalam format email
+        // $ : Matches the end of the line
+        // ^(.+)@(.+)$ berarti abcde,123@abcde.com
+        
+        String regex = "^(.+)@(.+)$"; //membuat string yang akan digunakan pada class Pattern
+        
+        //A regular expression, specified as a string, must first be compiled into an instance of this class
+        Pattern pattern = Pattern.compile(regex); 
+        //The resulting pattern can then be used to create a Matcher object that can match arbitrary character sequences against the regular expression.
+        Matcher matcher = pattern.matcher((CharSequence) email);
+        
+        if(matcher.matches() == true)
+        {
+            this.email = email;
+            //All of the state involved in performing a match resides in the matcher, so many matchers can share the same pattern.
+            System.out.println(email + " : " + matcher.matches() + "\n");
+        }
+        
+        else if(matcher.matches() == false)
+        {
+            //All of the state involved in performing a match resides in the matcher, so many matchers can share the same pattern.
+            System.out.println("Maaf format email yang anda masukan salah" + " : "+ matcher.matches() + "\n");
+        }
+        return matcher.matches(); //mengembalikan hasil validasi apakah true atau false
     }
     
     /**
      * Method untuk memasukkan dob ojek
      * Ditambahkan saat modul 3
-     * @param dob Parameter dari method setDOB dalam bentuk String
+     * Diubah di modul 4
+     * @param day Parameter dari method setDOB dalam bentuk integer (numerik)
+     * @param month Parameter dari method setDOB dalam bentuk integer (numerik)
+     * @param year Parameter dari method setDOB dalam bentuk integer (numerik)
      */
-    public void setDOB(String dob)
+    public void setDOB(int day, int month, int year)
     {
-        this.dob = dob;        
+      //this.dob = dob;
+      //String hari = Integer.toString(day);
+      //String bulan = Integer.toString(month);
+      //String tahun = Integer.toString(year);
+      //Date date = new Date();
+      //DateFormat df = new DateFormat();\
+      //DateFormat formatter = DateFormat.getInstance(); // Date and time
+      //String dateStr = formatter.format(date);
+      //DateFormatter df = new DateFormatter(sdf);
+      //ubahtanggal = new JFormattedTextField(df);
+      //date.getTime();
+      //GregorianCalendar g = new GregorianCalendar(year, month, day);
+      //year = year;
+      Date trialTime = new Date();
+      Calendar calendar = new GregorianCalendar(day, month, year);
+      calendar.clear();
+      calendar.set(day, month, year);
+      //calendar.set(9, 12, 1994);
+      Calendar cal = Calendar.getInstance();
+      
+      //Date tahun = calendar.get(year);
+      //calendar.setWeekDate();
+      //calendar.get(year);
+      //System.out.println("YEAR: " + calendar);
+      //System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
+      //g.setGregorianChange(date);
+      //date.getTime()
+      //g.set(day, month, year);
+      //date.Parse(day, month, year);
+      //calendar.setTime(trialTime);
+      Date waktu = cal.getTime();
+      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+      SimpleDateFormat df = new SimpleDateFormat("h:mm a");
+      
+      System.out.printf("Date of Birth : " + sdf.format(trialTime) + "\n" + "Waktu : " + df.format(waktu));
+      dob = trialTime;
+      //sdf.format(trialTime)
+      //dob = sdf.format(trialTime);
+       //System.out.printf("Date of Birth : " + sdf.format(g.getGregorianChange()) + "\n");
+      //System.out.printf("Date of Birth : " + (new GregorianCalendar(year, month, day).getTime());
+      //SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+      //System.out.printf("Date of Birth :", format);
+      
+      //Date date = new Date();dob
+      //System.out.printf("%s %tB %<te, %<tY", "Due date:", date);
     }
     
     /**
@@ -102,9 +235,37 @@ public class Ojek
      * Ditambahkan saat modul 3
      * @param no_plat Parameter dari method setNoPlat dalam bentuk String
      */
-    public void setNoPlat(String no_plat)
+    public boolean setNoPlat(String no_plat)
     {
-        this.no_plat = no_plat;        
+        // ^ : Matches the beginning of the line
+        // [A-Z] : A through Z, inclusive (range), harus huruf gede dari A-Z
+        // re{n,m} : Matches at least n but not more than m times
+        // [re] : Grouping
+        // \s : A whitespace character: [ \t\n\x0B\f\r] -> untuk validasi spasi (Bukan \s karena \s merupakan special escape sequences for String untuk spasi)
+        // \S : A non-whitespace character: [ \^\s] -> untuk validasi non spasi (Bukan \S karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        // $ : Matches the end of the line
+        // ^[A-Z]{1,2}[\\s\\S]\\d{1,4}[\\s\\S][A-Z]{1,3}$ berarti B1234ABC atau B 1234 ABC
+        
+        String regex = "^[A-Z]{1,2}[\\s\\S]\\d{1,4}[\\s\\S][A-Z]{1,3}$"; //membuat string yang akan digunakan pada class Pattern
+        
+        //A regular expression, specified as a string, must first be compiled into an instance of this class
+        Pattern pattern = Pattern.compile(regex); 
+        //The resulting pattern can then be used to create a Matcher object that can match arbitrary character sequences against the regular expression.
+        Matcher matcher = pattern.matcher((CharSequence) no_plat);
+        //All of the state involved in performing a match resides in the matcher, so many matchers can share the same pattern.
+        if(matcher.matches() == true)
+        {
+            this.no_plat = no_plat;
+            //All of the state involved in performing a match resides in the matcher, so many matchers can share the same pattern.
+            System.out.println(no_plat + " : " + matcher.matches() + "\n");
+        }
+        
+        else if(matcher.matches() == false)
+        {
+            //All of the state involved in performing a match resides in the matcher, so many matchers can share the same pattern.
+            System.out.println("Maaf format nomor plat yang anda masukan salah" + " : "+ matcher.matches() + "\n");
+        }
+        return matcher.matches(); //mengembalikan hasil validasi apakah true atau false
     }
 
     /**
@@ -184,7 +345,7 @@ public class Ojek
      * Ditambahkan saat modul 3
      * @return dob Mengembalikan isi data dari instance variable dob
      */
-    public String getDOB()
+    public Date getDOB()
     {
         return dob;
     }
@@ -230,13 +391,41 @@ public class Ojek
     }
     
     /**
-     * Method untuk Menampilkan hasil (isi data) dari instance nama, id dan status dalam bentuk string
+     * Method untuk mengimplementasikan toString, belum digunakan saat ini
      */
-    public void printData()
+    public String toString()
     {
-        System.out.println("Nama Ojek:" + " " + nama);
-        System.out.println("ID Ojek :" + " " + getID());
-        System.out.println("Status Ojek :" + " " + status + "\n");
+        //Pelanggan orang = new Pelanggan(1, "User");
+        
+        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+        Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+        Pelanggan p_Rajab = new Pelanggan(1,"Rajab"); //membuat objek baru pada kelas Pelanggan
+        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+        
+        
+        if(pesanan_sekarang == null)
+        {
+            System.out.println("Nama Ojek:" + " " + nama);
+            System.out.println("ID Ojek :" + " " + getID());
+            System.out.println("Status Ojek :" + " " + status + "\n");
+            getNama();
+            getID();
+            getStatus();
+        }
+        
+        else if(pesanan_sekarang != null)
+        {
+            System.out.println("Nama Ojek:" + " " + nama);
+            System.out.println("ID Ojek :" + " " + getID());
+            System.out.println("Status Ojek :" + " " + status);
+            getNama();
+            getID();
+            getStatus();
+            System.out.println("Nama Pelanggan :" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
+        }
+        return "";
     }
     
     /**
@@ -320,4 +509,66 @@ public class Ojek
  *    //System.out.println("ID Ojek :" + " " + id);
  *  }
  *  
+ *  Bekas Modul 4 :
+ *  
+ *  method :
+ *  
+ *   public boolean setTelefon(String telefon)
+    {
+        //this.telefon = telefon;
+        //validate phone numbers of format "1234567890"
+        //validating phone number with extension length from 3 to 5
+        
+        else if(telefon.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}"))
+		{
+		    return true;
+		}
+		//return false;
+    }
+    
+    /*
+    /**
+     * Method untuk memasukkan dob ojek
+     * Ditambahkan saat modul 3
+     * @param dob Parameter dari method setDOB dalam bentuk String
+     
+    public void setDOB(String dob)
+    {
+        this.dob = dob;        
+    }
+    *
+    
+     public boolean setEmail(String email)
+    {
+        //this.email = email;
+        //return false;
+        
+        /*
+        //cara 1
+        //cara 2
+        String EMAIL_REGEX = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        String email1 = "user@domain.com";
+        Boolean b = email1.matches(EMAIL_REGEX);
+        System.out.println("is e-mail: "+email1+" :Valid = " + b);
+        *
+    }
+    
+    public boolean setNoPlat(String no_plat)
+    {
+        this.no_plat = no_plat;
+        return false;
+    //Modul 4 tidak ada method printData()
+    /*
+    /**
+     * Method untuk Menampilkan hasil (isi data) dari instance nama, id dan status dalam bentuk string
+     *
+    public void printData()
+    {
+        System.out.println("Nama Ojek:" + " " + nama);
+        System.out.println("ID Ojek :" + " " + getID());
+        System.out.println("Status Ojek :" + " " + status + "\n");
+    }
+    *
+    
+    }
  */

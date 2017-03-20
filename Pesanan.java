@@ -295,13 +295,14 @@ public class Pesanan
     {
         this.selesai = selesai;
     }
-    
+    //Modul 4 tidak ada method printData()
+    /*
     /**
      * Method untuk Menampilkan hasil (isi data) dari method getStatusSelesai(), getStatusDiproses(),
      * instance lokasi_awal, lokasi_akhir, pelanggan_awal, pelanggan_akhir dan layanan dalam bentuk string
      * 
      * Diubah di Modul 3
-     */
+     *
     public void printData()
     {
         System.out.println("Nama Pelanggan Awal :" + " " + pelanggan_awal);
@@ -312,12 +313,61 @@ public class Pesanan
         System.out.println("Status selesai :" + " " + getStatusSelesai());
         System.out.println("Status diproses :" + " " + getStatusDiproses() + "\n\n");
     }
-    
+    */
     /**
      * Method untuk mengimplementasikan toString, belum digunakan saat ini
      */
     public String toString()
     {
+        String final_status = "KOSONG";
+        if (diproses == true & selesai == false)
+        {
+            final_status = "DIPROSES";
+        }
+        
+        if (diproses == false & selesai == false)
+        {
+            final_status = "KOSONG";
+        }
+        
+        if (diproses == false & selesai == true)
+        {
+            final_status = "SELESAI";
+        }
+        
+        if (pelayan == null)
+        {
+            if (pelanggan_akhir != null)
+            {
+                System.out.println("Dibuat oleh " + pengguna.getNama() + " untuk " + pelanggan_awal + " di " + lokasi_awal.getNama()
+                + "\n" + "ke " + pelanggan_akhir + " di " + lokasi_akhir.getNama() + " dengan layanan " + layanan
+                + "\n" + "status " + final_status + " || \n");
+            }
+            
+            else if (pelanggan_akhir == null)
+            {
+                System.out.println("Dibuat oleh " + pengguna.getNama() + " untuk " + pelanggan_awal + " di " + lokasi_awal.getNama()
+                + "\n" + "ke " + lokasi_akhir.getNama() + " dengan layanan " + layanan
+                + "\n" + "status " + final_status + " || \n");
+            }
+        }
+        
+        if (pelayan != null)
+        {
+            if (pelanggan_akhir != null)
+            {
+                System.out.println("Dibuat oleh " + pengguna.getNama() + " untuk " + pelanggan_awal + " di " + lokasi_awal.getNama()
+                + "\n" + "ke " + pelanggan_akhir + " di " + lokasi_akhir.getNama() + " dengan layanan " + layanan
+                + "\n" + "status " + final_status + " || Diproses oleh " + pelayan.getNama() + "\n");
+            }
+            
+            else if (pelanggan_akhir == null)
+            {
+                System.out.println("Dibuat oleh " + pengguna.getNama() + " untuk " + pelanggan_awal + " di " + lokasi_awal.getNama()
+                + "\n" + "ke " + lokasi_akhir.getNama() + " dengan layanan " + layanan
+                + "\n" + "status " + final_status + " || Diproses oleh " + pelayan.getNama() + "\n");
+            }
+        }
         return "";
     }
     

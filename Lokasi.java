@@ -3,6 +3,8 @@
  * class Lokasi berisi kumpulan method untuk mengatur lokasi tujuan pelanggan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017 
+ * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
@@ -10,6 +12,7 @@
 
 /**
  * Class Lokasi ditambahkan pada versi 0.2 (Modul 2)
+ * Dari modul 2 sampai modul 4 tidak ada perubahan
  */
 
 public class Lokasi

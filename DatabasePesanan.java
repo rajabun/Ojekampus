@@ -3,6 +3,8 @@
  * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017
+ * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
@@ -12,14 +14,16 @@
  * Modul 1 : Jika terdapat method lain yang memerlukan nilai return selain numerik, string dan boolean, diganti
  * menjadi tipe method String dengan nilai return value-nya String kosong.
  * Modul 2 : Class DatabasePesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
- * Modul 3 : Tidak ada perubahan 
+ * Modul 3 : Mengubah semua instance dan method menjadi static
+ * Modul 4 : Tidak ada perubahan
+ * Modul 5 :
  */
 
 public class DatabasePesanan
 {
     // instance variables - replace the example below with your own
     
-    private Pesanan list_pesanan;
+    private static Pesanan list_pesanan;
 
     /**
      * Constructor for objects of class DatabasePesanan
@@ -36,9 +40,8 @@ public class DatabasePesanan
      * @param pesan Parameter dari method addPesanan yang merujuk ke class Pesanan
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public boolean addPesanan(Pesanan pesan)
+    public static boolean addPesanan(Pesanan pesan)
     {
-        //Pesanan list_pesanan = pesan;
         list_pesanan = pesan;
         System.out.println("Pesanan Berhasil Dilakukan\n");
         return true;
@@ -50,10 +53,10 @@ public class DatabasePesanan
      * @param pesan Parameter dari method hapusPesanan yang merujuk ke class Pesanan
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public boolean hapusPesanan(Pesanan pesan)
+    public static boolean hapusPesanan(Pesanan pesan)
     {
-        //Pesanan list_pesanan = null;
         list_pesanan = null;
+        System.out.println("Pesanan Berhasil Dihapus\n");
         return true;
     }
     
@@ -62,7 +65,7 @@ public class DatabasePesanan
      * 
      * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
      */
-    public Pesanan getPesanan()
+    public static Pesanan getPesanan()
     {
         return list_pesanan;
     }
@@ -121,6 +124,15 @@ public class DatabasePesanan
         return list_pesanan;
     }
     
-   
+   public boolean addPesanan(Pesanan pesan)
+    {
+        //Pesanan list_pesanan = pesan;
+    }
+    
+    public boolean hapusPesanan(Pesanan pesan)
+    {
+        //Pesanan list_pesanan = null;
+    }
+    
      */
     

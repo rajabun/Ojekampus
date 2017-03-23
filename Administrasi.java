@@ -2,7 +2,9 @@
 /**
  * class Administrasi berisi kumpulan method untuk mengatur tugas ojek (koordinasi ojek dan pelanggan).
  * 
- * @author Muhammad Rajab(1206244415) 
+ * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017
+ * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017
  * @since 0.1, 23 Februari 2017
@@ -10,16 +12,12 @@
 
 /**
  * Modul 3 : Class Administrasi dibuat
+ * Modul 4 : Tidak ada perubahan
+ * Modul 5 :
  */
 public class Administrasi
 {
     // instance variables - replace the example below with your own
-    Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-    Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-    Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-    Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-    Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-    Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
     
     /**
      * Constructor for objects of class Administrasi
@@ -37,21 +35,12 @@ public class Administrasi
      * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
      * 
      */
-    public void pesananDitugaskan(Pesanan pesan, Ojek pelayan)
+    public static void pesananDitugaskan(Pesanan pesan, Ojek pelayan)
     {
-        pes_Rajab.setStatusSelesai(false);
-        pes_Rajab.setStatusDiproses(true);
-        pes_Rajab.setPelayan(ojek_Muhammad);
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        ojekAmbilPesanan(pes_Rajab, ojek_Muhammad);
-        
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        */
+        pesan.setStatusSelesai(false);
+        pesan.setStatusDiproses(true);
+        pesan.setPelayan(pelayan);
+        ojekAmbilPesanan(pesan, pelayan);
     }
     
     /**
@@ -61,10 +50,10 @@ public class Administrasi
      * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
      * 
      */
-    public void ojekAmbilPesanan(Pesanan pesan, Ojek pelayan)
+    public static void ojekAmbilPesanan(Pesanan pesan, Ojek pelayan)
     {
-        ojek_Muhammad.setStatus(StatusOjek.Jemput);
-        ojek_Muhammad.setPesanan(pes_Rajab);
+        pelayan.setStatus(StatusOjek.Jemput);
+        pelayan.setPesanan(pesan);
     }
     
     /**
@@ -73,10 +62,10 @@ public class Administrasi
      * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
      * 
      */
-    public void ojekLepasPesanan(Ojek pelayan)
+    public static void ojekLepasPesanan(Ojek pelayan)
     {
-        ojek_Muhammad.setStatus(StatusOjek.Idle);
-        ojek_Muhammad.setPesanan(null);
+        pelayan.setStatus(StatusOjek.Idle);
+        pelayan.setPesanan(null);
     }
     
     /**
@@ -85,17 +74,12 @@ public class Administrasi
      * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
      * 
      */
-    public void pesananDibatalkan(Ojek pelayan)
+    public static void pesananDibatalkan(Ojek pelayan)
     {
-        pes_Rajab.setStatusSelesai(false);
-        pes_Rajab.setStatusDiproses(false);
-        ojek_Muhammad.setPesanan(null);
-        ojekLepasPesanan(ojek_Muhammad);
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        */
+        pelayan.getPesanan().setStatusSelesai(false);
+        pelayan.getPesanan().setStatusDiproses(false);
+        pelayan.setPesanan(null);
+        ojekLepasPesanan(pelayan);
     }
     
     /**
@@ -104,17 +88,12 @@ public class Administrasi
      * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
      * 
      */
-    public void pesananSelesai(Ojek pelayan)
+    public static void pesananSelesai(Ojek pelayan)
     {
-        pes_Rajab.setStatusSelesai(true);
-        pes_Rajab.setStatusDiproses(false);
-        ojek_Muhammad.setPesanan(null);
-        ojekLepasPesanan(ojek_Muhammad);
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        */
+        pelayan.getPesanan().setStatusSelesai(true);
+        pelayan.getPesanan().setStatusDiproses(false);
+        pelayan.setPesanan(null);
+        ojekLepasPesanan(pelayan);
     }
     
     /**
@@ -123,17 +102,12 @@ public class Administrasi
      * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
      * 
      */
-    public void pesananDibatalkan(Pesanan pesan)
+    public static void pesananDibatalkan(Pesanan pesan)
     {
-        ojekLepasPesanan(ojek_Muhammad);
-        pes_Rajab.setStatusSelesai(false);
-        pes_Rajab.setStatusDiproses(false);
-        pes_Rajab.setPelayan(null);
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        */
+        ojekLepasPesanan(pesan.getPelayan());
+        pesan.setStatusSelesai(false);
+        pesan.setStatusDiproses(false);
+        pesan.setPelayan(null);
     }
     
     /**
@@ -142,17 +116,12 @@ public class Administrasi
      * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
      * 
      */
-    public void pesananSelesai(Pesanan pesan)
+    public static void pesananSelesai(Pesanan pesan)
     {
-        ojekLepasPesanan(ojek_Muhammad);
-        pes_Rajab.setStatusSelesai(true);
-        pes_Rajab.setStatusDiproses(false);
-        pes_Rajab.setPelayan(null);
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        */
+        ojekLepasPesanan(pesan.getPelayan());
+        pesan.setStatusSelesai(true);
+        pesan.setStatusDiproses(false);
+        pesan.setPelayan(null);
     }
     
 }
@@ -168,6 +137,17 @@ public class Administrasi
         Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
         Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
         Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan 
+    
+         /*
+        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        ojekAmbilPesanan(pes_Rajab, ojek_Muhammad);
+        
+        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        *
     }
  * 
  * public void ojekAmbilPesanan(Pesanan pesan, Ojek pelayan)
@@ -200,6 +180,11 @@ public class Administrasi
         Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
         
         //pes_Rajab.getPelayan();
+        /*
+        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        *
      }
  * 
  * public void pesananSelesai(Ojek pelayan)
@@ -212,6 +197,11 @@ public class Administrasi
         Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
         
         //pes_Rajab.getPelayan();
+        /*
+        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        *
     }
  * 
  * public void pesananDibatalkan(Pesanan pesan)
@@ -224,6 +214,11 @@ public class Administrasi
         Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
         
         //pes_Rajab.getPelayan();
+        /*
+        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        *
     }
  * 
  * public void pesananSelesai(Pesanan pesan)
@@ -236,6 +231,11 @@ public class Administrasi
         Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
         
         //pes_Rajab.getPelayan();
+        /*
+        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+        *
     }
  *
  *

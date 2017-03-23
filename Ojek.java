@@ -4,13 +4,14 @@ import java.util.regex.Pattern;
 import java.util.GregorianCalendar;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
-import java.text.DateFormat;
 
 
 /**
  * class Ojek berisi kumpulan method untuk mengatur ojek yang dipesan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017
+ * @version 0.4, 19 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
@@ -26,7 +27,10 @@ import java.text.DateFormat;
  *           Menambah instance variables private String telefon, email, no_plat, dob
  * Modul 4 : Mengimpor class Pattern, Matcher dan Date
  *           Mengubah instance variables private String dob; menjadi private Date dob;
- *           Mengubah method setEmail(String email)
+ *           Mengubah method setEmail(String email), setTelefon (String telefon), setDOB(Date dob), setNoPlat(String no_plat)
+ *           Mengubah method getEmail(), getTelefon (), getDOB(), getNoPlat()
+ *           Mengganti method printData() dengan toString()
+ * Modul 5 :
  *           
  */
 
@@ -44,12 +48,15 @@ public class Ojek
     
     /**
      * Constructor for objects of class Ojek
-     * 
+     *
+     * @param id Parameter dari constructor kelas ini dalam bentuk integer (numerik)
      * @param nama Parameter dari constructor kelas ini dalam bentuk String
+     * @param posisi_sekarang Parameter dari constructor kelas ini yang merujuk ke class Lokasi
      */
     public Ojek(int id, String nama, Lokasi posisi_sekarang) 
     {
         // initialise instance variables
+        id = DatabaseUser.getIDOjekTerakhir();
         this.nama = nama; //this digunakan karena nama instance variable sama dengan dengan parameter method ini
         Lokasi lokasi1 = new Lokasi("Cafe Earhouse", 12, 06, "Pamulang");
         posisi_sekarang = lokasi1;
@@ -183,51 +190,32 @@ public class Ojek
      */
     public void setDOB(int day, int month, int year)
     {
-      //this.dob = dob;
-      //String hari = Integer.toString(day);
-      //String bulan = Integer.toString(month);
-      //String tahun = Integer.toString(year);
-      //Date date = new Date();
-      //DateFormat df = new DateFormat();\
-      //DateFormat formatter = DateFormat.getInstance(); // Date and time
-      //String dateStr = formatter.format(date);
-      //DateFormatter df = new DateFormatter(sdf);
-      //ubahtanggal = new JFormattedTextField(df);
-      //date.getTime();
-      //GregorianCalendar g = new GregorianCalendar(year, month, day);
-      //year = year;
+      //Membuat objek Date
       Date trialTime = new Date();
-      Calendar calendar = new GregorianCalendar(day, month, year);
-      calendar.clear();
-      calendar.set(day, month, year);
-      //calendar.set(9, 12, 1994);
-      Calendar cal = Calendar.getInstance();
       
-      //Date tahun = calendar.get(year);
-      //calendar.setWeekDate();
-      //calendar.get(year);
-      //System.out.println("YEAR: " + calendar);
-      //System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
-      //g.setGregorianChange(date);
-      //date.getTime()
-      //g.set(day, month, year);
-      //date.Parse(day, month, year);
-      //calendar.setTime(trialTime);
-      Date waktu = cal.getTime();
-      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+      //Membuat objek GregorianCalendar(int year, int month, int dayofmonth)
+      //month bernilai 0 untuk januari hingga 11 untuk desember, sehingga jika menginput 1 (bulan januari) harus dikurangi 1 sehingga menghasilkan bulan januari (01)
+      //Sisa dokumentasi tentang GregorianCalendar ada di https://docs.oracle.com/javase/8/docs/api/java/util/GregorianCalendar.html
+      Date tanggal = new GregorianCalendar(year, month-1, day).getTime();
+      
+      //getInstance() : Calendar's getInstance method returns a Calendar object whose calendar fields have been initialized with the current date and time:
+      // getTime() : Returns a Date object representing this Calendar's time value (millisecond offset from the Epoch").
+      Date waktu = Calendar.getInstance().getTime();
+      
+      //Membuat objek SimpleDateFormat. Ini diperlukan untuk membuat format dd-mm-yyyy untuk tanggal dan h:mm a untuk waktu
+      //dd-MM-yyyy = day-month-year
+      //h:mm a = hour:minute:Am/pm marker
+      
+      //Month: If the number of pattern letters (M) is 3 or more, the month is interpreted as text; otherwise, it is interpreted as a number.
+      //Sisa dokumentasi tentang SimpleDateFormat ada di http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
+      SimpleDateFormat sdf = new SimpleDateFormat("dd MMMMMMMM yyyy");
       SimpleDateFormat df = new SimpleDateFormat("h:mm a");
       
-      System.out.printf("Date of Birth : " + sdf.format(trialTime) + "\n" + "Waktu : " + df.format(waktu));
-      dob = trialTime;
-      //sdf.format(trialTime)
-      //dob = sdf.format(trialTime);
-       //System.out.printf("Date of Birth : " + sdf.format(g.getGregorianChange()) + "\n");
-      //System.out.printf("Date of Birth : " + (new GregorianCalendar(year, month, day).getTime());
-      //SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-      //System.out.printf("Date of Birth :", format);
+      // SimpleDateFormat.format(Date date) : Formats the given Date into a date/time string and appends the result to the given StringBuffer.
+      System.out.printf("Date of Birth : " + sdf.format(tanggal) + "\n" + "Waktu input : " + df.format(waktu) + "\n\n");
       
-      //Date date = new Date();dob
-      //System.out.printf("%s %tB %<te, %<tY", "Due date:", date);
+      //Mengembalikan nilai objek tanggal ke instance variable dob
+      this.dob = tanggal;
     }
     
     /**
@@ -243,6 +231,8 @@ public class Ojek
         // [re] : Grouping
         // \s : A whitespace character: [ \t\n\x0B\f\r] -> untuk validasi spasi (Bukan \s karena \s merupakan special escape sequences for String untuk spasi)
         // \S : A non-whitespace character: [ \^\s] -> untuk validasi non spasi (Bukan \S karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        
         // $ : Matches the end of the line
         // ^[A-Z]{1,2}[\\s\\S]\\d{1,4}[\\s\\S][A-Z]{1,3}$ berarti B1234ABC atau B 1234 ABC
         
@@ -257,7 +247,7 @@ public class Ojek
         {
             this.no_plat = no_plat;
             //All of the state involved in performing a match resides in the matcher, so many matchers can share the same pattern.
-            System.out.println(no_plat + " : " + matcher.matches() + "\n");
+            System.out.println("Nomor Plat : " + no_plat + " : " + matcher.matches() + "\n");
         }
         
         else if(matcher.matches() == false)
@@ -305,8 +295,9 @@ public class Ojek
      */
     public int getID()
     {
-        DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
-        id = id_ojek.getIDOjekTerakhir();
+        //DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
+        //id = id_ojek.getIDOjekTerakhir();
+        id = DatabaseUser.getIDOjekTerakhir();
         return id;
     }
     
@@ -347,6 +338,14 @@ public class Ojek
      */
     public Date getDOB()
     {
+        //Month: If the number of pattern letters (M) is 3 or more, the month is interpreted as text; otherwise, it is interpreted as a number.
+        //Sisa dokumentasi tentang SimpleDateFormat ada di http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("h:mm a");
+      
+        // SimpleDateFormat.format(Date date) : Formats the given Date into a date/time string and appends the result to the given StringBuffer.
+        System.out.printf("Date of Birth : " + sdf.format(dob) + "\n\n");
+      
         return dob;
     }
     
@@ -357,6 +356,7 @@ public class Ojek
      */
     public String getNoPlat()
     {
+        System.out.println("Nomor Plat : " + no_plat + "\n");
         return no_plat;
     }
     
@@ -395,16 +395,6 @@ public class Ojek
      */
     public String toString()
     {
-        //Pelanggan orang = new Pelanggan(1, "User");
-        
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1,"Rajab"); //membuat objek baru pada kelas Pelanggan
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
-        
         if(pesanan_sekarang == null)
         {
             System.out.println("Nama Ojek:" + " " + nama);
@@ -423,7 +413,8 @@ public class Ojek
             getNama();
             getID();
             getStatus();
-            System.out.println("Nama Pelanggan :" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
+            //System.out.println("Nama Pelanggan :" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
+            System.out.println("Nama Pelanggan :" + " " + getPesanan().getPelanggan().getNama() + "\n");
         }
         return "";
     }
@@ -520,10 +511,10 @@ public class Ojek
         //validating phone number with extension length from 3 to 5
         
         else if(telefon.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}"))
-		{
-		    return true;
-		}
-		//return false;
+        {
+            return true;
+        }
+        //return false;
     }
     
     /*
@@ -557,6 +548,7 @@ public class Ojek
     {
         this.no_plat = no_plat;
         return false;
+    }
     //Modul 4 tidak ada method printData()
     /*
     /**
@@ -568,7 +560,55 @@ public class Ojek
         System.out.println("ID Ojek :" + " " + getID());
         System.out.println("Status Ojek :" + " " + status + "\n");
     }
-    *
     
+    public void setDOB(int day, int month, int year)
+    {
+      //this.dob = dob;
+      //String hari = Integer.toString(day);
+      //String bulan = Integer.toString(month);
+      //String tahun = Integer.toString(year);
+      //Date date = new Date();
+      //DateFormat df = new DateFormat();
+      //DateFormat formatter = DateFormat.getInstance(); // Date and time
+      //String dateStr = formatter.format(date);
+      //DateFormatter df = new DateFormatter(sdf);
+      //ubahtanggal = new JFormattedTextField(df);
+      //date.getTime();
+      //GregorianCalendar g = new GregorianCalendar(year, month, day);
+      //year = year;
+      Date trialTime = new Date();
+      Calendar calendar = new GregorianCalendar(year, month, day);
+      this.dob = trialTime;
+      //calendar.clear();
+      //calendar.set(day, month, year);
+      //calendar.set(9, 12, 1994);
+      Calendar cal = Calendar.getInstance();
+      //calendar.getGregorianChange();
+      //Date tahun = calendar.get(year);
+      //calendar.setWeekDate();
+      //calendar.get(year);
+      //System.out.println("YEAR: " + calendar);
+      //System.out.println("MONTH: " + calendar.get(Calendar.MONTH));
+      //g.setGregorianChange(date);
+      //date.getTime()
+      //g.set(day, month, year);
+      //date.Parse(day, month, year);
+      //calendar.setTime(trialTime);
+      Date waktu = cal.getTime();
+      SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+      SimpleDateFormat df = new SimpleDateFormat("h:mm a");
+      
+      System.out.printf("Date of Birth : " + sdf.format(trialTime) + "\n" + "Waktu : " + df.format(waktu));
+      dob = trialTime;
+      //sdf.format(trialTime)
+      //dob = sdf.format(trialTime);
+       //System.out.printf("Date of Birth : " + sdf.format(g.getGregorianChange()) + "\n");
+      //System.out.printf("Date of Birth : " + (new GregorianCalendar(year, month, day).getTime());
+      //SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+      //System.out.printf("Date of Birth :", format);
+      
+      //Date date = new Date();dob
+      //System.out.printf("%s %tB %<te, %<tY", "Due date:", date);
     }
+    
  */

@@ -3,6 +3,8 @@
  * class DatabaseUser berisi kumpulan method untuk mengatur database pelanggan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017
+ * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
@@ -12,16 +14,18 @@
  * Modul 1 : Jika terdapat method lain yang memerlukan nilai return selain numerik, string dan boolean, diganti
  * menjadi tipe method String dengan nilai return value-nya String kosong.
  * Modul 2 : Class DatabaseUser diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
- * Modul 3 : Tidak ada perubahan
+ * Modul 3 : Mengubah semua instance dan method menjadi static
+ * Modul 4 : Tidak ada perubahan
+ * Modul 5 :
  */
 
 public class DatabaseUser
 {
     
-    private Pelanggan pelanggan_database;
-    private Ojek ojek_database;
-    private int id_ojek_terakhir = 1; //isi dari id_ojek_terakhir adalah 1
-    private int id_pelanggan_terakhir = 1; //isi dari id_pelanggan_terakhir adalah 1
+    private static Pelanggan pelanggan_database;
+    private static Ojek ojek_database;
+    private static int id_ojek_terakhir = 1; //isi dari id_ojek_terakhir adalah 1
+    private static int id_pelanggan_terakhir = 1; //isi dari id_pelanggan_terakhir adalah 1
     
     /**
      * Constructor for objects of class DatabaseUser
@@ -38,9 +42,8 @@ public class DatabaseUser
      * @param baru Parameter dari method addPelanggan yang merujuk ke class Pelanggan
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public boolean addPelanggan (Pelanggan baru)
+    public static boolean addPelanggan (Pelanggan baru)
     {
-        //Pelanggan pelanggan_database = baru;
         pelanggan_database = baru;
         System.out.println("Penambahan Pelanggan dalam Database Berhasil\n");
         return true;
@@ -52,9 +55,8 @@ public class DatabaseUser
      * @param id Parameter dari method removePelanggan dalam bentuk int
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public boolean removePelanggan (int id)
+    public static boolean removePelanggan (int id)
     {
-        //Pelanggan pelanggan_database = null;
         pelanggan_database = null;
         return true;
     }
@@ -65,9 +67,8 @@ public class DatabaseUser
      * @param baru Parameter dari method addOjek yang merujuk ke class Ojek
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public boolean addOjek(Ojek baru)
+    public static boolean addOjek(Ojek baru)
     {
-        //Ojek ojek_database = baru;
         ojek_database = baru;
         System.out.println("Penambahan Ojek dalam Database Berhasil\n");
         return true;
@@ -79,10 +80,10 @@ public class DatabaseUser
      * @param id Parameter dari method removePelanggan dalam bentuk int
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public boolean removeOjek (int id)
+    public static boolean removeOjek (int id)
     {
-        //Ojek ojek_database = null;
         ojek_database = null;
+        System.out.println("Ojek Berhasil Dihapus dari Database\n");
         return true;
     }
     
@@ -91,7 +92,7 @@ public class DatabaseUser
      * 
      * @return id_ojek_terakhir Mengembalikan isi data dari instance variable id_ojek_terakhir
      */
-    public int getIDOjekTerakhir()
+    public static int getIDOjekTerakhir()
     {
         return id_ojek_terakhir;
     }
@@ -101,7 +102,7 @@ public class DatabaseUser
      * 
      * @return id_pelanggan_terakhir Mengembalikan isi data dari instance variable id_pelanggan_terakhir
      */
-    public int getIDPelangganTerakhir()
+    public static int getIDPelangganTerakhir()
     {
         return id_pelanggan_terakhir;
     }
@@ -111,7 +112,7 @@ public class DatabaseUser
      * 
      * @return ojek_database Mengembalikan isi data dari instance variable ojek_database
      */
-    public Ojek getUserOjek()
+    public static Ojek getUserOjek()
     {
         return ojek_database;
     }
@@ -121,7 +122,7 @@ public class DatabaseUser
      * 
      * @return pelanggan_database Mengembalikan isi data dari instance variable pelanggan_database
      */
-    public Pelanggan getUserPelanggan()
+    public static Pelanggan getUserPelanggan()
     {
         return pelanggan_database;
     }
@@ -207,4 +208,24 @@ public class DatabaseUser
     {
         return "";
     }    
+    
+    public boolean addPelanggan (Pelanggan baru)
+    {
+        //Pelanggan pelanggan_database = baru;
+    }
+    
+    public boolean removePelanggan (int id)
+    {
+        //Pelanggan pelanggan_database = null;
+    }
+    
+    public boolean addOjek(Ojek baru)
+    {
+        //Ojek ojek_database = baru;
+    }
+    
+    public boolean removeOjek (int id)
+    {
+        //Ojek ojek_database = null;
+    }
  */

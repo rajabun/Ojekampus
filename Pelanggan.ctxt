@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=id\ nama
 comment0.target=Pelanggan(int,\ java.lang.String)
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pelanggan\r\n\ \r\n\ @param\ nama\ Parameter\ dari\ constructor\ kelas\ ini\ dalam\ bentuk\ String\r\n
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Pelanggan\r\n\ \r\n\ @param\ id\ Parameter\ dari\ constructor\ kelas\ ini\ dalam\ bentuk\ integer\ (numerik)\r\n\ @param\ nama\ Parameter\ dari\ constructor\ kelas\ ini\ dalam\ bentuk\ String\r\n
 comment1.params=
 comment1.target=int\ getID()
 comment1.text=\r\n\ Method\ untuk\ menampilkan\ id\ pelanggan\r\n\ \r\n\ @return\ id\ Mengembalikan\ isi\ data\ dari\ instance\ variable\ id\r\n

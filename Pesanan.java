@@ -3,6 +3,8 @@
  * class Pesanan berisi kumpulan method yang mengatur pesanan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017
+ * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017 
  * @since 0.1, 23 Februari 2017
@@ -13,6 +15,8 @@
  * menjadi tipe method String dengan nilai return value-nya String kosong.
  * Modul 2 : Class Pesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
  * Modul 3 : Menambah 2 constructor, beberapa method (getPelayan(), getStatusDiproses() dan getTipeLayanan()) dan mengubah isi method printData()
+ * Modul 4 : Mengganti method printData() dengan toString()
+ * Modul 5 :
  */
 
 public class Pesanan
@@ -295,25 +299,7 @@ public class Pesanan
     {
         this.selesai = selesai;
     }
-    //Modul 4 tidak ada method printData()
-    /*
-    /**
-     * Method untuk Menampilkan hasil (isi data) dari method getStatusSelesai(), getStatusDiproses(),
-     * instance lokasi_awal, lokasi_akhir, pelanggan_awal, pelanggan_akhir dan layanan dalam bentuk string
-     * 
-     * Diubah di Modul 3
-     *
-    public void printData()
-    {
-        System.out.println("Nama Pelanggan Awal :" + " " + pelanggan_awal);
-        System.out.println("Lokasi Awal :" + " " + lokasi_awal);
-        System.out.println("Nama Pelanggan Akhir :" + " " + pelanggan_akhir);
-        System.out.println("Lokasi Akhir :" + " " + lokasi_akhir);
-        System.out.println("Layanan yang Dipilih :" + " " + layanan);
-        System.out.println("Status selesai :" + " " + getStatusSelesai());
-        System.out.println("Status diproses :" + " " + getStatusDiproses() + "\n\n");
-    }
-    */
+    
     /**
      * Method untuk mengimplementasikan toString, belum digunakan saat ini
      */
@@ -522,5 +508,24 @@ public class Pesanan
         //System.out.println("Status diproses :" + " " + diproses);
     }
     
+    //Modul 4 tidak ada method printData()
+    /*
+    /**
+     * Method untuk Menampilkan hasil (isi data) dari method getStatusSelesai(), getStatusDiproses(),
+     * instance lokasi_awal, lokasi_akhir, pelanggan_awal, pelanggan_akhir dan layanan dalam bentuk string
+     * 
+     * Diubah di Modul 3
+     *
+    public void printData()
+    {
+        System.out.println("Nama Pelanggan Awal :" + " " + pelanggan_awal);
+        System.out.println("Lokasi Awal :" + " " + lokasi_awal);
+        System.out.println("Nama Pelanggan Akhir :" + " " + pelanggan_akhir);
+        System.out.println("Lokasi Akhir :" + " " + lokasi_akhir);
+        System.out.println("Layanan yang Dipilih :" + " " + layanan);
+        System.out.println("Status selesai :" + " " + getStatusSelesai());
+        System.out.println("Status diproses :" + " " + getStatusDiproses() + "\n\n");
+    }
+    *
     
     */

@@ -1,11 +1,15 @@
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.GregorianCalendar;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
 
 /**
  * class Pelanggan berisi kumpulan method untuk mengatur data pelanggan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
  * @version 0.2, 02 Maret 2017
@@ -18,7 +22,9 @@ import java.util.regex.Pattern;
  *           Menambah isi Constructor, menambah method getDOB(), mengubah isi method printData() dan getID()
  * Modul 4 : Mengimpor class Pattern, Matcher dan Date
  *           Mengubah instance variables private String dob; menjadi private Date dob;
- *           Mengubah method setEmail(String email)
+ *           Mengubah method setEmail(String email), setTelefon (String telefon), setDOB(Date dob)
+ *           Mengganti method printData() dengan toString()
+ * Modul 5 :
  *           
  */
 public class Pelanggan
@@ -31,13 +37,13 @@ public class Pelanggan
     /**
      * Constructor for objects of class Pelanggan
      * 
+     * @param id Parameter dari constructor kelas ini dalam bentuk integer (numerik)
      * @param nama Parameter dari constructor kelas ini dalam bentuk String
      */
     public Pelanggan(int id, String nama) 
     {
         // initialise instance variables
-        DatabaseUser id_pelanggan = new DatabaseUser();
-        id = id_pelanggan.getIDPelangganTerakhir();
+        id = DatabaseUser.getIDPelangganTerakhir();
         this.nama = nama;
     }
     
@@ -48,8 +54,7 @@ public class Pelanggan
      */
     public int getID()
     {
-        DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
-        id = id_ojek.getIDPelangganTerakhir();
+        id = DatabaseUser.getIDPelangganTerakhir();
         return id;
     }
     
@@ -61,6 +66,14 @@ public class Pelanggan
      */
     public Date getDOB()
     {
+        //Month: If the number of pattern letters (M) is 3 or more, the month is interpreted as text; otherwise, it is interpreted as a number.
+        //Sisa dokumentasi tentang SimpleDateFormat ada di http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("h:mm a");
+      
+        // SimpleDateFormat.format(Date date) : Formats the given Date into a date/time string and appends the result to the given StringBuffer.
+        System.out.printf("Date of Birth : " + sdf.format(dob) + "\n\n");
+      
         return dob;
     }
     
@@ -85,52 +98,52 @@ public class Pelanggan
         // \ : Nothing, but quotes the following character
         // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
         // re{n,m} : Matches at least n but not more than m times
-		// \\d{7,12} berarti 7410000 atau 012345678901
+        // \\d{7,12} berarti 7410000 atau 012345678901
         if (telefon.matches("\\d{7,12}")) 
-		{
-		    this.telefon = telefon;
+        {
+            this.telefon = telefon;
             System.out.println(telefon + " : " + telefon.matches("\\d{7,12}") + "\n");
-		    return true;
-		}
-		
-		//untuk validasi nomer telepon dengan -, . atau spasi
-		// \ : Nothing, but quotes the following character
+            return true;
+        }
+        
+        //untuk validasi nomer telepon dengan -, . atau spasi
+        // \ : Nothing, but quotes the following character
         // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
         // re{n} : Matches exactly n number of occurrences of the preceding expression.
-		// \s : A whitespace character: [ \t\n\x0B\f\r] -> untuk validasi spasi (Bukan \s karena \s merupakan special escape sequences for String untuk spasi)
-		// [re] : Grouping
-		// - : untuk pemisah nomor telepon -
-		// \\. : Backslash character (untuk .), gabisa langsung . karena kalo . itu,
-		// . : Matches any single character except newline. Using m option allows it to match the newline as well
-		// \\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4} berarti 000-111-2222 atau 000.111.2222 atau 000 111 2222
-		
-		else if(telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
-		{
-		    this.telefon = telefon;
-		    System.out.println(telefon + " : " + telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
-		    return true;
-		}
-		
-		//untuk validating nomer telepon dimana kode area menggunakan ()
-		// \\( : Backslash character untuk (, gabisa langsung ( karena fungsinya akan bertabrakan dengan ()
-		// \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
+        // \s : A whitespace character: [ \t\n\x0B\f\r] -> untuk validasi spasi (Bukan \s karena \s merupakan special escape sequences for String untuk spasi)
+        // [re] : Grouping
+        // - : untuk pemisah nomor telepon -
+        // \\. : Backslash character (untuk .), gabisa langsung . karena kalo . itu,
+        // . : Matches any single character except newline. Using m option allows it to match the newline as well
+        // \\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4} berarti 000-111-2222 atau 000.111.2222 atau 000 111 2222
+        
+        else if(telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
+        {
+            this.telefon = telefon;
+            System.out.println(telefon + " : " + telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
+            return true;
+        }
+        
+        //untuk validating nomer telepon dimana kode area menggunakan ()
+        // \\( : Backslash character untuk (, gabisa langsung ( karena fungsinya akan bertabrakan dengan ()
+        // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
         // re{n} : Matches exactly n number of occurrences of the preceding expression.
-		// \\) : Backslash character untuk ), gabisa langsung ) karena fungsinya akan bertabrakan dengan ()
-		// - : untuk pemisah nomor telepon -
-		// \\(\\d{3}\\)-\\d{3}-\\d{4} berarti (000)-111-2222
-		
-		else if(telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
-		{
-		    this.telefon = telefon;
-		    System.out.println(telefon + " : " + telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
-		    return true;
-		}
-		//return false jika tidak ada input yang sesuai (matches)
-		else
-		{
-		    System.out.println("Maaf format nonor telepon yang ada masukan salah\n");
-		    return false;
-		}
+        // \\) : Backslash character untuk ), gabisa langsung ) karena fungsinya akan bertabrakan dengan ()
+        // - : untuk pemisah nomor telepon -
+        // \\(\\d{3}\\)-\\d{3}-\\d{4} berarti (000)-111-2222
+        
+        else if(telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
+        {
+            this.telefon = telefon;
+            System.out.println(telefon + " : " + telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
+            return true;
+        }
+        //return false jika tidak ada input yang sesuai (matches)
+        else
+        {
+            System.out.println("Maaf format nonor telepon yang ada masukan salah\n");
+            return false;
+        }
     }
     
     /**
@@ -181,7 +194,33 @@ public class Pelanggan
      */
     public void setDOB(int day, int month, int year)
     {
-        this.dob = dob;        
+      //Membuat objek Date
+      Date trialTime = new Date();
+      
+      //Membuat objek GregorianCalendar(int year, int month, int dayofmonth)
+      //month bernilai 0 untuk januari hingga 11 untuk desember, sehingga jika menginput 1 (bulan januari) harus dikurangi 1 sehingga menghasilkan bulan januari (01)
+      //Sisa dokumentasi tentang GregorianCalendar ada di https://docs.oracle.com/javase/8/docs/api/java/util/GregorianCalendar.html
+      Date tanggal = new GregorianCalendar(year, month-1, day).getTime();
+      
+      //getInstance() : Calendar's getInstance method returns a Calendar object whose calendar fields have been initialized with the current date and time:
+      // getTime() : Returns a Date object representing this Calendar's time value (millisecond offset from the Epoch").
+      Date waktu = Calendar.getInstance().getTime();
+      
+      //Membuat objek SimpleDateFormat. Ini diperlukan untuk membuat format dd-mm-yyyy untuk tanggal dan h:mm a untuk waktu
+      //dd-MM-yyyy = day-month-year
+      //h:mm a = hour:minute:Am/pm marker
+      
+      //Month: If the number of pattern letters (M) is 3 or more, the month is interpreted as text; otherwise, it is interpreted as a number.
+      //Sisa dokumentasi tentang SimpleDateFormat ada di http://docs.oracle.com/javase/8/docs/api/java/text/SimpleDateFormat.html
+      SimpleDateFormat sdf = new SimpleDateFormat("dd MMMMMMMM yyyy");
+      SimpleDateFormat df = new SimpleDateFormat("h:mm a");
+      
+      // SimpleDateFormat.format(Date date) : Formats the given Date into a date/time string and appends the result to the given StringBuffer.
+      System.out.printf("Date of Birth : " + sdf.format(tanggal) + "\n" + "Waktu input : " + df.format(waktu) + "\n\n");
+      
+      //Mengembalikan nilai objek tanggal ke instance variable dob
+      this.dob = tanggal;
+      
     }
     
     /**
@@ -214,41 +253,25 @@ public class Pelanggan
      */
     public String toString()
     {
-        Pesanan pemesanan;
-        DatabasePesanan dbasep = new DatabasePesanan();
-        pemesanan = dbasep.getPesanan();
-        
-        if(pemesanan == null)
+        if(DatabasePesanan.getPesanan() == null)
         {
             System.out.println("Nama Pelanggan:" + " " + nama);
             System.out.println("ID Pelanggan :" + " " + getID());
             System.out.println("Nomor Telefon :" + " " + telefon + "\n");
             getNama();
             getID();
-            return telefon;
+            //return telefon;
         }
-        //logic belum berjalan dengan baik
-        else if(pemesanan != null)
+        else if(DatabasePesanan.getPesanan() != null)
         {
-            Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-            Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-            Pelanggan p_Rajab = new Pelanggan(1,"Rajab"); //membuat objek baru pada kelas Pelanggan
-            Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-            Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-            Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
             System.out.println("Nama Pelanggan:" + " " + nama);
             System.out.println("ID Pelanggan :" + " " + getID());
             System.out.println("Nomor Telefon :" + " " + telefon);
-            //System.out.println("Nama Pengirim:" + " " + dbasep.getPesanan().getPelanggan().getNama() + "\n");
-            System.out.println("Nama Pengirim : " + pes_Rajab.getPelanggan().getNama() + "\n");
-            //pes_Rajab.getPenggunaAwal();
+            System.out.println("Nama Pengirim : " + DatabasePesanan.getPesanan().getPelanggan().getNama() + "\n");
             getNama();
             getID();
-            pes_Rajab.getPelanggan();
-            //dbasep.getPesanan().getPelanggan();
-            return telefon;
-            //System.out.println("Nama Pelanggan Pengirim Pesanan:" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
+            DatabasePesanan.getPesanan().getPelanggan();
+            //return telefon;
         }
         return "";
     }
@@ -313,6 +336,25 @@ public class Pelanggan
     
     method :
    
+    public Pelanggan(int id, String nama) 
+    {
+        // initialise instance variables
+        //DatabaseUser id_pelanggan = new DatabaseUser();
+        //id = id_pelanggan.getIDPelangganTerakhir();
+    }
+    
+    /**
+     * Method untuk menampilkan id pelanggan
+     * 
+     * @return id Mengembalikan isi data dari instance variable id
+     *
+    public int getID()
+    {
+        //DatabaseUser id_ojek = new DatabaseUser(); //membuat objek baru pada kelas DatabaseUser dengan nama id_ojek
+        //id = id_ojek.getIDPelangganTerakhir();
+    }
+    
+    
     /*
     /**
      * Method untuk menampilkan dob pelanggan
@@ -329,12 +371,12 @@ public class Pelanggan
         //this.telefon = telefon;
         //validate phone numbers of format "1234567890"
         //validating phone number with extension length from 3 to 5
-		
-		else if(telefon.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}"))
-		{
-		    return true;
-		}
-		//return false;
+        
+        else if(telefon.matches("\\d{3}-\\d{3}-\\d{4}\\s(x|(ext))\\d{3,5}"))
+        {
+            return true;
+        }
+        //return false;
     }
     
     public boolean setEmail(String email)
@@ -374,6 +416,50 @@ public class Pelanggan
     {
         System.out.println("Nama Pelanggan :" + " " + nama);
         System.out.println("ID Pelanggan :" + " " + getID() + "\n");
+    }
+    
+    public String toString()
+    {
+        /*
+        Pesanan pemesanan;
+        DatabasePesanan dbasep = new DatabasePesanan();
+        pemesanan = dbasep.getPesanan();
+        *
+        if(DatabasePesanan.getPesanan() == null)
+        {
+            //return telefon;
+        }
+        //logic belum berjalan dengan baik
+        else if(DatabasePesanan.getPesanan() != null)
+        {
+            /*
+            Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+            Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+            Pelanggan p_Rajab = new Pelanggan(1,"Rajab"); //membuat objek baru pada kelas Pelanggan
+            Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+            Lokasi per_Rajab_akhir = new Lokasi("Taman  Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+            Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+            *
+            //System.out.println("Nama Pengirim:" + " " + dbasep.getPesanan().getPelanggan().getNama() + "\n");
+            //pes_Rajab.getPenggunaAwal();
+            //dbasep.getPesanan().getPelanggan();
+            //return telefon;
+            //System.out.println("Nama Pelanggan Pengirim Pesanan:" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
+        }
+        return "";
+    }
+    
+    public void setDOB(int day, int month, int year)
+    {
+      //this.dob = dob;
+      //Calendar calendar = new GregorianCalendar(year, month-1, day);
+      
+      //this.dob = trialTime;
+      
+      //Date tanggal = calendar.getTime();
+      
+      //System.out.printf("Date of Birth : " + calendar.get(Calendar.DAY_OF_MONTH) + " " + calendar.get(Calendar.MONTH) + " " + calendar.get(Calendar.YEAR) + "\n" + "Waktu : " + df.format(waktu));
+      
     }
     
    */

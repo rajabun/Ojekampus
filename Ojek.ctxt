@@ -1,7 +1,7 @@
 #BlueJ class context
 comment0.params=id\ nama\ posisi_sekarang
 comment0.target=Ojek(int,\ java.lang.String,\ Lokasi)
-comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Ojek\r\n\ \r\n\ @param\ nama\ Parameter\ dari\ constructor\ kelas\ ini\ dalam\ bentuk\ String\r\n
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Ojek\r\n\r\n\ @param\ id\ Parameter\ dari\ constructor\ kelas\ ini\ dalam\ bentuk\ integer\ (numerik)\r\n\ @param\ nama\ Parameter\ dari\ constructor\ kelas\ ini\ dalam\ bentuk\ String\r\n\ @param\ posisi_sekarang\ Parameter\ dari\ constructor\ kelas\ ini\ yang\ merujuk\ ke\ class\ Lokasi\r\n
 comment1.params=id
 comment1.target=void\ setID(int)
 comment1.text=\r\n\ Method\ untuk\ memasukkan\ id\ ojek\r\n\ \r\n\ @param\ id\ Parameter\ dari\ method\ setID\ dalam\ bentuk\ int\r\n

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
@@ -16,14 +17,17 @@
  * Modul 2 : Class DatabasePesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
  * Modul 3 : Mengubah semua instance dan method menjadi static
  * Modul 4 : Tidak ada perubahan
- * Modul 5 :
+ * Modul 5 : Mengubah tipe data instance list_pesanan menjadi tipe ArrayList
+ *           Menambah method hapusPesanan(Pelanggan pengguna) dan getDatabase()
  */
 
 public class DatabasePesanan
 {
     // instance variables - replace the example below with your own
     
-    private static Pesanan list_pesanan;
+    //private static Pesanan list_pesanan;
+    private static ArrayList<Pesanan> list_pesanan = new ArrayList<Pesanan>(); // Diubah di modul 5
+    
 
     /**
      * Constructor for objects of class DatabasePesanan
@@ -33,7 +37,27 @@ public class DatabasePesanan
         // initialise instance variables
         
     }
-    
+    /*
+    public static void main (String [] args)
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         *
+        
+        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+        Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+        Pelanggan p_Rajab = new Pelanggan(1,"Rajab","085854032720"); //membuat objek baru pada kelas Pelanggan
+        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+        Pesanan pes_Rajab_2 = new Pesanan(p_Rajab, TipeLayanan.BeliBarang, per_Rajab_akhir, per_Rajab_awal, "Ani", "Fatayati", 50000); //membuat objek baru pada kelas Pesanan
+        addPesanan(pes_Rajab);
+        addPesanan(pes_Rajab_2);
+    }
+    */
     /**
      * Method untuk memasukkan pesanan dari ojek kedalam database pesanan
      * 
@@ -42,9 +66,22 @@ public class DatabasePesanan
      */
     public static boolean addPesanan(Pesanan pesan)
     {
-        list_pesanan = pesan;
-        System.out.println("Pesanan Berhasil Dilakukan\n");
-        return true;
+        if(pesan.getPelanggan() == pesan.getPelanggan())
+        {
+            System.out.println("Pesanan Gagal Dilakukan\n");
+            return false;
+        }
+        
+        
+        if(pesan.getPelanggan() != pesan.getPelanggan())
+        {
+            list_pesanan.add(pesan);
+            //list_pesanan = pesan;
+            System.out.println("Pesanan Berhasil Dilakukan\n");
+            return true;
+        }
+        
+        return false;
     }
 
     /**
@@ -54,6 +91,30 @@ public class DatabasePesanan
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
     public static boolean hapusPesanan(Pesanan pesan)
+    {
+        //list_pesanan = null;
+        //System.out.println("Pesanan Berhasil Dihapus\n");
+        //return true;
+        if(list_pesanan.contains(pesan.getPelayan()))
+        {
+                 list_pesanan = null;
+                 System.out.println("Pesanan Berhasil Dihapus\n");       
+        }
+        else
+        {
+            System.out.println("Pesanan tidak berhasil dihapus\n");
+            return false;
+        }
+        return false;
+    }
+    
+    /**
+     * Method untuk menghapus pesanan ojek dari database pesanan
+     * Ditambah di modul 5
+     * @param pengguna Parameter dari method hapusPesanan yang merujuk ke class Pelanggan
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public static boolean hapusPesanan(Pelanggan pengguna)
     {
         list_pesanan = null;
         System.out.println("Pesanan Berhasil Dihapus\n");
@@ -66,6 +127,22 @@ public class DatabasePesanan
      * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
      */
     public static Pesanan getPesanan()
+    {
+        if(list_pesanan.contains(list_pesanan))
+        {
+            ArrayList<Pesanan> list_pesanan;   
+        }
+        //return list_pesanan;
+        //return ArrayList<Pesanan> list_pesanan;
+        return null;
+    }
+    
+    /**
+     * Method untuk menampilkan database pesanan
+     * Ditambah di modul 5
+     * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
+     */
+    public static ArrayList<Pesanan> getDatabase()
     {
         return list_pesanan;
     }

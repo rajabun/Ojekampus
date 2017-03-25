@@ -30,20 +30,21 @@ import java.text.SimpleDateFormat;
  *           Mengubah method setEmail(String email), setTelefon (String telefon), setDOB(Date dob), setNoPlat(String no_plat)
  *           Mengubah method getEmail(), getTelefon (), getDOB(), getNoPlat()
  *           Mengganti method printData() dengan toString()
- * Modul 5 :
+ * Modul 5 : Mengubah nilai instance variable status menjadi default
  *           
  */
 
 public class Ojek
+//implements Comparable<Ojek>
 {
     // instance variables - replace the example below with your own
 
-    private StatusOjek status = StatusOjek.Idle; //Ditambahkan saat modul 3
+    private StatusOjek status; //Diubah saat modul 5
     private Lokasi posisi_sekarang;
     private Pesanan pesanan_sekarang = null; //isi dari pesanan_sekarang adalah null
     private int id;
     private String nama;
-    private String telefon, email, no_plat; //Ditambahkan saat modul 3
+    private String telepon, email, no_plat; //Ditambahkan saat modul 3
     private Date dob; //Ditambahkan saat modul 3
     
     /**
@@ -58,10 +59,17 @@ public class Ojek
         // initialise instance variables
         id = DatabaseUser.getIDOjekTerakhir();
         this.nama = nama; //this digunakan karena nama instance variable sama dengan dengan parameter method ini
-        Lokasi lokasi1 = new Lokasi("Cafe Earhouse", 12, 06, "Pamulang");
-        posisi_sekarang = lokasi1;
+        setPosisi(posisi_sekarang);
     }
-    
+    /*
+    @Override
+    public int compareTo(Ojek s)
+    {
+        return this.id - s.id;     //Sorts the objects in ascending order
+         
+        // return s.nilai - this.nilai;    //Sorts the objects in descending order
+    }
+    */
     /**
      * Method untuk memasukkan id ojek
      * 
@@ -85,19 +93,19 @@ public class Ojek
     /**
      * Method untuk memasukkan telepon ojek
      * Ditambahkan saat modul 3
-     * @param telefon Parameter dari method setTelefon dalam bentuk String
+     * @param telepon Parameter dari method setTelepon dalam bentuk String
      */
-    public boolean setTelefon(String telefon)
+    public boolean setTelepon(String telepon)
     {
         //untuk validasi nomer telepon dengan maksimal 12 digit dengan format "081234567890"
         // \ : Nothing, but quotes the following character
         // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
         // re{n,m} : Matches at least n but not more than m times
         // \\d{7,12} berarti 012345678901
-        if (telefon.matches("\\d{7,12}")) 
+        if (telepon.matches("\\d{7,12}")) 
         {
-            this.telefon = telefon;
-            System.out.println(telefon + " : " + telefon.matches("\\d{7,12}") + "\n");
+            this.telepon = telepon;
+            System.out.println(telepon + " : " + telepon.matches("\\d{7,12}") + "\n");
             return true;
         }
         
@@ -112,10 +120,10 @@ public class Ojek
         // . : Matches any single character except newline. Using m option allows it to match the newline as well
         // \\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4} berarti 000-111-2222 atau 000.111.2222 atau 000 111 2222
         
-        else if(telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
+        else if(telepon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
         {
-            this.telefon = telefon;
-            System.out.println(telefon + " : " + telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
+            this.telepon = telepon;
+            System.out.println(telepon + " : " + telepon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
             return true;
         }
         
@@ -127,16 +135,16 @@ public class Ojek
         // - : untuk pemisah nomor telepon -
         // \\(\\d{3}\\)-\\d{3}-\\d{4} berarti (000)-111-2222
         
-        else if(telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
+        else if(telepon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
         {
-            this.telefon = telefon;
-            System.out.println(telefon + " : " + telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
+            this.telepon = telepon;
+            System.out.println(telepon + " : " + telepon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
             return true;
         }
         //return false jika tidak ada input yang sesuai (matches)
         else
         {
-            System.out.println("Maaf format nomer telefon yang ada masukan salah\n");
+            System.out.println("Maaf format nomer telepon yang ada masukan salah\n");
             return false;
         }
           
@@ -312,13 +320,13 @@ public class Ojek
     }
     
     /**
-     * Method untuk menampilkan telefon ojek
+     * Method untuk menampilkan telepon ojek
      * Ditambahkan saat modul 3
-     * @return telefon Mengembalikan isi data dari instance variable telefon
+     * @return telepon Mengembalikan isi data dari instance variable telepon
      */
-    public String getTelefon()
+    public String getTelepon()
     {
-        return telefon;
+        return telepon;
     }
     
     /**
@@ -391,7 +399,7 @@ public class Ojek
     }
     
     /**
-     * Method untuk mengimplementasikan toString, belum digunakan saat ini
+     * Method untuk mengimplementasikan toString, mulai digunakan saat modul 4
      */
     public String toString()
     {
@@ -413,7 +421,6 @@ public class Ojek
             getNama();
             getID();
             getStatus();
-            //System.out.println("Nama Pelanggan :" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
             System.out.println("Nama Pelanggan :" + " " + getPesanan().getPelanggan().getNama() + "\n");
         }
         return "";
@@ -609,6 +616,33 @@ public class Ojek
       
       //Date date = new Date();dob
       //System.out.printf("%s %tB %<te, %<tY", "Due date:", date);
+    }
+    
+    Bekas Nodul 5
+    
+    instance variable :
+    
+    //private StatusOjek status = StatusOjek.Idle; //Ditambahkan saat modul 3
+    
+    method :
+     
+    public String toString()
+    {
+        if(pesanan_sekarang == null)
+        {}
+        
+        else if(pesanan_sekarang != null)
+        {
+            //System.out.println("Nama Pelanggan :" + " " + pes_Rajab.getPelanggan().getNama() + "\n");
+        }
+        return "";
+    }
+    
+    public Ojek(int id, String nama, Lokasi posisi_sekarang) 
+    {
+        // initialise instance variables
+        //Lokasi lokasi1 = new Lokasi("Cafe Earhouse", 12, 06, "Pamulang");
+        //posisi_sekarang = lokasi1;
     }
     
  */

@@ -24,14 +24,15 @@ import java.text.SimpleDateFormat;
  *           Mengubah instance variables private String dob; menjadi private Date dob;
  *           Mengubah method setEmail(String email), setTelefon (String telefon), setDOB(Date dob)
  *           Mengganti method printData() dengan toString()
- * Modul 5 :
+ * Modul 5 : Menambah local variable pada constructor dengan String telepon
+ *           Menambah method getEmail() dan getTelepon()
  *           
  */
 public class Pelanggan
 {
     private int id;
     private String nama;
-    private String telefon, email; //Ditambahkan saat modul 3
+    private String telepon, email; //Ditambahkan saat modul 3
     private Date dob; //Ditambahkan saat modul 4
     
     /**
@@ -40,11 +41,12 @@ public class Pelanggan
      * @param id Parameter dari constructor kelas ini dalam bentuk integer (numerik)
      * @param nama Parameter dari constructor kelas ini dalam bentuk String
      */
-    public Pelanggan(int id, String nama) 
+    public Pelanggan(int id, String nama, String telepon) 
     {
         // initialise instance variables
         id = DatabaseUser.getIDPelangganTerakhir();
         this.nama = nama;
+        setTelepon(telepon);
     }
     
     /**
@@ -88,21 +90,41 @@ public class Pelanggan
     }
     
     /**
+     * Method untuk menampilkan email pelanggan
+     * Ditambahkan saat modul 5 di class Pelanggan
+     * @return email Mengembalikan isi data dari instance variable email
+     */
+    public String getEmail()
+    {
+        return email;
+    }
+    
+    /**
+     * Method untuk menampilkan telepon pelanggan
+     * Ditambahkan saat modul 5 di class Pelanggan
+     * @return telepon Mengembalikan isi data dari instance variable telepon
+     */
+    public String getTelepon()
+    {
+        return telepon;
+    }
+    
+    /**
      * Method untuk memasukkan telepon pelanggan
      * Ditambahkan saat modul 3
-     * @param telefon Parameter dari method setTelefon dalam bentuk String
+     * @param telepon Parameter dari method setTelepon dalam bentuk String
      */
-    public boolean setTelefon(String telefon)
+    public boolean setTelepon(String telepon)
     {
         //untuk validasi nomer telepon dengan maksimal 12 digit dengan format "081234567890"
         // \ : Nothing, but quotes the following character
         // \d : Matches the digits. Equivalent to [0-9]. (Bukan \d karena \ merupakan special escape sequences for String, bertabrakan fungsinya)
         // re{n,m} : Matches at least n but not more than m times
         // \\d{7,12} berarti 7410000 atau 012345678901
-        if (telefon.matches("\\d{7,12}")) 
+        if (telepon.matches("\\d{7,12}")) 
         {
-            this.telefon = telefon;
-            System.out.println(telefon + " : " + telefon.matches("\\d{7,12}") + "\n");
+            this.telepon = telepon;
+            System.out.println(telepon + " : " + telepon.matches("\\d{7,12}") + "\n");
             return true;
         }
         
@@ -117,10 +139,10 @@ public class Pelanggan
         // . : Matches any single character except newline. Using m option allows it to match the newline as well
         // \\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4} berarti 000-111-2222 atau 000.111.2222 atau 000 111 2222
         
-        else if(telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
+        else if(telepon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}"))
         {
-            this.telefon = telefon;
-            System.out.println(telefon + " : " + telefon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
+            this.telepon = telepon;
+            System.out.println(telepon + " : " + telepon.matches("\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}") + "\n");
             return true;
         }
         
@@ -132,10 +154,10 @@ public class Pelanggan
         // - : untuk pemisah nomor telepon -
         // \\(\\d{3}\\)-\\d{3}-\\d{4} berarti (000)-111-2222
         
-        else if(telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
+        else if(telepon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}"))
         {
-            this.telefon = telefon;
-            System.out.println(telefon + " : " + telefon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
+            this.telepon = telepon;
+            System.out.println(telepon + " : " + telepon.matches("\\(\\d{3}\\)-\\d{3}-\\d{4}") + "\n");
             return true;
         }
         //return false jika tidak ada input yang sesuai (matches)
@@ -257,7 +279,7 @@ public class Pelanggan
         {
             System.out.println("Nama Pelanggan:" + " " + nama);
             System.out.println("ID Pelanggan :" + " " + getID());
-            System.out.println("Nomor Telefon :" + " " + telefon + "\n");
+            System.out.println("Nomor Telepon :" + " " + telepon + "\n");
             getNama();
             getID();
             //return telefon;
@@ -266,7 +288,7 @@ public class Pelanggan
         {
             System.out.println("Nama Pelanggan:" + " " + nama);
             System.out.println("ID Pelanggan :" + " " + getID());
-            System.out.println("Nomor Telefon :" + " " + telefon);
+            System.out.println("Nomor Telepon :" + " " + telepon);
             System.out.println("Nama Pengirim : " + DatabasePesanan.getPesanan().getPelanggan().getNama() + "\n");
             getNama();
             getID();

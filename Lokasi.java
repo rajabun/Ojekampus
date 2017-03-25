@@ -12,7 +12,7 @@
 
 /**
  * Class Lokasi ditambahkan pada versi 0.2 (Modul 2)
- * Dari modul 2 sampai modul 4 tidak ada perubahan
+ * Dari modul 2 sampai modul 5 tidak ada perubahan
  */
 
 public class Lokasi

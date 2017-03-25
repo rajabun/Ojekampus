@@ -13,7 +13,9 @@
 /**
  * Modul 3 : Class Administrasi dibuat
  * Modul 4 : Tidak ada perubahan
- * Modul 5 :
+ * Modul 5 : Menambah method pesananDibatalkan(Pelanggan pengguna), pesananSelesai(Pelanggan pengguna)
+ *           Menambah method cariPesananIdle(), jalankanSistemPenugas(), temukanOjekTerdekat (Pesanan pesan)
+ *           Menambah method printAllDatabase(), printOjekDatabase(), printPelangganDatabase(), printPesananDatabase()           
  */
 public class Administrasi
 {
@@ -46,8 +48,8 @@ public class Administrasi
     /**
      * Method untuk menugaskan pesanan ke ojek untuk diambil
      * 
-     * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
-     * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
+     * @param pesan Parameter dari method ojekAmbilPesanan yang merujuk ke class Pesanan
+     * @param pelayan Parameter dari method ojekAmbilPesanan yang merujuk ke class Ojek
      * 
      */
     public static void ojekAmbilPesanan(Pesanan pesan, Ojek pelayan)
@@ -59,7 +61,7 @@ public class Administrasi
     /**
      * Method untuk melepas pesanan dari ojek
      * 
-     * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
+     * @param pelayan Parameter dari method OjekLepasPesanann yang merujuk ke class Ojek
      * 
      */
     public static void ojekLepasPesanan(Ojek pelayan)
@@ -71,7 +73,7 @@ public class Administrasi
     /**
      * Method untuk membatalkan pesanan dari ojek
      * 
-     * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
+     * @param pelayan Parameter dari method pesananDibatalkan yang merujuk ke class Ojek
      * 
      */
     public static void pesananDibatalkan(Ojek pelayan)
@@ -85,7 +87,7 @@ public class Administrasi
     /**
      * Method untuk menyatakan pesanan selesai dari ojek
      * 
-     * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
+     * @param pelayan Parameter dari method pesananSelesai yang merujuk ke class Ojek
      * 
      */
     public static void pesananSelesai(Ojek pelayan)
@@ -99,7 +101,7 @@ public class Administrasi
     /**
      * Method untuk membatalkan pesanan dari class pesanan (pelanggan)
      * 
-     * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
+     * @param pesan Parameter dari method pesananDibatalkan yang merujuk ke class Pesanan
      * 
      */
     public static void pesananDibatalkan(Pesanan pesan)
@@ -113,7 +115,7 @@ public class Administrasi
     /**
      * Method untuk menyatakan pesanan selesai dari class pesanan (pelanggan)
      * 
-     * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
+     * @param pesan Parameter dari method pesananSelesai yang merujuk ke class Pesanan
      * 
      */
     public static void pesananSelesai(Pesanan pesan)
@@ -122,6 +124,146 @@ public class Administrasi
         pesan.setStatusSelesai(true);
         pesan.setStatusDiproses(false);
         pesan.setPelayan(null);
+    }
+    
+    /**
+     * Method untuk membatalkan pesanan dari pelanggan
+     * 
+     * @param pelayan Parameter dari method pesananDibatalkan yang merujuk ke class Pelanggan
+     * 
+     */
+    public static void pesananDibatalkan(Pelanggan pengguna)
+    {
+        //pelayan.getPesanan().setStatusSelesai(false);
+        //pelayan.getPesanan().setStatusDiproses(false);
+        //ojekLepasPesanan(pelayan);
+        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        Pesanan message = new Pesanan(pengguna, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000);
+        ojekLepasPesanan(message.getPelayan());
+        message.setStatusSelesai(false);
+        message.setStatusDiproses(false);
+        message.setPelanggan(null);
+    }
+    
+    /**
+     * Method untuk menyatakan pesanan selesai dari pelanggan
+     * 
+     * @param pengguna Parameter dari method pesananSelesai yang merujuk ke class Pelanggan
+     * 
+     */
+    public static void pesananSelesai(Pelanggan pengguna)
+    {
+        //pelayan.getPesanan().setStatusSelesai(true);
+        //pelayan.getPesanan().setStatusDiproses(false);
+        //ojekLepasPesanan(pelayan);
+        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        Pesanan message = new Pesanan(pengguna, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000);
+        ojekLepasPesanan(message.getPelayan());
+        message.setStatusSelesai(true);
+        message.setStatusDiproses(false);
+        message.setPelanggan(null);
+    }
+    
+    /**
+     * Method untuk mencari pesanan yang memiliki status idle
+     * 
+     */
+    public static Pesanan cariPesananIdle()
+    {
+        if(DatabasePesanan.getPesanan().getStatusDiproses() == false && DatabasePesanan.getPesanan().getStatusSelesai() == false)
+        {
+            return DatabasePesanan.getPesanan();
+        }
+        return DatabasePesanan.getPesanan();
+    }
+    
+    /**
+     * Method untuk menjalankan sistem penugas
+     * 
+     */
+    public static void jalankanSistemPenugas()
+    {
+       cariPesananIdle();
+       temukanOjekTerdekat(cariPesananIdle());
+    }
+    
+    /**
+     * Method untuk menemukan ojek terdekat
+     * 
+     * @param pesan Parameter dari method pesananSelesai yang merujuk ke class Pesanan
+     * 
+     */
+    public static Ojek temukanOjekTerdekat(Pesanan pesan)
+    {
+        if(DatabasePesanan.getPesanan().getPelayan().getStatus() == StatusOjek.Idle && pesan.getPelayan() != null)
+        {
+            
+        }
+        return DatabaseUser.getUserOjek();
+    }
+    
+    /**
+     * Method untuk mencetak semua database
+     * 
+     */
+    public static void printAllDatabase()
+    {
+       System.out.println("=====================");
+       System.out.println("Database Ojek");
+       System.out.println("=====================");
+       System.out.println(DatabaseUser.getOjekDatabase());
+       System.out.println("\n\n\n");
+       System.out.println("=====================");
+       System.out.println("Database Pelanggan");
+       System.out.println("=====================");
+       System.out.println(DatabaseUser.getPelangganDatabase());
+       System.out.println("\n\n\n");
+       System.out.println("=====================");
+       System.out.println("Database Pesanan");
+       System.out.println("=====================");
+       System.out.println(DatabasePesanan.getDatabase());
+       System.out.println("\n\n\n");
+    }
+    
+    /**
+     * Method untuk mencetak database ojek
+     * 
+     */
+    public static void printOjekDatabase()
+    {
+       System.out.println("=====================");
+       System.out.println("Database Ojek");
+       System.out.println("=====================");
+       System.out.println(DatabaseUser.getOjekDatabase());
+       System.out.println("\n\n\n"); 
+    }
+    
+    /**
+     * Method untuk mencetak database pelanggan
+     * 
+     */
+    public static void printPelangganDatabase()
+    {
+       System.out.println("=====================");
+       System.out.println("Database Pelanggan");
+       System.out.println("=====================");
+       System.out.println(DatabaseUser.getPelangganDatabase()); 
+       System.out.println("\n\n\n");
+    }
+    
+    /**
+     * Method untuk mencetak database pesanan
+     * 
+     */
+    public static void printPesananDatabase()
+    {
+       System.out.println("=====================");
+       System.out.println("Database Pesanan");
+       System.out.println("=====================");
+       System.out.println(DatabasePesanan.getDatabase());
+       System.out.println("\n\n\n");
     }
     
 }

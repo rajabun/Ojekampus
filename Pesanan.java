@@ -16,14 +16,14 @@
  * Modul 2 : Class Pesanan diubah instance variabel dan methodnya pada versi 0.2 (Modul 2)
  * Modul 3 : Menambah 2 constructor, beberapa method (getPelayan(), getStatusDiproses() dan getTipeLayanan()) dan mengubah isi method printData()
  * Modul 4 : Mengganti method printData() dengan toString()
- * Modul 5 :
+ * Modul 5 : Mengubah nilai instance variable pelayan, diproses dan selesai menjadi default
  */
 
-public class Pesanan
+public class Pesanan 
 {
     // instance variables - replace the example below with your own
     
-    private Ojek pelayan = null; //isi dari pelayan adalah null
+    private Ojek pelayan; //diubah di modul 5
     private Pelanggan pengguna;
     private String pelanggan_awal;
     private String pelanggan_akhir;
@@ -31,10 +31,9 @@ public class Pesanan
     private TipeLayanan layanan;
     private Lokasi lokasi_awal;
     private Lokasi lokasi_akhir;
-    private boolean diproses = false; //isi dari diproses adalah false
-    private boolean selesai = false;
+    private boolean diproses; //diubah di modul 5
+    private boolean selesai; //diubah di modul 5
     
-
     /**
      * Constructor for objects of class Pesanan
      * 
@@ -47,11 +46,11 @@ public class Pesanan
     public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal)
     {
         // initialise instance variables
-        this.pengguna = pengguna;
-        this.layanan = layanan;
-        this.lokasi_awal = lokasi_awal;
-        this.lokasi_akhir = lokasi_akhir;
-        this.pelanggan_awal = pelanggan_awal;   
+        setPelanggan(pengguna);
+        setTipeLayanan(layanan);
+        setLokasiAwal(lokasi_awal);
+        setLokasiAkhir(lokasi_akhir);
+        this.pelanggan_awal = pelanggan_awal;
     }
     
     /**
@@ -68,10 +67,10 @@ public class Pesanan
     public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir)
     {
         // initialise instance variables
-        this.pengguna = pengguna;
-        this.layanan = layanan;
-        this.lokasi_awal = lokasi_awal;
-        this.lokasi_akhir = lokasi_akhir;
+        setPelanggan(pengguna);
+        setTipeLayanan(layanan);
+        setLokasiAwal(lokasi_awal);
+        setLokasiAkhir(lokasi_akhir);
         this.pelanggan_awal = pelanggan_awal;
         this.pelanggan_akhir = pelanggan_akhir;
     }
@@ -91,10 +90,10 @@ public class Pesanan
     public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir, double biaya)
     {
         // initialise instance variables
-        this.pengguna = pengguna;
-        this.layanan = layanan;
-        this.lokasi_awal = lokasi_awal;
-        this.lokasi_akhir = lokasi_akhir;
+        setPelanggan(pengguna);
+        setTipeLayanan(layanan);
+        setLokasiAwal(lokasi_awal);
+        setLokasiAkhir(lokasi_akhir);
         this.pelanggan_awal = pelanggan_awal;
         this.pelanggan_akhir = pelanggan_akhir;
         this.biaya = biaya;
@@ -245,7 +244,7 @@ public class Pesanan
      * 
      * @param biaya Parameter dari method setBiaya dalam bentuk double
      */
-    public void setBiaya(Double biaya)
+    public void setBiaya(double biaya)
     {
         this.biaya = biaya;
     }
@@ -527,5 +526,27 @@ public class Pesanan
         System.out.println("Status diproses :" + " " + getStatusDiproses() + "\n\n");
     }
     *
+    
+    Bekas Modul 5 
+    
+    instance variables :
+    
+    //private Ojek pelayan = null; //isi dari pelayan adalah null
+    //private boolean diproses = false; //isi dari diproses adalah false
+    //private boolean selesai = false;
+
+    methods :
+    
+    public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal)
+    public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir)
+    public Pesanan(Pelanggan pengguna, TipeLayanan layanan, Lokasi lokasi_awal, Lokasi lokasi_akhir, String pelanggan_awal, String pelanggan_akhir, double biaya)
+    {
+        // initialise instance variables
+        //this.pengguna = pengguna;
+        //this.layanan = layanan;
+        //this.lokasi_awal = lokasi_awal;
+        //this.lokasi_akhir = lokasi_akhir;
+    }
+    
     
     */

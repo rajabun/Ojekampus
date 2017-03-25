@@ -20,6 +20,9 @@ import java.util.List;
  * Modul 3 : Mengubah method main sesuai case study modul 3
  * Modul 4 : Mengubah method main sesuai case study modul 4
  * Modul 5 : Mengubah method main sesuai case study modul 5
+ *           Menambah method antarBarang(), antarOrang(), ojekMembatalkan(), ojekMengubahStatus(), pembelianBarang()
+ *           Menambah method penggunaMembatalkan(), penggunaMenghapusPesanan(), penggunaMenyelesaikanPesanan()
+ *           Menambah method registrasiOjek(), registrasiPengguna()
  */
 
 public class OjeKampus
@@ -98,11 +101,11 @@ public class OjeKampus
         
     }
     */
-    //*
+    /*
     /**
      * Method utama untuk menjalankan program OjeKampus
      * Modul 4
-     */
+     *
     //public void main (String [] args)
     public static void main (String [] args)
     {
@@ -111,7 +114,7 @@ public class OjeKampus
          * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
          * 
          * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
-         */
+         *
         Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
         Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
         Pelanggan p_Rajab = new Pelanggan(1,"Rajab"); //membuat objek baru pada kelas Pelanggan
@@ -213,7 +216,7 @@ public class OjeKampus
         pes_Rajab.setPenggunaAkhir(null);
         System.out.println(pes_Rajab);
         //pes_Rajab.toString();
-        */
+        *
         
         //*
         //tugas 4
@@ -246,7 +249,7 @@ public class OjeKampus
     /*
     /**
      * Method utama untuk menjalankan program OjeKampus
-     * Modul 5
+     * Modul 5 Pertama
      *
     //public void main (String [] args)
     public static void main (String [] args)
@@ -283,6 +286,181 @@ public class OjeKampus
         //a.sortArrayList(listInt);
     }
     */
+    
+    /**
+     * Method utama untuk menjalankan program OjeKampus
+     * Modul 5 Kedua
+     */
+    public static void main (String [] args)
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+        Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+        Pelanggan p_Rajab = new Pelanggan(1,"Rajab","085854032720"); //membuat objek baru pada kelas Pelanggan
+        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+        Pesanan pes_Rajab_2 = new Pesanan(p_Rajab, TipeLayanan.BeliBarang, per_Rajab_akhir, per_Rajab_awal, "Jabun", "Shion", 50000); //membuat objek baru pada kelas Pesanan
+        DatabasePesanan.addPesanan(pes_Rajab);
+        
+    }
+    
+    /**
+     * Method untuk mengantar barang
+     * 
+     */
+    public static void antarBarang()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method yang memesan ojek untuk mengantar orang
+     * 
+     */
+    public static void antarOrang()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk membatalkan pesanan dari akun ojek
+     * 
+     */
+    public static void ojekMembatalkan()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk mengubah status ojek
+     * 
+     */
+    public static void ojekMengubahStatus()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method yang memesan ojek untuk membeli barang
+     * 
+     */
+    public static void pembelianBarang()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk membatalkan pesanan dari akun pengguna
+     * 
+     */
+    public static void penggunaMembatalkan()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk menghapus pesanan dari akun pengguna
+     * 
+     */
+    public static void penggunaMenghapusPesanan()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk menyelesaikan pesanan dari akun pengguna
+     * 
+     */
+    public static void penggunaMenyelesaikanPesanan()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk registrasi ojek
+     * 
+     */
+    public static void registrasiOjek()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
+    /**
+     * Method untuk registrasi pengguna (pelanggan)
+     * 
+     */
+    public static void registrasiPengguna()
+    {
+        /*
+         * Untuk membuat objek baru -> nama_class nama_objek = new nama_class();
+         * Pastikan isi dari () pada nama_class sesuai dengan parameter constructor pada class tersebut
+         * 
+         * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
+         */
+        
+    }
+    
     /**
      * Constructor for objects of class OjeKampus
      */

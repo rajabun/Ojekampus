@@ -14,11 +14,11 @@
  * Class TipeLayanan ditambahkan pada versi 0.3 (Modul 3)
  * Class ini merupakan enum
  * Modul 4 : Tidak ada perubahan
- * Modul 5 :
+ * Modul 5 : Tidak ada perubahan
  */
 public enum TipeLayanan
 {
-    AntarBarang ("Antar Barang"), AntarOrang("Antar Orang"), BeliBarang("Beli Barang");
+    AntarBarang("Antar Barang"), AntarOrang("Antar Orang"), BeliBarang("Beli Barang");
     
     private String deskripsi;
     

@@ -14,11 +14,11 @@
  * Class StatusOjek ditambahkan pada versi 0.3 (Modul 3)
  * Class ini merupakan enum
  * Modul 4 : Tidak ada perubahan
- * Modul 5 :
+ * Modul 5 : Tidak ada perubahan
  */
 public enum StatusOjek
 {
-    Antar ("Mengantar"), Idle("Idle"), Jemput("Menjemput");
+    Antar("Mengantar"), Idle("Idle"), Jemput("Menjemput");
     
     private String deskripsi;
     

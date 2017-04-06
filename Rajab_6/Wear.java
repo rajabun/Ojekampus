@@ -27,7 +27,6 @@ public interface Wear
     /**
      * Method untuk menampilkan weapon
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
      */
     public String getWeapon();
     
@@ -42,21 +41,18 @@ public interface Wear
     /**
      * Method untuk menampilkan armor
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
      */
     public String getArmor();
     
     /**
      * Method untuk menampilkan weapon dmg
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
      */
     public double getWeaponDmg();
     
      /**
      * Method untuk menampilkan armor def
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
      */
     public double getArmorDef();
 }

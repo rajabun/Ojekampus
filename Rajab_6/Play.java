@@ -28,18 +28,21 @@ public class Play
     {
         // initialise instance variables
         initialize();
-        System.out.println("War start!" + "\nHero = " + player.getName() 
-        + ", level = " + player.getLevel() + "\nEnemy = " + enemy.getName() 
-        + ", level = " + player.getLevel());
+        System.out.println("War start!");
+        System.out.println("\nHero = " + player.getName() + ", level = " + player.getLevel());
+        System.out.println("\nEnemy = " + enemy.getName() + ", level = " + player.getLevel());
         for (int i = 1; !player.isDead(); i++)
         {
-            //print(i);
+            Print(i);
             // kode anda
+            attackTurn(player, enemy);
             if (enemy.isDead())
             {
                 System.out.println("Enemy died! Spawning new enemy!");
                 // kode anda
                 System.out.println("Player level up! Level = " + player.getLevel());
+                enemyCount++;
+                initializeEnemy();
             }
         }
         System.out.println("Hero mati pada level " + player.getLevel());
@@ -53,7 +56,11 @@ public class Play
     {
         //Random r = new Random();
         Hero h = new Hero("Rajab",1);
-        h.setRank(setAttackPower(100));
+        setRank("Sword Slash",100);
+        h.setWeapon("Katana", 50);
+        h.setArmor("Best Armor", 50);
+        enemyCount = 1;
+        initializeEnemy();
     }
     
     /**
@@ -62,7 +69,11 @@ public class Play
      */
     private void initializeEnemy()
     {
-        
+        Monster m = new Monster("Dragon", enemyCount);
+        //m.setRank(Tank t = new Tank());
+        setRank("Dragon Tail",50);
+        m.setWeapon("Fang", 15);
+        m.setArmor("Dragon Skin", 10);
     }
     
     /**
@@ -76,6 +87,19 @@ public class Play
         "\nKill count = " + (enemyCount - 1) +
         "\nHero health = " + player.getHP() + ", Enemy health = " + enemy.getHP());
         // kode anda
+        int stage = 1;
+        
+        if(stage == 1)
+        {
+            
+            stage++;
+        }
+        if(stage == 2)
+        {
+            
+            stage--;
+        }
+        
     }
     
     /**
@@ -86,7 +110,41 @@ public class Play
      */
     private Rank setRank(String name, int power)
     {
+        if(1<player.level+3<<100)
+        {
+            Normal n = new Normal("Punch",5);
+            Rank rank = n;
+        }
         
+        if(2<player.level+3<<100)
+        {
+            Tank t = new Tank("Steel Body",7);
+            Rank rank = t;
+        }
+        
+        if(3<player.level+3<<100)
+        {
+            Damager d = new Damager("Big Punch",9);
+            Rank rank = d;
+        }
+        /*
+        for(player.level = 3 ; player.level<100 ; player.level = player.level+3)
+        {
+            Damager d = new Damager("Big Punch",9);
+            Rank rank = d;
+        }
+        
+        if(player.level == 2)
+        {
+            //Rank rank = Normal;
+        }
+        
+        if(player.level == 3)
+        {
+            //Rank rank = Normal;
+        }
+        */
+       return player.getRank(); 
     }
     
     /**
@@ -97,7 +155,8 @@ public class Play
      */
     private void attackTurn(Entity attacker, Entity defender)
     {
-        
+        defender.setHP(10);
+        System.out.println("Damage = " + player.getDamage(10,5));
     }
     
     /**
@@ -106,6 +165,6 @@ public class Play
      */
     public static void main(String[] args)
     {
-        Play();
+        Play p = new Play();
     }
 }

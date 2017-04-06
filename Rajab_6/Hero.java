@@ -33,7 +33,6 @@ public class Hero extends Entity
     /**
      * Method quote
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
      */
     public void quote()
     {
@@ -45,7 +44,6 @@ public class Hero extends Entity
     /**
      * Method untuk membuat HP jadi full
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
      */
     public void fullHP()
     {

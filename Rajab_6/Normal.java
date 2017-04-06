@@ -19,7 +19,7 @@ public class Normal implements Rank
     // instance variables - replace the example below with your own
     private String attackName;
     private int attackPower;
-    private static double rank;
+    private static double rank = 1;
     
     /**
      * Constructor for objects of class Normal
@@ -73,7 +73,6 @@ public class Normal implements Rank
      */
     public double getRank()
     {
-        rank = 1;
         return rank;
     }
     

@@ -19,8 +19,8 @@ public class Damager implements Rank
     // instance variables - replace the example below with your own
     private String attackName;
     private int attackPower;
-    private static double rank;
-
+    private static double rank = 1.25;
+    
     /**
      * Constructor for objects of class Damager
      * 
@@ -73,7 +73,6 @@ public class Damager implements Rank
      */
     public double getRank()
     {
-        rank = 1.25;
         return rank;
     }
     

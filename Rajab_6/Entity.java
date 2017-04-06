@@ -48,7 +48,6 @@ public abstract class Entity implements Wear
     /**
      * Method untuk mengontrol level up
      * 
-     * @param id Parameter dari method setID dalam bentuk int
      */
     protected void levelUp()
     {
@@ -67,23 +66,32 @@ public abstract class Entity implements Wear
     {
         // put your code here
         //return ;
+        maxHP = maxHP - health;
+        if(maxHP == 0)
+        {
+            isDead();
+        }
     }
     
     /**
      * Method untuk menampilkan damage
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @param def Parameter dari method getDamage dalam bentuk double
+     * @param opRank Parameter dari method getDamage dalam bentuk double
+     * @return health Mengembalikan isi data dari instance variable health
      */
     protected int getDamage(double def, double opRank)
     {
         // put your code here
-        return 0;
+        int a = (int)attack;
+        int d = (int)defense;
+        health = (1+(((2*level/5)+2)*strength*(a/d)/50));
+        return health;
     }
     
     /**
      * Method untuk memasukkan power
      * 
-     * @param diff Parameter dari method setHP dalam bentuk double
      */
     protected void setPower()
     {
@@ -96,45 +104,46 @@ public abstract class Entity implements Wear
     /**
      * Method untuk menampilkan nama
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return name Mengembalikan isi data dari instance variable name
      */
     protected String getName()
     {
         // put your code here
-        return "";
+        return name;
     }
     
     /**
      * Method untuk menampilkan level
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return level Mengembalikan isi data dari instance variable level
      */
     protected int getLevel()
     {
         // put your code here
-        return 0;
+        return level;
     }
     
     /**
      * Method untuk menampilkan hp
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return maxHP Mengembalikan isi data dari instance variable maxHP
      */
     protected int getHP()
     {
         // put your code here
-        return 0;
+        return maxHP;
     }
     
     /**
      * Method untuk menampilkan status is Dead
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return true Mengembalikan isi method dalam bentuk true
      */
     protected boolean isDead()
     {
         // put your code here
-        return false;
+        System.out.println("Your Character is Dead");
+        return true;
     }
     
     /**
@@ -145,13 +154,13 @@ public abstract class Entity implements Wear
     protected void setRank(Rank rank)
     {
         // put your code here
-        //return ;
+        this.rank = rank;
     }
     
     /**
      * Method untuk menampilkan rank
      * 
-     * @return rank Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return rank Mengembalikan isi data dari instance variable rank
      */
     protected Rank getRank()
     {
@@ -162,23 +171,23 @@ public abstract class Entity implements Wear
     /**
      * Method untuk menampilkan attack
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return attack Mengembalikan isi data dari instance variable attack
      */
     protected double getAttack()
     {
         // put your code here
-        return 0;
+        return attack;
     }
     
     /**
      * Method untuk menampilkan defense
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return defense Mengembalikan isi data dari instance variable defense
      */
     protected double getDefense()
     {
         // put your code here
-        return 0;
+        return defense;
     }
     
     /**
@@ -191,20 +200,20 @@ public abstract class Entity implements Wear
     {
         // put your code here
         //return ;
-        this.name = name;
-        dmg = weaponDmg;
+        weapon = name;
+        weaponDmg = dmg;
         setPower();
     }
     
     /**
      * Method untuk menampilkan weapon
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return weapon Mengembalikan isi data dari instance variable weapon
      */
     public String getWeapon()
     {
         // put your code here
-        return "";
+        return weapon;
     }
     
     /**
@@ -217,42 +226,42 @@ public abstract class Entity implements Wear
     {
         // put your code here
         //return ;
-        this.name = name;
-        def = armorDef;
+        armor = name;
+        armorDef = def;
         setPower();
     }
     
     /**
      * Method untuk menampilkan armor
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return armor Mengembalikan isi data dari instance variable armor
      */
     public String getArmor()
     {
         // put your code here
-        return "";
+        return armor;
     }
     
     /**
      * Method untuk menampilkan weapon dmg
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return weaponDmg Mengembalikan isi data dari instance variable weaponDmg
      */
     public double getWeaponDmg()
     {
         // put your code here
-        return 0;
+        return weaponDmg;
     }
     
     /**
      * Method untuk menampilkan armor def
      * 
-     * @return posisi_sekarang Mengembalikan isi data dari instance variable posisi_sekarang
+     * @return armorDef Mengembalikan isi data dari instance variable armorDef
      */
     public double getArmorDef()
     {
         // put your code here
-        return 0;
+        return armorDef;
     }
     
     /**

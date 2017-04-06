@@ -19,7 +19,7 @@ public class Tank implements Rank
     // instance variables - replace the example below with your own
     private String attackName;
     private int attackPower;
-    private static double rank;
+    private static double rank = 0.8;
     
     /**
      * Constructor for objects of class Tank
@@ -73,7 +73,6 @@ public class Tank implements Rank
      */
     public double getRank()
     {
-        rank = 0.8;
         return rank;
     }
 }

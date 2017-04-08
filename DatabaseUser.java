@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * class DatabaseUser berisi kumpulan method untuk mengatur database pelanggan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
@@ -20,14 +21,18 @@ import java.util.ArrayList;
  * Modul 5 : Mengubah nilai instance id_ojek_terakhir dan id_pelanggan_terakhir menjadi default
  *           Mengubah tipe data instance ojek_database dan pelanggan_database menjadi tipe ArrayList
  *           Menambah method getOjekDatabase() dan getPelangganDatabase()
+ * Modul 6 : Menambah instance user_database. Menghilangkan ojek_database & pelanggan_database
+ *           Mengubah nilai default instance id_ojek_terakhir dan id_pelanggan_terakhir menjadi 1
+ *           Mengubah seluruh method kecuali method getIDOjekTerakhir() & getIDPelangganTerakhir()
  */
 
 public class DatabaseUser
 {
-    private static int id_ojek_terakhir; // Diubah di modul 5
-    private static int id_pelanggan_terakhir; // Diubah di modul 5
-    private static ArrayList <Ojek> ojek_database = new ArrayList<Ojek>(); // Diubah di modul 5
-    private static ArrayList <Pelanggan> pelanggan_database = new ArrayList<Pelanggan>(); // Diubah di modul 5
+    private static int id_ojek_terakhir = 1; // Diubah di modul 6
+    private static int id_pelanggan_terakhir = 1; // Diubah di modul 6
+    private static ArrayList <User> user_database = new ArrayList<User>(); // Ditambah di modul 6
+    //private static ArrayList <Ojek> ojek_database = new ArrayList<Ojek>(); // Diubah di modul 5
+    //private static ArrayList <Pelanggan> pelanggan_database = new ArrayList<Pelanggan>(); // Diubah di modul 5
     
     /**
      * Constructor for objects of class DatabaseUser
@@ -61,60 +66,7 @@ public class DatabaseUser
         addPelanggan(p_Rajab_3);
     }
     */
-    /**
-     * Method untuk memasukkan pelanggan dari ojek kedalam database pelanggan
-     * 
-     * @param baru Parameter dari method addPelanggan yang merujuk ke class Pelanggan
-     * @return true Mengembalikan isi data dari method ini dengan nilai true
-     */
-    public static boolean addPelanggan (Pelanggan baru)
-    {
-        //pelanggan_database = baru;
-        //pelanggan_database.add(new Pelanggan(1, "Rajab", "085854032720"));
-        //pelanggan_database.contains(baru);
-        //if(baru.equals(baru))
-        //Pelanggan p1 = baru;
-        if(pelanggan_database.contains(baru))
-        {
-            if(baru.equals(baru))
-            {
-                System.out.println("Data sudah terdaftar dalam Database\n");
-                //return false;
-            }
-        }
-        else
-        {
-            pelanggan_database.add(baru);
-            System.out.println("Penambahan Pelanggan dalam Database Berhasil\n");
-            return true;
-        }
-        return false;
-    }
-    
-    /**
-     * Method untuk menghapus pelanggan ojek dari database pelanggan
-     * 
-     * @param id Parameter dari method removePelanggan dalam bentuk int
-     * @return true Mengembalikan isi data dari method ini dengan nilai true
-     */
-    public static boolean removePelanggan (int id)
-    {
-        //pelanggan_database = null;
-        //System.out.println("Pelanggan Berhasil Dihapus dari Database\n");
-        if(pelanggan_database.contains(id))
-        {
-                System.out.println("Pelanggan Berhasil Dihapus dari Database\n");
-                //return false;
-        }
-        else
-        {
-            pelanggan_database = null;
-            System.out.println("Data belum terdaftar dalam Database\n");
-            return true;
-        }
-        return false;
-    }
-    
+   
     /**
      * Method untuk memasukkan ojek kedalam database pelanggan
      * 
@@ -128,7 +80,7 @@ public class DatabaseUser
         //ojek_database.add(baru);
         //System.out.println("Penambahan Ojek dalam Database Berhasil\n");
         //return true;
-        if(ojek_database.contains(baru))
+        if(user_database.contains(baru))
         {
             if(baru.equals(baru))
             {
@@ -138,7 +90,8 @@ public class DatabaseUser
         }
         else
         {
-            ojek_database.add(baru);
+            user_database.add(baru);
+            id_pelanggan_terakhir++; //ditambah di modul 6
             System.out.println("Penambahan Ojek dalam Database Berhasil\n");
             return true;
         }
@@ -146,25 +99,31 @@ public class DatabaseUser
     }
     
     /**
-     * Method untuk menghapus ojek dari database pelanggan
+     * Method untuk memasukkan pelanggan dari ojek kedalam database pelanggan
      * 
-     * @param id Parameter dari method removePelanggan dalam bentuk int
+     * @param baru Parameter dari method addPelanggan yang merujuk ke class Pelanggan
      * @return true Mengembalikan isi data dari method ini dengan nilai true
      */
-    public static boolean removeOjek (int id)
+    public static boolean addPelanggan (Pelanggan baru)
     {
-        //ojek_database = null;
-        //System.out.println("Ojek Berhasil Dihapus dari Database\n");
-        //return true;
-        if(ojek_database.contains(id))
+        //pelanggan_database = baru;
+        //pelanggan_database.add(new Pelanggan(1, "Rajab", "085854032720"));
+        //pelanggan_database.contains(baru);
+        //if(baru.equals(baru))
+        //Pelanggan p1 = baru;
+        if(user_database.contains(baru))
         {
-                System.out.println("Ojek Berhasil Dihapus dari Database\n");
+            if(baru.equals(baru))
+            {
+                System.out.println("Data sudah terdaftar dalam Database\n");
                 //return false;
+            }
         }
         else
         {
-            ojek_database = null;
-            System.out.println("Data belum terdaftar dalam Database\n");
+            user_database.add(baru);
+            id_pelanggan_terakhir++; //ditambah di modul 6
+            System.out.println("Penambahan Pelanggan dalam Database Berhasil\n");
             return true;
         }
         return false;
@@ -191,34 +150,27 @@ public class DatabaseUser
     }
     
     /**
-     * Method untuk menampilkan data pengemudi ojek
-     * 
-     * @return ojek_database Mengembalikan isi data dari instance variable ojek_database
-     */
-    public static Ojek getUserOjek()
-    {
-        //return ojek_database;
-        return ojek_database.get(id_ojek_terakhir);
-    }
-    
-    /**
-     * Method untuk menampilkan data pelanggan ojek
-     * 
-     * @return pelanggan_database Mengembalikan isi data dari instance variable pelanggan_database
-     */
-    public static Pelanggan getUserPelanggan()
-    {
-        //return pelanggan_database;
-        return pelanggan_database.get(id_pelanggan_terakhir);
-    }
-    
-    /**
      * Method untuk menampilkan database ojek
      * Ditambah di modul 5
      * @return pelanggan_database Mengembalikan isi data dari instance variable pelanggan_database
      */
     public static ArrayList<Ojek> getOjekDatabase()
     {
+        ArrayList <Ojek> ojek_database = new ArrayList<Ojek>(); // Ditambah di modul 6
+        if(user_database.contains(Pesanan.getPelayan()))
+        {
+            if(baru.equals(baru))
+            {
+                System.out.println("Data sudah terdaftar dalam Database\n");
+                //return false;
+            }
+        }
+        else
+        {
+            ojek_database.add(baru);
+            System.out.println("Penambahan Ojek dalam Database Berhasil\n");
+            return ojek_database;
+        }
         return ojek_database;
     }
     
@@ -229,7 +181,95 @@ public class DatabaseUser
      */
     public static ArrayList<Pelanggan> getPelangganDatabase()
     {
+        ArrayList <Pelanggan> pelanggan_database = new ArrayList<Pelanggank>(); // Ditambah di modul 6
         return pelanggan_database;
+    }
+    
+    /**
+     * Method untuk menampilkan data pengemudi ojek
+     * 
+     * @return ojek_database Mengembalikan isi data dari instance variable ojek_database
+     */
+    public static Ojek getUserOjek()
+    {
+        //return ojek_database;
+        //return ojek_database.get(id_ojek_terakhir);
+        if(user_database.contains(id))
+        {
+                return user_database.get(id_ojek_terakhir);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    /**
+     * Method untuk menampilkan data pelanggan ojek
+     * 
+     * @return pelanggan_database Mengembalikan isi data dari instance variable pelanggan_database
+     */
+    public static Pelanggan getUserPelanggan()
+    {
+        //return pelanggan_database;
+        //return pelanggan_database.get(id_pelanggan_terakhir);
+        if(user_database.contains(id))
+        {
+                return user_database.get(id_ojek_terakhir);
+        }
+        else
+        {
+            return null;
+        }
+    }
+    
+    /**
+     * Method untuk menghapus ojek dari database pelanggan
+     * 
+     * @param id Parameter dari method removePelanggan dalam bentuk int
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public static boolean removeOjek (int id)
+    {
+        //ojek_database = null;
+        //System.out.println("Ojek Berhasil Dihapus dari Database\n");
+        //return true;
+        if(user_database.contains(id))
+        {
+                System.out.println("Ojek Berhasil Dihapus dari Database\n");
+                //return false;
+        }
+        else
+        {
+            user_database = null;
+            System.out.println("Data belum terdaftar dalam Database\n");
+            return true;
+        }
+        return false;
+    }
+    
+    /**
+     * Method untuk menghapus pelanggan ojek dari database pelanggan
+     * 
+     * @param id Parameter dari method removePelanggan dalam bentuk int
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public static boolean removePelanggan (int id)
+    {
+        //pelanggan_database = null;
+        //System.out.println("Pelanggan Berhasil Dihapus dari Database\n");
+        if(user_database.contains(id))
+        {
+                System.out.println("Pelanggan Berhasil Dihapus dari Database\n");
+                //return false;
+        }
+        else
+        {
+            user_database = null;
+            System.out.println("Data belum terdaftar dalam Database\n");
+            return true;
+        }
+        return false;
     }
     
     /**

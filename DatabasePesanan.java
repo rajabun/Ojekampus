@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
@@ -19,6 +20,7 @@ import java.util.ArrayList;
  * Modul 4 : Tidak ada perubahan
  * Modul 5 : Mengubah tipe data instance list_pesanan menjadi tipe ArrayList
  *           Menambah method hapusPesanan(Pelanggan pengguna) dan getDatabase()
+ * Modul 6 : Menambah local variable Pelanggan pengguna pada method getPesanan()
  */
 
 public class DatabasePesanan
@@ -85,6 +87,46 @@ public class DatabasePesanan
     }
 
     /**
+     * Method untuk menampilkan database pesanan
+     * Ditambah di modul 5
+     * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
+     */
+    public static ArrayList<Pesanan> getDatabase()
+    {
+        return list_pesanan;
+    }
+
+    /**
+     * Method untuk menampilkan pesanan ojek
+     * 
+     * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
+     */
+    //public static Pesanan getPesanan(Pelanggan pengguna)
+    public static Pesanan getPesanan()
+    {
+        if(list_pesanan.contains(list_pesanan))
+        {
+            ArrayList<Pesanan> list_pesanan;   
+        }
+        //return list_pesanan;
+        //return ArrayList<Pesanan> list_pesanan;
+        return null;
+    }
+    
+    /**
+     * Method untuk menghapus pesanan ojek dari database pesanan
+     * Ditambah di modul 5
+     * @param pengguna Parameter dari method hapusPesanan yang merujuk ke class Pelanggan
+     * @return true Mengembalikan isi data dari method ini dengan nilai true
+     */
+    public static boolean hapusPesanan(Pelanggan pengguna)
+    {
+        list_pesanan = null;
+        System.out.println("Pesanan Berhasil Dihapus\n");
+        return true;
+    }
+    
+    /**
      * Method untuk menghapus pesanan ojek dari database pesanan
      * 
      * @param pesan Parameter dari method hapusPesanan yang merujuk ke class Pesanan
@@ -106,45 +148,6 @@ public class DatabasePesanan
             return false;
         }
         return false;
-    }
-    
-    /**
-     * Method untuk menghapus pesanan ojek dari database pesanan
-     * Ditambah di modul 5
-     * @param pengguna Parameter dari method hapusPesanan yang merujuk ke class Pelanggan
-     * @return true Mengembalikan isi data dari method ini dengan nilai true
-     */
-    public static boolean hapusPesanan(Pelanggan pengguna)
-    {
-        list_pesanan = null;
-        System.out.println("Pesanan Berhasil Dihapus\n");
-        return true;
-    }
-    
-    /**
-     * Method untuk menampilkan pesanan ojek
-     * 
-     * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
-     */
-    public static Pesanan getPesanan()
-    {
-        if(list_pesanan.contains(list_pesanan))
-        {
-            ArrayList<Pesanan> list_pesanan;   
-        }
-        //return list_pesanan;
-        //return ArrayList<Pesanan> list_pesanan;
-        return null;
-    }
-    
-    /**
-     * Method untuk menampilkan database pesanan
-     * Ditambah di modul 5
-     * @return list_pesanan Mengembalikan isi data dari instance variable list_pesanan
-     */
-    public static ArrayList<Pesanan> getDatabase()
-    {
-        return list_pesanan;
     }
     
     /**

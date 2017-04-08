@@ -3,6 +3,7 @@
  * class Pesanan berisi kumpulan method yang mengatur pesanan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
@@ -17,21 +18,22 @@
  * Modul 3 : Menambah 2 constructor, beberapa method (getPelayan(), getStatusDiproses() dan getTipeLayanan()) dan mengubah isi method printData()
  * Modul 4 : Mengganti method printData() dengan toString()
  * Modul 5 : Mengubah nilai instance variable pelayan, diproses dan selesai menjadi default
+ * Modul 6 : Tidak ada perubahan
  */
 
 public class Pesanan 
 {
     // instance variables - replace the example below with your own
     
-    private Ojek pelayan; //diubah di modul 5
-    private Pelanggan pengguna;
-    private String pelanggan_awal;
-    private String pelanggan_akhir;
     private double biaya;
+    private boolean diproses; //diubah di modul 5
     private TipeLayanan layanan;
     private Lokasi lokasi_awal;
     private Lokasi lokasi_akhir;
-    private boolean diproses; //diubah di modul 5
+    private String pelanggan_awal;
+    private String pelanggan_akhir;
+    private Ojek pelayan; //diubah di modul 5
+    private Pelanggan pengguna;
     private boolean selesai; //diubah di modul 5
     
     /**
@@ -100,45 +102,15 @@ public class Pesanan
     }
     
     /**
-     * Method untuk menampilkan pelayan dari ojek
-     * (Ditambah saat modul 3)
-     * @return pelayan Mengembalikan isi data dari instance variable pelayan
-     */
-    public Ojek getPelayan()
-    {
-        return pelayan;
-    }
-    
-    /**
-     * Method untuk menampilkan status pesanan diproses dari ojek
-     * (Ditambah saat modul 3)
-     * @return diproses Mengembalikan isi data dari method ini dengan isi nilai diproses
-     */
-    public boolean getStatusDiproses()
-    {
-        return diproses;
-    }
-    
-    /**
-     * Method untuk menampilkan status pesanan selesai dari ojek
+     * Method untuk menampilkan biaya ojek
      * 
-     * @return selesai Mengembalikan isi data dari method ini dengan nilai selesai
+     * @return biaya Mengembalikan isi data dari instance variable biaya
      */
-    public boolean getStatusSelesai()
+    public double getBiaya()
     {
-        return selesai;
+        return biaya;
     }
-    
-    /**
-     * Method untuk menampilkan pelanggan dari ojek
-     * 
-     * @return pengguna Mengembalikan isi data dari instance variable pengguna
-     */
-    public Pelanggan getPelanggan()
-    {
-        return pengguna;
-    }
-    
+   
     /**
      * Method untuk menampilkan lokasi awal dari ojek
      * 
@@ -160,13 +132,23 @@ public class Pesanan
     }
     
     /**
-     * Method untuk menampilkan tipe layanan dari ojek
-     * (String diubah menjadi TipeLayanan pada modul 3)
-     * @return layanan Mengembalikan isi data dari instance variable layanan
+     * Method untuk menampilkan pelanggan dari ojek
+     * 
+     * @return pengguna Mengembalikan isi data dari instance variable pengguna
      */
-    public TipeLayanan getTipeLayanan()
+    public Pelanggan getPelanggan()
     {
-        return layanan;
+        return pengguna;
+    }
+    
+    /**
+     * Method untuk menampilkan pelayan dari ojek
+     * (Ditambah saat modul 3)
+     * @return pelayan Mengembalikan isi data dari instance variable pelayan
+     */
+    public Ojek getPelayan()
+    {
+        return pelayan;
     }
     
     /**
@@ -190,23 +172,63 @@ public class Pesanan
     }
     
     /**
-     * Method untuk menampilkan biaya ojek
-     * 
-     * @return biaya Mengembalikan isi data dari instance variable biaya
+     * Method untuk menampilkan tipe layanan dari ojek
+     * (String diubah menjadi TipeLayanan pada modul 3)
+     * @return layanan Mengembalikan isi data dari instance variable layanan
      */
-    public double getBiaya()
+    public TipeLayanan getTipeLayanan()
     {
-        return biaya;
+        return layanan;
     }
-   
+    
     /**
-     * Method untuk memasukkan nama pelayan (ojek)
-     * 
-     * @param pelayan Parameter dari method setPelayan yang merujuk ke class Ojek
+     * Method untuk menampilkan status pesanan diproses dari ojek
+     * (Ditambah saat modul 3)
+     * @return diproses Mengembalikan isi data dari method ini dengan isi nilai diproses
      */
-    public void setPelayan(Ojek pelayan)
+    public boolean getStatusDiproses()
     {
-        this.pelayan = pelayan;
+        return diproses;
+    }
+    
+    /**
+     * Method untuk menampilkan status pesanan selesai dari ojek
+     * 
+     * @return selesai Mengembalikan isi data dari method ini dengan nilai selesai
+     */
+    public boolean getStatusSelesai()
+    {
+        return selesai;
+    }
+    
+    /**
+     * Method untuk memasukkan biaya
+     * 
+     * @param biaya Parameter dari method setBiaya dalam bentuk double
+     */
+    public void setBiaya(double biaya)
+    {
+        this.biaya = biaya;
+    }
+    
+    /**
+     * Method untuk memasukkan lokasi awal
+     * 
+     * @param lokasi_awal Parameter dari method setLokasiAwal yang merujuk ke class Lokasi
+     */
+    public void setLokasiAwal(Lokasi lokasi_awal)
+    {
+        this.lokasi_awal = lokasi_awal;
+    }
+    
+    /**
+     * Method untuk memasukkan lokasi akhir
+     * 
+     * @param lokasi_akhir Parameter dari method setLokasiAkhir yang merujuk ke class Lokasi
+     */
+    public void setLokasiAkhir(Lokasi lokasi_akhir)
+    {
+        this.lokasi_akhir = lokasi_akhir;
     }
     
     /**
@@ -217,6 +239,16 @@ public class Pesanan
     public void setPelanggan(Pelanggan pengguna)
     {
         this.pengguna = pengguna;
+    }
+    
+    /**
+     * Method untuk memasukkan nama pelayan (ojek)
+     * 
+     * @param pelayan Parameter dari method setPelayan yang merujuk ke class Ojek
+     */
+    public void setPelayan(Ojek pelayan)
+    {
+        this.pelayan = pelayan;
     }
     
     /**
@@ -240,16 +272,6 @@ public class Pesanan
     }
     
     /**
-     * Method untuk memasukkan biaya
-     * 
-     * @param biaya Parameter dari method setBiaya dalam bentuk double
-     */
-    public void setBiaya(double biaya)
-    {
-        this.biaya = biaya;
-    }
-    
-    /**
      * Method untuk memasukkan tipe layanan
      * 
      * @param layanan Parameter dari method setTipeLayanan yang merujuk ke class TipeLayanan
@@ -257,26 +279,6 @@ public class Pesanan
     public void setTipeLayanan(TipeLayanan layanan)
     {
         this.layanan = layanan;
-    }
-    
-    /**
-     * Method untuk memasukkan lokasi awal
-     * 
-     * @param lokasi_awal Parameter dari method setLokasiAwal yang merujuk ke class Lokasi
-     */
-    public void setLokasiAwal(Lokasi lokasi_awal)
-    {
-        this.lokasi_awal = lokasi_awal;
-    }
-    
-    /**
-     * Method untuk memasukkan lokasi akhir
-     * 
-     * @param lokasi_akhir Parameter dari method setLokasiAkhir yang merujuk ke class Lokasi
-     */
-    public void setLokasiAkhir(Lokasi lokasi_akhir)
-    {
-        this.lokasi_akhir = lokasi_akhir;
     }
     
     /**

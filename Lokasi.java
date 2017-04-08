@@ -3,6 +3,7 @@
  * class Lokasi berisi kumpulan method untuk mengatur lokasi tujuan pelanggan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017 
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
@@ -12,16 +13,16 @@
 
 /**
  * Class Lokasi ditambahkan pada versi 0.2 (Modul 2)
- * Dari modul 2 sampai modul 5 tidak ada perubahan
+ * Dari modul 2 sampai modul 6 tidak ada perubahan
  */
 
 public class Lokasi
 {
     // instance variables - replace the example below with your own
-    private double x;
-    private double y;
     private String nama_lokasi;
     private String keterangan_lokasi;
+    private double x;
+    private double y;
     
     /**
      * Constructor for objects of class Lokasi
@@ -40,7 +41,27 @@ public class Lokasi
         this.keterangan_lokasi = keterangan_lokasi;
     }
     
-   /**
+    /**
+     * Method untuk menampilkan keterangan lokasi
+     * 
+     * @return keterangan_lokasi Mengembalikan isi data dari instance variable keterangan_lokasi
+     */
+    public String getKeteranganLokasi()
+    {
+        return keterangan_lokasi;
+    }
+    
+    /**
+     * Method untuk menampilkan nama lokasi
+     * 
+     * @return nama Mengembalikan isi data dari instance variable nama
+     */
+    public String getNama()
+    {
+        return nama_lokasi;
+    }
+    
+    /**
      * Method untuk menampilkan X
      * 
      * @return x Mengembalikan isi data dari instance variable x
@@ -61,23 +82,23 @@ public class Lokasi
     }
     
     /**
-     * Method untuk menampilkan nama lokasi
+     * Method untuk memasukkan keterangan lokasi
      * 
-     * @return nama Mengembalikan isi data dari instance variable nama
+     * @param keterangan_lokasi Parameter dari method setNama dalam bentuk String
      */
-    public String getNama()
+    public void setKeteranganLokasi(String keterangan_lokasi)
     {
-        return nama_lokasi;
+        this.keterangan_lokasi = keterangan_lokasi;
     }
     
     /**
-     * Method untuk menampilkan keterangan lokasi
+     * Method untuk memasukkan nama lokasi
      * 
-     * @return keterangan_lokasi Mengembalikan isi data dari instance variable keterangan_lokasi
+     * @param nama_lokasi Parameter dari method setNama dalam bentuk String
      */
-    public String getKeteranganLokasi()
+    public void setNama(String nama_lokasi)
     {
-        return keterangan_lokasi;
+        this.nama_lokasi = nama_lokasi;
     }
     
     /**
@@ -98,26 +119,6 @@ public class Lokasi
     public void setY(double y)
     {
         this.y = y;
-    }
-    
-    /**
-     * Method untuk memasukkan nama lokasi
-     * 
-     * @param nama_lokasi Parameter dari method setNama dalam bentuk String
-     */
-    public void setNama(String nama_lokasi)
-    {
-        this.nama_lokasi = nama_lokasi;
-    }
-    
-    /**
-     * Method untuk memasukkan keterangan lokasi
-     * 
-     * @param keterangan_lokasi Parameter dari method setNama dalam bentuk String
-     */
-    public void setKeteranganLokasi(String keterangan_lokasi)
-    {
-        this.keterangan_lokasi = keterangan_lokasi;
     }
     
     /**

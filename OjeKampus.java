@@ -6,6 +6,7 @@ import java.util.List;
  * class OjeKampus berisi method main yang berfungsi sebagai main program dari aplikasi OjeKampus.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
@@ -23,6 +24,7 @@ import java.util.List;
  *           Menambah method antarBarang(), antarOrang(), ojekMembatalkan(), ojekMengubahStatus(), pembelianBarang()
  *           Menambah method penggunaMembatalkan(), penggunaMenghapusPesanan(), penggunaMenyelesaikanPesanan()
  *           Menambah method registrasiOjek(), registrasiPengguna()
+ * Modul 6 : Tidak ada perubahan
  */
 
 public class OjeKampus

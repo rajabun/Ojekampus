@@ -3,6 +3,7 @@
  * class Administrasi berisi kumpulan method untuk mengatur tugas ojek (koordinasi ojek dan pelanggan).
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
  * @version 0.3, 18 Maret 2017
@@ -15,7 +16,8 @@
  * Modul 4 : Tidak ada perubahan
  * Modul 5 : Menambah method pesananDibatalkan(Pelanggan pengguna), pesananSelesai(Pelanggan pengguna)
  *           Menambah method cariPesananIdle(), jalankanSistemPenugas(), temukanOjekTerdekat (Pesanan pesan)
- *           Menambah method printAllDatabase(), printOjekDatabase(), printPelangganDatabase(), printPesananDatabase()           
+ *           Menambah method printAllDatabase(), printOjekDatabase(), printPelangganDatabase(), printPesananDatabase()
+ * Modul 6 : Mengubah method cariPesananIdle() dan temukanOjekTerdekat() menjadi private
  */
 public class Administrasi
 {
@@ -31,18 +33,26 @@ public class Administrasi
     }
     
     /**
-     * Method untuk menugaskan pesanan ke ojek
-     * 
-     * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
-     * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
+     * Method untuk mencari pesanan yang memiliki status idle
+     * diubah menjadi private di modul 6 
+     */
+    private static Pesanan cariPesananIdle()
+    {
+        if(DatabasePesanan.getPesanan().getStatusDiproses() == false && DatabasePesanan.getPesanan().getStatusSelesai() == false)
+        {
+            return DatabasePesanan.getPesanan();
+        }
+        return DatabasePesanan.getPesanan();
+    }
+    
+    /**
+     * Method untuk menjalankan sistem penugas
      * 
      */
-    public static void pesananDitugaskan(Pesanan pesan, Ojek pelayan)
+    public static void jalankanSistemPenugas()
     {
-        pesan.setStatusSelesai(false);
-        pesan.setStatusDiproses(true);
-        pesan.setPelayan(pelayan);
-        ojekAmbilPesanan(pesan, pelayan);
+       cariPesananIdle();
+       temukanOjekTerdekat(cariPesananIdle());
     }
     
     /**
@@ -85,48 +95,6 @@ public class Administrasi
     }
     
     /**
-     * Method untuk menyatakan pesanan selesai dari ojek
-     * 
-     * @param pelayan Parameter dari method pesananSelesai yang merujuk ke class Ojek
-     * 
-     */
-    public static void pesananSelesai(Ojek pelayan)
-    {
-        pelayan.getPesanan().setStatusSelesai(true);
-        pelayan.getPesanan().setStatusDiproses(false);
-        pelayan.setPesanan(null);
-        ojekLepasPesanan(pelayan);
-    }
-    
-    /**
-     * Method untuk membatalkan pesanan dari class pesanan (pelanggan)
-     * 
-     * @param pesan Parameter dari method pesananDibatalkan yang merujuk ke class Pesanan
-     * 
-     */
-    public static void pesananDibatalkan(Pesanan pesan)
-    {
-        ojekLepasPesanan(pesan.getPelayan());
-        pesan.setStatusSelesai(false);
-        pesan.setStatusDiproses(false);
-        pesan.setPelayan(null);
-    }
-    
-    /**
-     * Method untuk menyatakan pesanan selesai dari class pesanan (pelanggan)
-     * 
-     * @param pesan Parameter dari method pesananSelesai yang merujuk ke class Pesanan
-     * 
-     */
-    public static void pesananSelesai(Pesanan pesan)
-    {
-        ojekLepasPesanan(pesan.getPelayan());
-        pesan.setStatusSelesai(true);
-        pesan.setStatusDiproses(false);
-        pesan.setPelayan(null);
-    }
-    
-    /**
      * Method untuk membatalkan pesanan dari pelanggan
      * 
      * @param pelayan Parameter dari method pesananDibatalkan yang merujuk ke class Pelanggan
@@ -144,6 +112,49 @@ public class Administrasi
         message.setStatusSelesai(false);
         message.setStatusDiproses(false);
         message.setPelanggan(null);
+    }
+    
+    /**
+     * Method untuk membatalkan pesanan dari class pesanan (pelanggan)
+     * 
+     * @param pesan Parameter dari method pesananDibatalkan yang merujuk ke class Pesanan
+     * 
+     */
+    public static void pesananDibatalkan(Pesanan pesan)
+    {
+        ojekLepasPesanan(pesan.getPelayan());
+        pesan.setStatusSelesai(false);
+        pesan.setStatusDiproses(false);
+        pesan.setPelayan(null);
+    }
+    
+    /**
+     * Method untuk menugaskan pesanan ke ojek
+     * 
+     * @param pesan Parameter dari method pesananDitugaskan yang merujuk ke class Pesanan
+     * @param pelayan Parameter dari method pesananDitugaskan yang merujuk ke class Ojek
+     * 
+     */
+    public static void pesananDitugaskan(Pesanan pesan, Ojek pelayan)
+    {
+        pesan.setStatusSelesai(false);
+        pesan.setStatusDiproses(true);
+        pesan.setPelayan(pelayan);
+        ojekAmbilPesanan(pesan, pelayan);
+    }
+    
+    /**
+     * Method untuk menyatakan pesanan selesai dari ojek
+     * 
+     * @param pelayan Parameter dari method pesananSelesai yang merujuk ke class Ojek
+     * 
+     */
+    public static void pesananSelesai(Ojek pelayan)
+    {
+        pelayan.getPesanan().setStatusSelesai(true);
+        pelayan.getPesanan().setStatusDiproses(false);
+        pelayan.setPesanan(null);
+        ojekLepasPesanan(pelayan);
     }
     
     /**
@@ -167,41 +178,17 @@ public class Administrasi
     }
     
     /**
-     * Method untuk mencari pesanan yang memiliki status idle
-     * 
-     */
-    public static Pesanan cariPesananIdle()
-    {
-        if(DatabasePesanan.getPesanan().getStatusDiproses() == false && DatabasePesanan.getPesanan().getStatusSelesai() == false)
-        {
-            return DatabasePesanan.getPesanan();
-        }
-        return DatabasePesanan.getPesanan();
-    }
-    
-    /**
-     * Method untuk menjalankan sistem penugas
-     * 
-     */
-    public static void jalankanSistemPenugas()
-    {
-       cariPesananIdle();
-       temukanOjekTerdekat(cariPesananIdle());
-    }
-    
-    /**
-     * Method untuk menemukan ojek terdekat
+     * Method untuk menyatakan pesanan selesai dari class pesanan (pelanggan)
      * 
      * @param pesan Parameter dari method pesananSelesai yang merujuk ke class Pesanan
      * 
      */
-    public static Ojek temukanOjekTerdekat(Pesanan pesan)
+    public static void pesananSelesai(Pesanan pesan)
     {
-        if(DatabasePesanan.getPesanan().getPelayan().getStatus() == StatusOjek.Idle && pesan.getPelayan() != null)
-        {
-            
-        }
-        return DatabaseUser.getUserOjek();
+        ojekLepasPesanan(pesan.getPelayan());
+        pesan.setStatusSelesai(true);
+        pesan.setStatusDiproses(false);
+        pesan.setPelayan(null);
     }
     
     /**
@@ -264,6 +251,21 @@ public class Administrasi
        System.out.println("=====================");
        System.out.println(DatabasePesanan.getDatabase());
        System.out.println("\n\n\n");
+    }
+    
+    /**
+     * Method untuk menemukan ojek terdekat
+     * 
+     * @param pesan Parameter dari method pesananSelesai yang merujuk ke class Pesanan
+     * diubah menjadi private di modul 6
+     */
+    private static Ojek temukanOjekTerdekat(Pesanan pesan)
+    {
+        if(DatabasePesanan.getPesanan().getPelayan().getStatus() == StatusOjek.Idle && pesan.getPelayan() != null)
+        {
+            
+        }
+        return DatabaseUser.getUserOjek();
     }
     
 }

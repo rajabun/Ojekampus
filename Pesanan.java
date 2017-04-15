@@ -3,6 +3,7 @@
  * class Pesanan berisi kumpulan method yang mengatur pesanan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
@@ -19,6 +20,7 @@
  * Modul 4 : Mengganti method printData() dengan toString()
  * Modul 5 : Mengubah nilai instance variable pelayan, diproses dan selesai menjadi default
  * Modul 6 : Tidak ada perubahan
+ * Modul 7 : Tidak ada perubahan
  */
 
 public class Pesanan 

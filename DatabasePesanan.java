@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
  * @version 0.4, 19 Maret 2017
@@ -21,6 +22,7 @@ import java.util.ArrayList;
  * Modul 5 : Mengubah tipe data instance list_pesanan menjadi tipe ArrayList
  *           Menambah method hapusPesanan(Pelanggan pengguna) dan getDatabase()
  * Modul 6 : Menambah local variable Pelanggan pengguna pada method getPesanan()
+ * Modul 7 : Mengubah method addPesanan, hapusPesanan(Pesanan) dan hapusPesanan(Pelanggan)
  */
 
 public class DatabasePesanan
@@ -70,10 +72,16 @@ public class DatabasePesanan
     {
         if(pesan.getPelanggan() == pesan.getPelanggan())
         {
-            System.out.println("Pesanan Gagal Dilakukan\n");
+            try
+            {
+                System.out.println("Pesanan Gagal Dilakukan\n");
+            }
+            catch(PesananSudahAdaException pesanan_input)
+            {
+                PesananSudahAdaException.getMessage();
+            }
             return false;
         }
-        
         
         if(pesan.getPelanggan() != pesan.getPelanggan())
         {
@@ -82,8 +90,7 @@ public class DatabasePesanan
             System.out.println("Pesanan Berhasil Dilakukan\n");
             return true;
         }
-        
-        return false;
+        //return false;
     }
 
     /**
@@ -121,9 +128,24 @@ public class DatabasePesanan
      */
     public static boolean hapusPesanan(Pelanggan pengguna)
     {
-        list_pesanan = null;
-        System.out.println("Pesanan Berhasil Dihapus\n");
-        return true;
+        if(list_pesanan.contains(pengguna))
+        {
+            list_pesanan = null;
+            System.out.println("Pesanan Berhasil Dihapus\n");
+            return true;
+        }
+        else
+        {
+            try
+            {
+                System.out.println("Pesanan tidak berhasil dihapus\n");
+            }
+            catch(PesananOlehPelangganDitemukan pelanggan_input)
+            {
+                PesananOlehPelangganDitemukan.getMessage();
+            }
+            return false;
+        }
     }
     
     /**
@@ -139,15 +161,23 @@ public class DatabasePesanan
         //return true;
         if(list_pesanan.contains(pesan.getPelayan()))
         {
-                 list_pesanan = null;
-                 System.out.println("Pesanan Berhasil Dihapus\n");       
+            list_pesanan = null;
+            System.out.println("Pesanan Berhasil Dihapus\n");
+            return true;
         }
         else
         {
-            System.out.println("Pesanan tidak berhasil dihapus\n");
+            try
+            {
+                System.out.println("Pesanan tidak berhasil dihapus\n");
+            }
+            catch(PesananTidakDitemukan pesanan_input)
+            {
+                PesananTidakDitemukan.getMessage();
+            }
             return false;
         }
-        return false;
+        //return false;
     }
     
     /**

@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
  * Write a description of class User here.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017 
  * @version 0.4, 19 Maret 2017
@@ -19,6 +20,7 @@ import java.text.SimpleDateFormat;
 
 /**
  * Class User ditambahkan pada versi 0.6 (Modul 6)
+ * Modul 7 : Tidak ada perubahan
  */
 public class User
 {

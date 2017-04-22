@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * class DatabaseUser berisi kumpulan method untuk mengatur database pelanggan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
@@ -25,7 +26,8 @@ import java.util.ArrayList;
  * Modul 6 : Menambah instance user_database. Menghilangkan ojek_database & pelanggan_database
  *           Mengubah nilai default instance id_ojek_terakhir dan id_pelanggan_terakhir menjadi 1
  *           Mengubah seluruh method kecuali method getIDOjekTerakhir() & getIDPelangganTerakhir()
- * Modul 7 : Tidak ada perubahan          
+ * Modul 7 : Tidak ada perubahan
+ * Modul 8 : Tidak ada perubahan
  */
 
 public class DatabaseUser
@@ -192,7 +194,7 @@ public class DatabaseUser
      * 
      * @return ojek_database Mengembalikan isi data dari instance variable ojek_database
      */
-    public static Ojek getUserOjek()
+    public static Ojek getUserOjek(int id)
     {
         //return ojek_database;
         //return ojek_database.get(id_ojek_terakhir);
@@ -211,7 +213,7 @@ public class DatabaseUser
      * 
      * @return pelanggan_database Mengembalikan isi data dari instance variable pelanggan_database
      */
-    public static Pelanggan getUserPelanggan()
+    public static Pelanggan getUserPelanggan(int id)
     {
         //return pelanggan_database;
         //return pelanggan_database.get(id_pelanggan_terakhir);

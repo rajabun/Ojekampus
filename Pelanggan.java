@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
  * class Pelanggan berisi kumpulan method untuk mengatur data pelanggan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
@@ -31,6 +32,7 @@ import java.text.SimpleDateFormat;
  * Modul 6 : Menghilangkan seluruh instance variabel
  *           Menghilangkan seluruh method kecuali constructor dan toString()
  * Modul 7 : Tidak ada perubahan
+ * Modul 8 : Tidak ada perubahan
  *           
  */
 public class Pelanggan extends User

@@ -4,6 +4,7 @@ import java.util.ArrayList;
  * class DatabasePesanan berisi kumpulan method untuk mengatur database pesanan ojek.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
@@ -23,6 +24,7 @@ import java.util.ArrayList;
  *           Menambah method hapusPesanan(Pelanggan pengguna) dan getDatabase()
  * Modul 6 : Menambah local variable Pelanggan pengguna pada method getPesanan()
  * Modul 7 : Mengubah method addPesanan, hapusPesanan(Pesanan) dan hapusPesanan(Pelanggan)
+ * Modul 8 : Tidak ada perubahan
  */
 
 public class DatabasePesanan

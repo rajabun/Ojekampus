@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
  * class Ojek berisi kumpulan method untuk mengatur ojek yang dipesan.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
@@ -37,6 +38,7 @@ import java.text.SimpleDateFormat;
  *           Menghilangkan method setEmail(String email), setTelefon (String telefon), setDOB(Date dob), setNama(String nama), setID (int id)
  *           Menghilangkan instance id, nama, telepon, email dan dob
  * Modul 7 : Tidak ada perubahan
+ * Modul 8 : Tidak ada perubahan
  *           
  */
 

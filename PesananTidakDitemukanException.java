@@ -3,6 +3,7 @@
  * Write a description of class PesananTidakDitemukanException here.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017 
@@ -14,6 +15,7 @@
 
 /**
  * Class PesananTidakDitemukanException ditambahkan pada versi 0.7 (Modul 7)
+ * Modul 8 : Tidak ada perubahan
  */
 public class PesananTidakDitemukanException extends Exception
 {

@@ -3,6 +3,7 @@
  * class Administrasi berisi kumpulan method untuk mengatur tugas ojek (koordinasi ojek dan pelanggan).
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
@@ -20,6 +21,7 @@
  *           Menambah method printAllDatabase(), printOjekDatabase(), printPelangganDatabase(), printPesananDatabase()
  * Modul 6 : Mengubah method cariPesananIdle() dan temukanOjekTerdekat() menjadi private
  * Modul 7 : Tidak ada perubahan
+ * Modul 8 : Tidak ada perubahan
  */
 public class Administrasi
 {

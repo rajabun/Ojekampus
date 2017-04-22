@@ -6,6 +6,7 @@ import java.util.List;
  * class OjeKampus berisi method main yang berfungsi sebagai main program dari aplikasi OjeKampus.
  * 
  * @author Muhammad Rajab(1206244415)
+ * @version 0.8, 20 April 2017
  * @version 0.7, 13 April 2017
  * @version 0.6, 30 Maret 2017
  * @version 0.5, 23 Maret 2017
@@ -27,11 +28,14 @@ import java.util.List;
  *           Menambah method registrasiOjek(), registrasiPengguna()
  * Modul 6 : Tidak ada perubahan
  * Modul 7 : Tidak ada perubahan
+ * Modul 8 : Menambah instance variable sistem
+ *           Menambah method StartSistemPengawas dan MenungguSistem
  */
 
 public class OjeKampus
 {
     // instance variables - replace the example below with your own
+    public static SistemPengawas sistem;
     /*
 
     /**
@@ -303,7 +307,7 @@ public class OjeKampus
          * 
          * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
          */
-        
+        startSistemPengawas(5);
         Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
         Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
         Pelanggan p_Rajab = new Pelanggan(1,"Rajab","085854032720"); //membuat objek baru pada kelas Pelanggan
@@ -312,7 +316,7 @@ public class OjeKampus
         Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
         Pesanan pes_Rajab_2 = new Pesanan(p_Rajab, TipeLayanan.BeliBarang, per_Rajab_akhir, per_Rajab_awal, "Jabun", "Shion", 50000); //membuat objek baru pada kelas Pesanan
         DatabasePesanan.addPesanan(pes_Rajab);
-        
+        menungguSistem(10);
     }
     
     /**
@@ -463,6 +467,33 @@ public class OjeKampus
          * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
          */
         
+    }
+    
+    /**
+     * Method untuk memulai sistem pengawas
+     * 
+     */
+    public static void StartSistemPengawas(int waktu_cek)
+    {
+        SistemPengawas sp = new SistemPengawas ("Rajab", waktu_cek);
+        sp.start();
+    }
+    
+    /**
+     * Method untuk membuat sistem pengawas jadi menunggu
+     * 
+     */
+    public static void menungguSistem(int a)
+    {
+        try
+        {
+            // Let the thread sleep for a while.
+            Thread.sleep(a);
+        }
+        catch (InterruptedException e)
+        {
+            System.out.println("Thread " + threadName + " interrupted");
+        }
     }
     
     /**

@@ -307,7 +307,7 @@ public class OjeKampus
          * 
          * Untuk memanggil method dari class lain kedalam method ini -> nama_objek_pada_class_yang_ingin_dipanggil_methodnya.nama_method
          */
-        startSistemPengawas(5);
+        //startSistemPengawas(5);
         Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
         Ojek ojek_Muhammad = new Ojek(1,"Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
         Pelanggan p_Rajab = new Pelanggan(1,"Rajab","085854032720"); //membuat objek baru pada kelas Pelanggan
@@ -492,7 +492,7 @@ public class OjeKampus
         }
         catch (InterruptedException e)
         {
-            System.out.println("Thread " + threadName + " interrupted");
+            System.out.println("Thread " + " interrupted");
         }
     }
     

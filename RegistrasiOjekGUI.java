@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.*;
 
 /**
  * Write a description of class RegistrasiOjekGUI here.
@@ -8,75 +9,113 @@ import javax.swing.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class RegistrasiOjekGUI extends Frame implements ActionListener
+public class RegistrasiOjekGUI extends JPanel implements ActionListener
 {
     // instance variables - replace the example below with your own
-    private Button btn1, btn2;
-    private TextField tfInput;  // Declare input TextField
-    private TextField tfOutput; // Declare output TextField
-    private Label lblInput;     // Declare input Label
-    private Label lblOutput;    // Declare output Label
+    private JLabel jcomp1, jcomp3, jcomp5, jcomp7, jcomp9, jcomp11, jcomp13;
+    private JMenuBar jcomp2;
+    private JTextArea jcomp4, jcomp6, jcomp8, jcomp10, jcomp12, jcomp14, jcomp15, jcomp16, jcomp17;
+    private JButton jcomp18;
+    
     /**
      * Constructor for objects of class RegistrasiOjekGUI
      */
     public RegistrasiOjekGUI()
     {
-        // initialise instance variables
-        //JLabel jlbHelloWorld = new JLabel("Hello World");
-        //add(jlbHelloWorld);
-        setTitle("Registrasi Ojek GUI"); // "super" Frame sets title
-        setSize(280, 150); // "super" Frame sets initial size
-        setVisible(true); // "super" Frame shows
-        // pack();
-        /*
-        setLayout(new FlowLayout());
-         // "super" Frame sets layout to FlowLayout, which arranges the components
-         // from left-to-right, and flow from top-to-bottom.
-         */
-        setLayout(new GridLayout(3, 2, 3, 3));
-         // "super" Frame sets layout to 3x2 GridLayout, horizontal and verical gaps of 3 pixels
-         
-        lblInput = new Label("Enter an Integer: "); // Construct Label
-        add(lblInput);               // "super" Frame container adds Label component
- 
-        tfInput = new TextField(10); // Construct TextField
-        add(tfInput);                // "super" Frame adds TextField 
+        //construct preComponents
+        JMenu fileMenu = new JMenu ("File");
+        JMenuItem exitItem = new JMenuItem ("Exit");
+        fileMenu.add (exitItem);
+        JMenu helpMenu = new JMenu ("Help");
+        JMenuItem contentsItem = new JMenuItem ("Contents");
+        helpMenu.add (contentsItem);
+        JMenuItem aboutItem = new JMenuItem ("About");
+        helpMenu.add (aboutItem);
+
+        //construct components
+        jcomp1 = new JLabel ("Registrasi Ojek");
+        jcomp2 = new JMenuBar();
+        jcomp2.add (fileMenu);
+        jcomp2.add (helpMenu);
+        jcomp3 = new JLabel ("Nama      :");
+        jcomp4 = new JTextArea (5, 5);
+        jcomp5 = new JLabel ("Telepon   :");
+        jcomp6 = new JTextArea (5, 5);
+        jcomp7 = new JLabel ("Email       :");
+        jcomp8 = new JTextArea (5, 5);
+        jcomp9 = new JLabel ("DoB          :");
+        jcomp10 = new JTextArea (5, 5);
+        jcomp11 = new JLabel ("Plat          :");
+        jcomp12 = new JTextArea (5, 5);
+        jcomp13 = new JLabel ("Lokasi     :");
+        jcomp14 = new JTextArea (5, 5);
+        jcomp15 = new JTextArea (5, 5);
+        jcomp16 = new JTextArea (5, 5);
+        jcomp17 = new JTextArea (5, 5);
+        jcomp18 = new JButton ("Registrasi");
+
+        //adjust size and set layout
+        setPreferredSize (new Dimension (356, 375));
+        setLayout (null);
+
+        //add components
+        add (jcomp1);
+        add (jcomp2);
+        add (jcomp3);
+        add (jcomp4);
+        add (jcomp5);
+        add (jcomp6);
+        add (jcomp7);
+        add (jcomp8);
+        add (jcomp9);
+        add (jcomp10);
+        add (jcomp11);
+        add (jcomp12);
+        add (jcomp13);
+        add (jcomp14);
+        add (jcomp15);
+        add (jcomp16);
+        add (jcomp17);
+        add (jcomp18);
         
-        tfInput.addActionListener(this);
-         // "tfInput" is the source object that fires an ActionEvent upon entered.
-         // The source add "this" instance as an ActionEvent listener, which provides
-         //  an ActionEvent handler called actionPerformed().
-         // Hitting "enter" on tfInput invokes actionPerformed().
- 
-        lblOutput = new Label("The Accumulated Sum is: ");  // allocate Label
-        add(lblOutput);               // "super" Frame adds Label
- 
-        tfOutput = new TextField(10); // allocate TextField
-        tfOutput.setEditable(false);  // read-only
-        add(tfOutput);
-        
-        btn1 = new Button("Button 1");
-        add(btn1);
-        setVisible(true); // "super" Frame shows
-        btn2 = new Button("This is Button 2");
-        add(btn2);
-        setVisible(true); // "super" Frame shows
-        
+        //set component bounds (only needed by Absolute Positioning)
+        jcomp1.setBounds (145, 40, 90, 40);
+        jcomp2.setBounds (0, 0, 375, 25);
+        jcomp3.setBounds (20, 87, 70, 25);
+        jcomp4.setBounds (85, 90, 250, 25);
+        jcomp5.setBounds (19, 120, 70, 25);
+        jcomp6.setBounds (85, 120, 250, 25);
+        jcomp7.setBounds (19, 150, 70, 25);
+        jcomp8.setBounds (85, 150, 250, 25);
+        jcomp9.setBounds (19, 180, 70, 25);
+        jcomp10.setBounds (85, 180, 250, 25);
+        jcomp11.setBounds (19, 210, 70, 25);
+        jcomp12.setBounds (85, 210, 250, 25);
+        jcomp13.setBounds (19, 240, 70, 25);
+        jcomp14.setBounds (85, 240, 75, 25);
+        jcomp15.setBounds (180, 240, 75, 25);
+        jcomp16.setBounds (85, 270, 110, 25);
+        jcomp17.setBounds (210, 270, 110, 25);
+        jcomp18.setBounds (235, 330, 100, 25);
     }
 
-    public static void main(String args[]) {
-        new RegistrasiOjekGUI();
+    public static void main (String[] args) {
+        JFrame frame = new JFrame ("Registrasi Ojek");
+        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add (new RegistrasiOjekGUI());
+        frame.pack();
+        frame.setVisible (true);
     }
     
     // ActionEvent handler - Called back upon hitting "enter" key on TextField
     @Override
     public void actionPerformed(ActionEvent evt) {
       // Get the String entered into the TextField tfInput, convert to int
-      int numberIn = Integer.parseInt(tfInput.getText());
+      //int numberIn = Integer.parseInt(tfInput.getText());
       //sum += numberIn;      // Accumulate numbers entered into sum
-      tfInput.setText("");  // Clear input TextField
+      //tfInput.setText("");  // Clear input TextField
       //tfOutput.setText(sum + ""); // Display sum on the output TextField, convert int to String
-      tfOutput.setText("");
+      //tfOutput.setText("");
     }
     /**
      * An example of a method - replace this comment with your own

@@ -83,16 +83,14 @@ public class CustomerGUI extends JFrame implements ActionListener
         // System.out.println(lblCount);
         // System.out.println(tfCount);
         // System.out.println(btnCount);
-        
-        
- 
+       
     }
     // Constructor to setup GUI components and event handlers
    
     // The entry main() method
     public static void main(String[] args) {
       // Invoke the constructor to setup the GUI, by allocating an instance
-      CustomerGUI app = new CustomerGUI();
+      //CustomerGUI app = new CustomerGUI();
          // or simply "new AWTCounter();" for an anonymous instance
     }
  

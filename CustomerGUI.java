@@ -1,8 +1,8 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.List;
-import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import java.io.*;
 
 /**
  * Write a description of class CustomerGUI here.
@@ -10,103 +10,125 @@ import java.util.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class CustomerGUI extends JFrame implements ActionListener
+public class CustomerGUI extends JPanel implements ActionListener
 {
     // instance variables - replace the example below with your own
-    private JFrame frame;
-    private JLabel lblCount;    // Declare a Label component 
-    private JTextField tfCount; // Declare a TextField component 
-    private JButton btnCount;   // Declare a Button component
-    private int count = 0;     // Counter's value
-    private JPanel listPane;
- 
+    private JButton jcomp1;
+    private JButton jcomp2;
+    private JButton jcomp5;
+    private JLabel jcomp3;
+    private JMenuBar jcomp4;
+
     /**
      * Constructor for objects of class CustomerGUI
      */
     public CustomerGUI()
     {
-        // initialise instance variables
-        
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        /*
-        listPane = new JPanel();
-        listPane.setLayout(new BoxLayout(listPane, BoxLayout.PAGE_AXIS));
-        */
-        
-        setLayout(new FlowLayout());
-        // "super" Frame, which is a Container, sets its layout to FlowLayout to arrange
-        // the components from left-to-right, and flow to next row from top-to-bottom.
-        
-        /*
-        setLayout(new GridLayout(3, 2, 3, 3));
-         // "super" Frame sets layout to 3x2 GridLayout, horizontal and verical gaps of 3 pixels
-        */
-        lblCount = new JLabel("Customer");  // construct the Label component
-        add(lblCount);                    // "super" Frame container adds Label component
-        //listPane.add(Box.createRigidArea(new Dimension(0,5)));
+        //construct preComponents
+        JMenu fileMenu = new JMenu ("File");
+        JMenuItem exitItem = new JMenuItem ("Exit");
+        fileMenu.add (exitItem);
+        JMenu helpMenu = new JMenu ("Help");
+        JMenuItem contentsItem = new JMenuItem ("Contents");
+        helpMenu.add (contentsItem);
+        JMenuItem aboutItem = new JMenuItem ("About");
+        helpMenu.add (aboutItem);
 
-        tfCount = new JTextField("0", 10); // construct the TextField component
-        setSize(160, 160);        // "super" Frame sets its initial window size
-        tfCount.setEditable(false);       // set to read-only
-        add(tfCount);                     // "super" Frame container adds TextField component
- 
-        btnCount = new JButton("Registrasi");   // construct the Button component
-        //setSize(160, 160);        // "super" Frame sets its initial window size
-        //btnCount.setPreferredSize(new Dimension(40, 40));
-        //btnCount.setMaximumSize(new Dimension(40, 40));
-        add(btnCount);                    // "super" Frame container adds Button component
-        
-        btnCount.addActionListener(this);
-        // "btnCount" is the source object that fires an ActionEvent when clicked.
+        //construct components
+        //jcomp1 = new JButton ( new AbstractAction("Registrasi") 
+        jcomp3 = new JLabel ("Menu Pelanggan");
+        jcomp1 = new JButton ("Registrasi");
+        jcomp2 = new JButton ("Pemesanan");
+        jcomp5 = new JButton ("Menunggu");
+        jcomp4 = new JMenuBar();
+        jcomp4.add (fileMenu);
+        jcomp4.add (helpMenu);
+
+        //adjust size and set layout
+        setPreferredSize (new Dimension (267, 235));
+        setLayout (null);
+
+        //add components
+        add (jcomp1);
+        add (jcomp2);
+        add (jcomp3);
+        add (jcomp4);
+        add (jcomp5);
+
+        //set component bounds (only needed by Absolute Positioning)
+        jcomp1.setBounds (90, 105, 100, 20);
+        jcomp2.setBounds (80, 150, 120, 20);
+        jcomp5.setBounds (90, 195, 100, 20);
+        jcomp3.setBounds (95, 55, 100, 25);
+        jcomp4.setBounds (0, 0, 270, 25);
+
+        //jcomp1.addActionListener(this);
+        jcomp1.addActionListener(this);
+        jcomp2.addActionListener(this);
+        jcomp5.addActionListener(this);
+        // "jcomp1" is the source object that fires an ActionEvent when clicked.
         // The source add "this" instance as an ActionEvent listener, which provides
         //   an ActionEvent handler called actionPerformed().
         // Clicking "btnCount" invokes actionPerformed().
-        
-        btnCount = new JButton("Pemesanan");   // construct the Button component
-        add(btnCount);                    // "super" Frame container adds Button component
-        
-        btnCount.addActionListener(this);
-        
-        setTitle("Customer GUI");  // "super" Frame sets its title
-        setSize(480, 360);        // "super" Frame sets its initial window size
- 
-        // For inspecting the Container/Components objects
-        // System.out.println(this);
-        // System.out.println(lblCount);
-        // System.out.println(tfCount);
-        // System.out.println(btnCount);
- 
-        setVisible(true);         // "super" Frame shows
- 
-        // System.out.println(this);
-        // System.out.println(lblCount);
-        // System.out.println(tfCount);
-        // System.out.println(btnCount);
-       
     }
     // Constructor to setup GUI components and event handlers
-   
-    // The entry main() method
-    public static void main(String[] args) {
-      // Invoke the constructor to setup the GUI, by allocating an instance
-      //CustomerGUI app = new CustomerGUI();
-         // or simply "new AWTCounter();" for an anonymous instance
-    }
- 
+
     // ActionEvent handler - Called back upon button-click.
     @Override
-    public void actionPerformed(ActionEvent evt) {
-      ++count; // Increase the counter value
-      // Display the counter value on the TextField tfCount
-      tfCount.setText(count + ""); // Convert int to String
+    public void actionPerformed(ActionEvent evt)
+    {
+        JButton b = (JButton) evt.getSource();
+        if (b == jcomp1)
+        {
+            RegistrasiPelangganGUI rp = new RegistrasiPelangganGUI();
+            rp.main(new String[0]);
+                
+            /*
+            try
+            {
+                throw new FileNotFoundException();
+                
+            }
+            catch (FileNotFoundException f)
+            {
+                f.getMessage();
+                f.printStackTrace();
+                //throw f;
+            }
+            */
+        }
+
+        else if (b ==jcomp2)
+        {
+            PesananGUI p = new PesananGUI();
+            p.main(new String[0]);
+        }
+        else
+        {
+            TungguGUI t = new TungguGUI();
+            t.main(new String[0]);
+        }
     }
-   
+
     /**
      * An example of a method - replace this comment with your own
      * 
      * @param  y   a sample parameter for a method
      * @return     the sum of x and y 
      */
-    
+    public static void main (String[] args) {
+        JFrame frame = new JFrame ("Menu Pelanggan");
+        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(new CustomerGUI());
+        frame.pack();
+        frame.setVisible (true);
+    }
+
+    /**
+     * An example of a method - replace this comment with your own
+     * 
+     * @param  y   a sample parameter for a method
+     * @return     the sum of x and y 
+     */
+
 }

@@ -26,39 +26,54 @@
 public class Administrasi
 {
     // instance variables - replace the example below with your own
-    
+
     /**
      * Constructor for objects of class Administrasi
      */
     public Administrasi()
     {
         // initialise instance variables
-        
+
     }
-    
+
     /**
      * Method untuk mencari pesanan yang memiliki status idle
      * diubah menjadi private di modul 6 
      */
     private static Pesanan cariPesananIdle()
     {
-        if(DatabasePesanan.getPesanan().getStatusDiproses() == false && DatabasePesanan.getPesanan().getStatusSelesai() == false)
+        for (int i = 0; i < DatabasePesanan.getDatabase().size(); i++)
         {
-            return DatabasePesanan.getPesanan();
+
+            if(DatabasePesanan.getPesanan(DatabasePesanan.getDatabase().get(i).getPelanggan()).getStatusDiproses() == false && DatabasePesanan.getPesanan(DatabasePesanan.getDatabase().get(i).getPelanggan()).getStatusSelesai() == false)
+            {
+                return DatabasePesanan.getPesanan(DatabasePesanan.getDatabase().get(i).getPelanggan());
+            }
+            else
+            {
+                System.out.println("Tidak ada pesanan idle");
+                return null;
+            }
         }
-        return DatabasePesanan.getPesanan();
+        return null;
     }
-    
+
     /**
      * Method untuk menjalankan sistem penugas
      * 
      */
     public static void jalankanSistemPenugas()
     {
-       cariPesananIdle();
-       temukanOjekTerdekat(cariPesananIdle());
+        //DatabaseUser.getUserOjek();
+        DatabaseUser.getUserOjek(0);
+        for (int i = 0; i < DatabasePesanan.getDatabase().size(); i++)
+        {
+            DatabasePesanan.getPesanan(DatabasePesanan.getDatabase().get(i).getPelanggan());
+        }
+        cariPesananIdle();
+        temukanOjekTerdekat(cariPesananIdle());
     }
-    
+
     /**
      * Method untuk menugaskan pesanan ke ojek untuk diambil
      * 
@@ -71,7 +86,7 @@ public class Administrasi
         pelayan.setStatus(StatusOjek.Jemput);
         pelayan.setPesanan(pesan);
     }
-    
+
     /**
      * Method untuk melepas pesanan dari ojek
      * 
@@ -83,7 +98,7 @@ public class Administrasi
         pelayan.setStatus(StatusOjek.Idle);
         pelayan.setPesanan(null);
     }
-    
+
     /**
      * Method untuk membatalkan pesanan dari ojek
      * 
@@ -97,7 +112,7 @@ public class Administrasi
         pelayan.setPesanan(null);
         ojekLepasPesanan(pelayan);
     }
-    
+
     /**
      * Method untuk membatalkan pesanan dari pelanggan
      * 
@@ -109,15 +124,19 @@ public class Administrasi
         //pelayan.getPesanan().setStatusSelesai(false);
         //pelayan.getPesanan().setStatusDiproses(false);
         //ojekLepasPesanan(pelayan);
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan message = new Pesanan(pengguna, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000);
-        ojekLepasPesanan(message.getPelayan());
-        message.setStatusSelesai(false);
-        message.setStatusDiproses(false);
-        message.setPelanggan(null);
+        //Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        //Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        //Pesanan message = new Pesanan(pengguna, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000);
+        Pesanan p = DatabasePesanan.getPesanan(pengguna);
+        //if(p.getPelanggan().equals(pengguna))
+        //{
+        ojekLepasPesanan(p.getPelayan());
+        p.setStatusSelesai(false);
+        p.setStatusDiproses(false);
+        p.setPelanggan(null);
+        //}
     }
-    
+
     /**
      * Method untuk membatalkan pesanan dari class pesanan (pelanggan)
      * 
@@ -131,7 +150,7 @@ public class Administrasi
         pesan.setStatusDiproses(false);
         pesan.setPelayan(null);
     }
-    
+
     /**
      * Method untuk menugaskan pesanan ke ojek
      * 
@@ -146,7 +165,7 @@ public class Administrasi
         pesan.setPelayan(pelayan);
         ojekAmbilPesanan(pesan, pelayan);
     }
-    
+
     /**
      * Method untuk menyatakan pesanan selesai dari ojek
      * 
@@ -160,7 +179,7 @@ public class Administrasi
         pelayan.setPesanan(null);
         ojekLepasPesanan(pelayan);
     }
-    
+
     /**
      * Method untuk menyatakan pesanan selesai dari pelanggan
      * 
@@ -172,15 +191,19 @@ public class Administrasi
         //pelayan.getPesanan().setStatusSelesai(true);
         //pelayan.getPesanan().setStatusDiproses(false);
         //ojekLepasPesanan(pelayan);
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan message = new Pesanan(pengguna, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000);
-        ojekLepasPesanan(message.getPelayan());
-        message.setStatusSelesai(true);
-        message.setStatusDiproses(false);
-        message.setPelanggan(null);
+        //Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+        //Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+        //Pesanan message = new Pesanan(pengguna, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000);
+        Pesanan p = DatabasePesanan.getPesanan(pengguna);
+        //if(p.getPelanggan().equals(pengguna))
+        //{
+        ojekLepasPesanan(p.getPelayan());
+        p.setStatusSelesai(true);
+        p.setStatusDiproses(false);
+        p.setPelanggan(null);
+        //}
     }
-    
+
     /**
      * Method untuk menyatakan pesanan selesai dari class pesanan (pelanggan)
      * 
@@ -194,69 +217,69 @@ public class Administrasi
         pesan.setStatusDiproses(false);
         pesan.setPelayan(null);
     }
-    
+
     /**
      * Method untuk mencetak semua database
      * 
      */
     public static void printAllDatabase()
     {
-       System.out.println("=====================");
-       System.out.println("Database Ojek");
-       System.out.println("=====================");
-       System.out.println(DatabaseUser.getOjekDatabase());
-       System.out.println("\n\n\n");
-       System.out.println("=====================");
-       System.out.println("Database Pelanggan");
-       System.out.println("=====================");
-       System.out.println(DatabaseUser.getPelangganDatabase());
-       System.out.println("\n\n\n");
-       System.out.println("=====================");
-       System.out.println("Database Pesanan");
-       System.out.println("=====================");
-       System.out.println(DatabasePesanan.getDatabase());
-       System.out.println("\n\n\n");
+        System.out.println("=====================");
+        System.out.println("Database Ojek");
+        System.out.println("=====================");
+        System.out.println(DatabaseUser.getOjekDatabase());
+        System.out.println("\n\n\n");
+        System.out.println("=====================");
+        System.out.println("Database Pelanggan");
+        System.out.println("=====================");
+        System.out.println(DatabaseUser.getPelangganDatabase());
+        System.out.println("\n\n\n");
+        System.out.println("=====================");
+        System.out.println("Database Pesanan");
+        System.out.println("=====================");
+        System.out.println(DatabasePesanan.getDatabase());
+        System.out.println("\n\n\n");
     }
-    
+
     /**
      * Method untuk mencetak database ojek
      * 
      */
     public static void printOjekDatabase()
     {
-       System.out.println("=====================");
-       System.out.println("Database Ojek");
-       System.out.println("=====================");
-       System.out.println(DatabaseUser.getOjekDatabase());
-       System.out.println("\n\n\n"); 
+        System.out.println("=====================");
+        System.out.println("Database Ojek");
+        System.out.println("=====================");
+        System.out.println(DatabaseUser.getOjekDatabase());
+        System.out.println("\n\n\n"); 
     }
-    
+
     /**
      * Method untuk mencetak database pelanggan
      * 
      */
     public static void printPelangganDatabase()
     {
-       System.out.println("=====================");
-       System.out.println("Database Pelanggan");
-       System.out.println("=====================");
-       System.out.println(DatabaseUser.getPelangganDatabase()); 
-       System.out.println("\n\n\n");
+        System.out.println("=====================");
+        System.out.println("Database Pelanggan");
+        System.out.println("=====================");
+        System.out.println(DatabaseUser.getPelangganDatabase()); 
+        System.out.println("\n\n\n");
     }
-    
+
     /**
      * Method untuk mencetak database pesanan
      * 
      */
     public static void printPesananDatabase()
     {
-       System.out.println("=====================");
-       System.out.println("Database Pesanan");
-       System.out.println("=====================");
-       System.out.println(DatabasePesanan.getDatabase());
-       System.out.println("\n\n\n");
+        System.out.println("=====================");
+        System.out.println("Database Pesanan");
+        System.out.println("=====================");
+        System.out.println(DatabasePesanan.getDatabase());
+        System.out.println("\n\n\n");
     }
-    
+
     /**
      * Method untuk menemukan ojek terdekat
      * 
@@ -265,126 +288,152 @@ public class Administrasi
      */
     private static Ojek temukanOjekTerdekat(Pesanan pesan)
     {
-        if(DatabasePesanan.getPesanan().getPelayan().getStatus() == StatusOjek.Idle && pesan.getPelayan() != null)
+        double a = pesan.getLokasiAwal().getX();
+        double b = pesan.getLokasiAwal().getY();
+        double c = Math.pow(a,2);
+        double d = Math.pow(b,2);
+        double jarak_awal = Math.sqrt(c + d);
+        double e = pesan.getLokasiAkhir().getX();
+        double f = pesan.getLokasiAkhir().getY();
+        double g = Math.pow(e,2);
+        double h = Math.pow(f,2);
+        double i = Math.pow((a+e),2);
+        double j = Math.pow((b+f),2);
+        double jarak_pesan = Math.sqrt(i + j);
+
+        //int x = (int)(pesan.getPelayan().getPosisi().getX() + 0.5d);
+        //int y = (int)(pesan.getPelayan().getPosisi().getY() + 0.5d);
+
+        double l = DatabaseUser.getUserOjek(pesan.getPelayan().getID()).getPosisi().getX();
+        double m = DatabaseUser.getUserOjek(pesan.getPelayan().getID()).getPosisi().getY();
+        double n = Math.pow(l,2);
+        double o = Math.pow(m,2);
+        double jarak_ojek = Math.sqrt(n + o);
+        
+        if(DatabasePesanan.getPesanan(DatabasePesanan.getDatabase().get(1).getPelanggan()).getPelayan().getStatus() == StatusOjek.Idle && pesan.getPelayan() == null)
         {
-            
+            if(jarak_awal >= jarak_ojek)
+            {
+                pesan.setPelayan(DatabaseUser.getUserOjek(pesan.getPelayan().getID()));
+            }
         }
-        return DatabaseUser.getUserOjek();
+        //return DatabaseUser.getUserOjek(pesan.getPelayan().getID());
+        return null;
     }
-    
+
 }
 
 /*
  * Bekas Modul 3
  * 
  * public void pesananDitugaskan(Pesanan pesan, Ojek pelayan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan 
-    
-         /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        ojekAmbilPesanan(pes_Rajab, ojek_Muhammad);
-        
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        *
-    }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
+Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan 
+
+/*
+ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+ojekAmbilPesanan(pes_Rajab, ojek_Muhammad);
+
+ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+ *
+}
  * 
  * public void ojekAmbilPesanan(Pesanan pesan, Ojek pelayan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
-        //ojek_Muhammad.getPesanan();
-    }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
+Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+
+//ojek_Muhammad.getPesanan();
+}
  * 
  * public void ojekLepasPesanan(Ojek pelayan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        
-        //ojek_Muhammad.setPesanan(pes_Rajab);
-    }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+
+//ojek_Muhammad.setPesanan(pes_Rajab);
+}
  * 
  * public void pesananDibatalkan(Ojek pelayan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
-        //pes_Rajab.getPelayan();
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        *
-     }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
+Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+
+//pes_Rajab.getPelayan();
+/*
+ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+ *
+}
  * 
  * public void pesananSelesai(Ojek pelayan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
-        //pes_Rajab.getPelayan();
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        *
-    }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
+Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+
+//pes_Rajab.getPelayan();
+/*
+ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+ *
+}
  * 
  * public void pesananDibatalkan(Pesanan pesan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
-        //pes_Rajab.getPelayan();
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        *
-    }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
+Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+
+//pes_Rajab.getPelayan();
+/*
+ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+ *
+}
  * 
  * public void pesananSelesai(Pesanan pesan)
-    {
-        Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
-        Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
-        Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
-        Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
-        Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
-        Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
-        
-        //pes_Rajab.getPelayan();
-        /*
-        ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
-        p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
-        pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
-        *
-    }
+{
+Lokasi kang_ojek = new Lokasi("Taman Kota 2", 3, 2, "BSD");
+Ojek ojek_Muhammad = new Ojek(1, "Muhammad",kang_ojek); //membuat objek baru pada kelas Ojek dengan nama ojek_muhammad. Ojek("Muhammad") merupakan implementasi dari constructor Ojek(String nama)
+Pelanggan p_Rajab = new Pelanggan(1, "Rajab"); //membuat objek baru pada kelas Pelanggan 
+Lokasi per_Rajab_awal = new Lokasi("Taman Menteng", 2, 4, "Bintaro"); //membuat objek baru pada kelas Lokasi
+Lokasi per_Rajab_akhir = new Lokasi("Taman Kota", 4, 4, "BSD"); //membuat objek baru pada kelas Lokasi
+Pesanan pes_Rajab = new Pesanan(p_Rajab, TipeLayanan.AntarBarang, per_Rajab_awal, per_Rajab_akhir, "Fakhri", "Ivan", 100000); //membuat objek baru pada kelas Pesanan
+
+//pes_Rajab.getPelayan();
+/*
+ojek_Muhammad.printData(); //menjalankan method printData() pada kelas Ojek
+p_Rajab.printData(); //menjalankan method printData() pada kelas Pelanggan
+pes_Rajab.printData(); //menjalankan method printData() pada kelas Pesanan
+ *
+}
  *
  *
  */

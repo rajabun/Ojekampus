@@ -59,10 +59,13 @@ public class Ojek extends User
      * @param nama Parameter dari constructor kelas ini dalam bentuk String
      * @param posisi_sekarang Parameter dari constructor kelas ini yang merujuk ke class Lokasi
      */
-    public Ojek(int id, String nama, Lokasi posisi_sekarang) 
+    //public Ojek(int id, String nama) 
+    //public Ojek(int id, String nama, StatusUser status_user, Lokasi posisi_sekarang) //tambahin sendiri
+    public Ojek(int id, String nama, Lokasi posisi_sekarang) //aslinya di UML 
     {
         // initialise instance variables
         super(id, nama);
+        setStatusUser(StatusUser.Ojek);
         setPosisi(posisi_sekarang);
     }
     
@@ -84,6 +87,7 @@ public class Ojek extends User
      */
     public Pesanan getPesanan()
     {
+        System.out.println(pesanan_sekarang);
         return pesanan_sekarang;
     }
     

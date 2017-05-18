@@ -9,19 +9,21 @@ import javax.swing.event.*;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class TungguGUI extends JPanel
+public class TungguGUI extends JPanel implements ActionListener
 {
     // instance variables - replace the example below with your own
-    private JLabel jcomp1;
-    private JMenuBar jcomp2;
-    private JLabel jcomp3;
-    private JTextArea jcomp4;
-    private JButton jcomp5;
-    private JLabel jcomp6;
-    private JTextField jcomp7;
-    private JButton jcomp8;
+    private JButton jcomp1;
+    private JLabel jcomp2;
+    private JTextField jcomp3;
+    private JLabel jcomp4;
+    private JLabel jcomp5;
+    private JTextField jcomp6;
+    private JLabel jcomp7;
+    private JTextArea jcomp8;
     private JButton jcomp9;
     private JButton jcomp10;
+    private JButton jcomp11;
+    private JMenuBar jcomp12;
 
     /**
      * Constructor for objects of class TungguGUI
@@ -29,8 +31,11 @@ public class TungguGUI extends JPanel
     public TungguGUI()
     {
         // initialise instance variables
+        
         //construct preComponents
         JMenu fileMenu = new JMenu ("File");
+        JMenuItem printItem = new JMenuItem ("Print");
+        fileMenu.add (printItem);
         JMenuItem exitItem = new JMenuItem ("Exit");
         fileMenu.add (exitItem);
         JMenu helpMenu = new JMenu ("Help");
@@ -40,21 +45,34 @@ public class TungguGUI extends JPanel
         helpMenu.add (aboutItem);
 
         //construct components
-        jcomp1 = new JLabel ("Pelanggan Menunggu");
-        jcomp2 = new JMenuBar();
-        jcomp2.add (fileMenu);
-        jcomp2.add (helpMenu);
-        jcomp3 = new JLabel ("ID      :");
-        jcomp4 = new JTextArea (5, 5);
-        jcomp5 = new JButton ("Enter");
-        jcomp6 = new JLabel ("Informasi Pesanan");
-        jcomp7 = new JTextField (5);
-        jcomp8 = new JButton ("Accept");
-        jcomp9 = new JButton ("Decline");
+        jcomp1 = new JButton ("Enter");
+        jcomp2 = new JLabel ("Pelanggan Menunggu");
+        jcomp3 = new JTextField ("No ID", 5);
+        jcomp4 = new JLabel ("ID     :");
+        jcomp5 = new JLabel ("Status     :");
+        jcomp6 = new JTextField (5);
+        jcomp6.setEditable(false);
+        jcomp7 = new JLabel ("Informasi Pesanan");
+        jcomp8 = new JTextArea (5, 5);
+        
+        //
+        // By default the JTextAread is editable, calling
+        // setEditable(false) produce uneditable JTextArea.
+        //
+        jcomp8.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(jcomp8);
+
+        this.add(scrollPane, BorderLayout.CENTER);
+        
+        jcomp9 = new JButton ("Accept");
         jcomp10 = new JButton ("Delete");
+        jcomp11 = new JButton ("Decline");
+        jcomp12 = new JMenuBar();
+        jcomp12.add (fileMenu);
+        jcomp12.add (helpMenu);
 
         //adjust size and set layout
-        setPreferredSize (new Dimension (356, 320));
+        setPreferredSize (new Dimension (578, 448));
         setLayout (null);
 
         //add components
@@ -68,18 +86,24 @@ public class TungguGUI extends JPanel
         add (jcomp8);
         add (jcomp9);
         add (jcomp10);
+        add (jcomp11);
+        add (jcomp12);
 
         //set component bounds (only needed by Absolute Positioning)
-        jcomp1.setBounds (120, 40, 150, 40);
-        jcomp2.setBounds (0, 0, 375, 25);
-        jcomp3.setBounds (50, 88, 70, 25);
-        jcomp4.setBounds (95, 90, 150, 25);
-        jcomp5.setBounds (255, 90, 75, 25);
-        jcomp6.setBounds (120, 150, 120, 20);
-        jcomp7.setBounds (130, 190, 100, 25);
-        jcomp8.setBounds (80, 240, 85, 25);
-        jcomp9.setBounds (195, 240, 85, 25);
-        jcomp10.setBounds (130, 280, 100, 25);
+        jcomp1.setBounds (195, 80, 75, 25);
+        jcomp2.setBounds (240, 35, 130, 25);
+        jcomp3.setBounds (80, 80, 100, 25);
+        jcomp4.setBounds (35, 80, 40, 25);
+        jcomp5.setBounds (305, 80, 100, 25);
+        jcomp6.setBounds (380, 80, 150, 25);
+        jcomp7.setBounds (245, 130, 110, 25);
+        jcomp8.setBounds (80, 170, 450, 230);
+        jcomp9.setBounds (115, 405, 100, 25);
+        jcomp10.setBounds (395, 405, 100, 25);
+        jcomp11.setBounds (255, 405, 100, 25);
+        jcomp12.setBounds (0, 0, 580, 25);
+        
+        jcomp1.addActionListener(this);
     }
 
     /**
@@ -94,5 +118,40 @@ public class TungguGUI extends JPanel
         frame.getContentPane().add (new TungguGUI());
         frame.pack();
         frame.setVisible (true);
+    }
+
+    // ActionEvent handler - Called back upon hitting "enter" key on TextField
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        // Get the String entered into the TextField tfInput, convert to int
+        //int numberIn = Integer.parseInt(tfInput.getText());
+        //sum += numberIn;      // Accumulate numbers entered into sum
+        //tfInput.setText("");  // Clear input TextField
+        //tfOutput.setText(sum + ""); // Display sum on the output TextField, convert int to String
+        //tfOutput.setText("");
+
+        JButton b = (JButton) evt.getSource();
+        int k = Integer.parseInt(jcomp3.getText());
+            
+        if (b == jcomp1) //tombol pesan
+        {
+            Pelanggan p = DatabaseUser.getUserPelanggan(k);
+            ////Ojek o = DatabaseUser.getUserOjek(k);
+            //Pesanan d = DatabasePesanan.getPesanan(p);
+            //d.setPelayan(o);
+            //String s = d.toString();
+            //jcomp8.setText(p.toString());
+        }
+        
+        else if (b == jcomp10) //tombol pesan
+        {
+            Pelanggan p = DatabaseUser.getUserPelanggan(k);
+            ////Ojek o = DatabaseUser.getUserOjek(k);
+            //Pesanan d = DatabasePesanan.getPesanan(p);
+            //d.setPelayan(o);
+            //String s = d.toString();
+            //jcomp8.setText(p.toString());
+        }
+
     }
 }

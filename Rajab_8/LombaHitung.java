@@ -31,7 +31,7 @@ public class LombaHitung implements Runnable {
          for(int i = 0; i < 24; i++) {
             System.out.println("Kontestan " + threadName + " menghitung" + ", " + i);
             // Let the thread sleep for a while.
-            Thread.sleep(75);
+            Thread.sleep(nomor);
          }
       }catch (InterruptedException e) {
          System.out.println("Kontestan " +  threadName + " interrupted.");

@@ -252,7 +252,7 @@ public class Pesanan
      */
     public void setPelayan(Ojek pelayan)
     {
-        this.pelayan = pelayan;
+        this.pelayan = pelayan;        
     }
     
     /**

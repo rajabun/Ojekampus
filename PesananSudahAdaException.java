@@ -17,7 +17,7 @@
  * Class PesananSudahAdaException ditambahkan pada versi 0.7 (Modul 7)
  * Modul 8 : Tidak ada perubahan
  */
-public class PesananSudahAdaException
+public class PesananSudahAdaException extends Exception
 {
     // instance variables - replace the example below with your own
     private Pesanan pesanan_error;
@@ -28,8 +28,9 @@ public class PesananSudahAdaException
     public PesananSudahAdaException(Pesanan pesanan_input)
     {
         // initialise instance variables
-        super("Pelanggan dengan nama");
-        pesanan_input = pesanan_error;
+        super("Pelanggan dengan nama ");
+        //pesanan_input = pesanan_error;
+        pesanan_error = pesanan_input;
     }
 
     /**

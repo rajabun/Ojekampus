@@ -27,8 +27,8 @@ public class PesananOlehPelangganDitemukanException extends Exception
     public PesananOlehPelangganDitemukanException(Pelanggan pelanggan_input)
     {
         // initialise instance variables
-        super("Pesanan oleh");
-        pelanggan_input = pelanggan_error;
+        super("Pesanan oleh ");
+        pelanggan_error = pelanggan_input;
     }
 
     /**

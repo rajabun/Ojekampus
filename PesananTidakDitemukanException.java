@@ -28,8 +28,8 @@ public class PesananTidakDitemukanException extends Exception
     public PesananTidakDitemukanException(Pesanan pesanan_input)
     {
         // initialise instance variables
-        super("Pesanan yang dipesan oleh");
-        pesanan_input = pesanan_error;
+        super("Pesanan yang dipesan oleh ");
+        pesanan_error = pesanan_input;
     }
 
     /**

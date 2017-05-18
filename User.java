@@ -30,6 +30,7 @@ public class User
     protected int id;
     protected String nama;
     protected String telepon;
+    protected StatusUser status_user; //tambah sendiri
     
     /**
      * Constructor for objects of class User
@@ -37,11 +38,44 @@ public class User
      * @param id Parameter dari constructor kelas ini dalam bentuk integer (numerik)
      * @param nama Parameter dari constructor kelas ini dalam bentuk String
      */
+    //public User(int id, String nama, StatusUser status_user)
     public User(int id, String nama)
     {
         // initialise instance variables
-        id = DatabaseUser.getIDPelangganTerakhir();
-        this.nama = nama;
+        //id = DatabaseUser.getIDPelangganTerakhir();
+        setID(id);
+        setNama(nama);
+        //setStatusUser(status_user); //tambah sendiri
+        //this.nama = nama;
+    }
+    
+     /**
+     * Method untuk memasukkan status user
+     * (tambah sendiri)
+     * @param status_user Parameter dari method setStatusUser yang merujuk ke class StatusUser
+     */
+    public void setStatusUser(StatusUser status_user)
+    {
+        this.status_user = status_user;
+        if(status_user == StatusUser.Ojek)
+        {
+            status_user = StatusUser.Ojek;
+        }
+        
+        else if(status_user == StatusUser.Pelanggan)
+        {
+            status_user = StatusUser.Pelanggan;
+        }
+    }
+    
+    /**
+     * Method untuk menampilkan status user
+     * (tambah sendiri)
+     * @return status_user Mengembalikan isi data dari instance variable status_user
+     */
+    public StatusUser getStatusUser()
+    {
+        return status_user;
     }
     
     /**
@@ -79,7 +113,7 @@ public class User
      */
     public int getID()
     {
-        id = DatabaseUser.getIDPelangganTerakhir();
+        //id = DatabaseUser.getIDPelangganTerakhir();
         return id;
     }
     
@@ -250,7 +284,7 @@ public class User
         //return false jika tidak ada input yang sesuai (matches)
         else
         {
-            System.out.println("Maaf format nonor telepon yang ada masukan salah\n");
+            System.out.println("Maaf format nomor telepon yang ada masukan salah\n");
             return false;
         }
     }
